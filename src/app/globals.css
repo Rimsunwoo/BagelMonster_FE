@@ -31,7 +31,7 @@ body {
     @apply text-black text-xs font-medium leading-[125%];
   }
   .text-input {
-    @apply text-[#aaaaaa];
+    @apply text-[#aaaaaa] text-xs font-medium leading-[125%];
   }
   .text-button {
     @apply text-white text-center text-sm font-bold leading-[125%];
@@ -43,6 +43,6 @@ body {
     @apply py-3 px-4 rounded bg-[#252525] cursor-pointer;
   }
   .auth-input {
-    @apply py-3 px-4 rounded border border-[#dddddd] bg-white;
+    @apply h-[41px] py-3 px-4 rounded border bg-white;
   }
 }

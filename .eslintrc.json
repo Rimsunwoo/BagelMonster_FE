@@ -1,13 +1,15 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "airbnb",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "prettier",
-    "prettier/prettier",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended"
+    // "airbnb",
+    // "plugin:import/errors",
+    // "plugin:import/warnings",
+    "next/core-web-vitals",
+    "prettier"
+
+    // "prettier/prettier",
+    // "plugin:@typescript-eslint/recommended",
+    // "plugin:@next/next/recommended"
   ],
   "plugins": ["@typescript-eslint", "unused-imports", "prettier"],
   "parserOptions": {
