@@ -4,12 +4,16 @@
     "airbnb",
     "plugin:import/errors",
     "plugin:import/warnings",
-     "plugin:prettier/recommended",
-     "plugin:@typescript-eslint/recommended",
-     "plugin:@next/next/recommended"
+    "prettier",
+    "prettier/prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@next/next/recommended"
   ],
-  
-  "plugins": ["@typescript-eslint", "unused-imports", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports",
+    "prettier"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -17,7 +21,17 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/consistent-type-imports": "error",
     "no-unused-vars": "off",
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
@@ -31,15 +45,29 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "type", "index"],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          [
+            "parent",
+            "sibling"
+          ],
+          "object",
+          "type",
+          "index"
+        ],
         "pathGroups": [
           {
-            "pattern": "react",
+            "pattern": "{react*,react*/**}",
             "group": "external",
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react", "next"],
+        "pathGroupsExcludedImportTypes": [
+          "react",
+          "next"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
