@@ -27,6 +27,14 @@
         "argsIgnorePattern": "^_"
       }
     ],
+    "settings": {
+      "import/resolver": {
+        "alias": {
+          "map": [["@", "./src"]],
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
+      }
+    },
     "import/order": [
       "error",
       {

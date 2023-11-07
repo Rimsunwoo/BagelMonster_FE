@@ -3,19 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255; */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    /* --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0; */
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
+}
+
+@layer components {
+  .flexcol {
+    @apply flex flex-col;
+  }
+  .text-title {
+    @apply text-black text-2xl font-bold leading-[125%];
+  }
+  .text-label {
+    @apply text-black text-xs font-medium leading-[125%];
+  }
+  .text-input {
+    @apply text-[#aaaaaa];
+  }
+  .text-button {
+    @apply text-white text-center text-sm font-bold leading-[125%];
+  }
+  .auth-button {
+    @apply py-3 px-4 rounded bg-[#f15a23] cursor-pointer;
+  }
+  .social-button {
+    @apply py-3 px-4 rounded bg-[#252525] cursor-pointer;
+  }
+  .auth-input {
+    @apply py-3 px-4 rounded border border-[#dddddd] bg-white;
+  }
 }
