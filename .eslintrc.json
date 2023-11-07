@@ -9,11 +9,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@next/next/recommended"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "unused-imports",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "unused-imports", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -24,12 +20,7 @@
     "react/jsx-filename-extension": [
       2,
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
     "unused-imports/no-unused-imports": "error",
@@ -42,21 +33,15 @@
         "argsIgnorePattern": "^_"
       }
     ],
+    "settings": {
+      "import/resolver": {
+        "alias": { "map": [["@", "./src"]], "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+      }
+    },
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          [
-            "parent",
-            "sibling"
-          ],
-          "object",
-          "type",
-          "index"
-        ],
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "object", "type", "index"],
         "pathGroups": [
           {
             "pattern": "{react*,react*/**}",
@@ -64,10 +49,7 @@
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": [
-          "react",
-          "next"
-        ],
+        "pathGroupsExcludedImportTypes": ["react", "next"],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
