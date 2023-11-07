@@ -1,15 +1,21 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import SignupForm from "@/components/signup/SignupForm";
+import SignupForm from "@/components/common/Form";
+
+import type { InputProps } from "@/types/auth.type";
 
 export default function Signup() {
+  const inputProps: InputProps[] = [
+    { id: "id", label: "아이디", placeholder: "아이디를 입력해주세요" },
+    { id: "password", label: "비밀번호", placeholder: "비밀번호를 입력해주세요" },
+    { id: "passwordConfirm", label: "비밀번호 확인", placeholder: "비밀번호를 한번 더 입력해주세요" },
+  ];
+
   return (
     <div className="w-full bg-white">
-      <Image src="" alt="icon 자리" width={90} height={45} className="bg-[#ff0000]/[.30]" />
       <p className="text-title">회원가입</p>
       <div className="flex flex-col items-center">
-        <SignupForm />
+        <SignupForm inputProps={inputProps} />
         <div className="flex justify-center items-center gap-1 ">
           <div className="text-label">이미 계정이 있으신가요?</div>
           <Link className="text-[#999] text-xs font-medium leading-[125%]" href="/login">
