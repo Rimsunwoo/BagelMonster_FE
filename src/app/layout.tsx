@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import type { Metadata } from "next";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Link href="/cart">장바구니</Link>
               </li>
               <li>
-                <Link href="/login">로그인</Link>
+                <Link href="/signin">로그인</Link>
               </li>
               <li>
                 <Link href="/signup">회원가입</Link>

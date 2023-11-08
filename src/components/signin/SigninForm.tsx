@@ -1,25 +1,35 @@
 "use client";
 
 import { Fragment } from "react";
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { signupSchema } from "@/schema/formSchema";
+import { signin } from "@/app/api/auth";
+import { signinSchema } from "@/schema/formSchema";
 
-import type { InputProps, SignupFormProps } from "@/types/auth.type";
+import type { InputProps, SigninFormProps } from "@/types/auth.type";
 
-interface Props {
-  inputProps: InputProps[];
-}
+export default function SigninForm() {
+  const inputProps: InputProps<SigninFormProps>[] = [
+    { id: "email", label: "아이디", placeholder: "아이디를 입력해주세요", type: "email" },
+    { id: "password", label: "비밀번호", placeholder: "비밀번호를 입력해주세요", type: "password" },
+  ];
 
-export default function Form({ inputProps }: Props) {
-  const resolver = yupResolver(signupSchema);
-  const { register, handleSubmit, formState } = useForm<SignupFormProps>({ resolver });
+  const resolver = yupResolver(signinSchema);
+  const { register, handleSubmit, formState, reset } = useForm<SigninFormProps>({ resolver });
   const { errors } = formState;
 
-  const onSubmit = async (data: SignupFormProps) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<SigninFormProps> = async ({ email, password }) => {
+    const request = { email, password };
+    try {
+      signin(request);
+      reset();
+    } catch (error) {
+      console.log("error :", error);
+      alert(error);
+    }
   };
 
   return (
@@ -33,7 +43,7 @@ export default function Form({ inputProps }: Props) {
           <input
             className={`auth-input text-input ${errors[input.id] && "border-red-500"}`}
             placeholder={input.placeholder}
-            type="text"
+            type={input.type}
             id={input.id}
             {...register(input.id)}
           />
