@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 
-import { signup } from "@/app/api/auth";
+import { signin, signup } from "@/app/api/auth";
 import { signupSchema } from "@/schema/formSchema";
 
 import type { InputProps, SignupFormProps } from "@/types/auth.type";
@@ -40,7 +40,7 @@ export default function SignupForm() {
     try {
       await signup({ ...request, isStore });
       reset();
-      // await signin({ email, password });
+      await signin({ email, password });
       router.push("/");
     } catch (error) {
       // #TODO alert 대신 toast로 변경

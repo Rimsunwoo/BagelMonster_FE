@@ -1,36 +1,15 @@
 import Link from "next/link";
 
-export default function Login() {
+import SigninForm from "@/components/signin/SigninForm";
+
+export default function signin() {
   return (
     <div className="w-[360px] bg-white">
       {/* <Image src="" alt="icon" width={90} height={45} className="bg-[#ff0000]/[.30]" /> */}
       <p className="text-title">로그인</p>
       <div className="flex flex-col items-center gap-10 w-80">
         <div className="flex flex-col gap-6 self-stretch">
-          <form className="flex flex-col gap-4 self-stretch">
-            <label className="flex flex-col gap-2 self-stretch text-label" htmlFor="id">
-              아이디
-              <input
-                className="flex items-center gap-2 self-stretch auth-input text-input"
-                placeholder="아이디를 입력해주세요"
-                type="text"
-                id="id"
-              />
-            </label>
-            <label className="flex flex-col gap-2 self-stretch text-label" htmlFor="password">
-              비밀번호
-              <input
-                className="flex items-center gap-2 self-stretch auth-input text-input"
-                placeholder="비밀번호를 입력해주세요"
-                id="password"
-              />
-            </label>
-            <input
-              className="flex justify-center items-center gap-2 self-stretch auth-button text-button"
-              type="submit"
-              value="로그인"
-            />
-          </form>
+          <SigninForm />
           <div className="flex justify-end items-center gap-1 self-stretch text-[#999]">
             <input className="text-center text-xs leading-[150%] cursor-pointer" type="button" value="아이디 찾기" />
             <span className="py-0 w-px h-3 bg-[#999]" />
