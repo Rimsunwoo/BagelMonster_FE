@@ -1,4 +1,4 @@
-import type { SignupFormProps } from "@/types/auth.type";
+import type { SigninFormProps, SignupFormProps } from "@/types/auth.type";
 
 import { API_URL } from "./index";
 
