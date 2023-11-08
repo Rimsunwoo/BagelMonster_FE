@@ -8,6 +8,46 @@
   --background-end-rgb: 255, 255, 255; */
 }
 
+@font-face {
+  font-family: "Pretendard-Bold";
+  src:
+    local("Pretendard Bold"),
+    url("/public/fonts/Pretendard-Bold.woff") format("woff"),
+    url("/public/fonts/Pretendard-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  src:
+    local("Pretendard Bold"),
+    url("/public/fonts/Pretendard-SemiBold.woff") format("woff"),
+    url("/public/fonts/Pretendard-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pretendard-Medium";
+  src:
+    local("Pretendard Medium"),
+    url("/public/fonts/Pretendard-Medium.woff") format("woff"),
+    url("/public/fonts/Pretendard-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src:
+    local("Pretendard Regular"),
+    url("/public/fonts/Pretendard-Regular.woff") format("woff"),
+    url("/public/fonts/Pretendard-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Pretendard-Light";
+  src:
+    local("Pretendard Light"),
+    url("/public/fonts/Pretendard-Light.woff") format("woff"),
+    url("/public/fonts/Pretendard-Light.woff2") format("woff2");
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     /* --foreground-rgb: 255, 255, 255;
@@ -44,5 +84,8 @@ body {
   }
   .auth-input {
     @apply h-[41px] py-3 px-4 rounded border bg-white;
+  }
+  .normal-button {
+    @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-SemiBold;
   }
 }
