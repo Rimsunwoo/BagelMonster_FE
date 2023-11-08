@@ -6,7 +6,6 @@
     // "plugin:import/warnings",
     "next/core-web-vitals",
     "prettier"
-
     // "prettier/prettier",
     // "plugin:@typescript-eslint/recommended",
     // "plugin:@next/next/recommended"
@@ -35,11 +34,11 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "settings": {
-      "import/resolver": {
-        "alias": { "map": [["@", "./src"]], "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-      }
-    },
+    // "settings": {
+    //   "import/resolver": {
+    //     "alias": { "map": [["@", "./src"]], "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    //   }
+    // },
     "import/order": [
       "error",
       {
