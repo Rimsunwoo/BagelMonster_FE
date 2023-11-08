@@ -24,15 +24,15 @@ const passwordConfirm = yup
 
 const name = yup
   .string()
-  .required("이름을 입력해주세요.")
+  .required("성함을 입력해주세요.")
   .min(2, "성함은 2자리 이상이어야 합니다.")
   .max(10, "성함은 10자리 이하이어야 합니다.");
 
 const phone = yup
   .string()
-  .required("전화번호를 입력해주세요.")
-  .min(9, "전화번호는 9자리 이상이어야합니다.")
-  .max(13, "전화번호는 13자리 이하이어야합니다.");
+  .required("휴대전화를 입력해주세요.")
+  .min(9, "휴대전화는 9자리 이상이어야합니다.")
+  .max(13, "휴대전화는 13자리 이하이어야합니다.");
 
 export const signupSchema = yup.object().shape({ email, password, passwordConfirm, name, phone });
 export const signinSchema = yup.object().shape({ email, password });

@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </ul>
           </nav>
         </header>
-        <main className="w-full">{children}</main>
+        <main className="w-full p-[5%]">{children}</main>
         <footer className="w-full flex gap-5 border-2 border-black">
           <div>
             <ul>

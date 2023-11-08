@@ -36,6 +36,7 @@ export default function SignupForm() {
 
   const onSubmit: SubmitHandler<FormProps> = async (request) => {
     const { email, password } = request;
+
     try {
       await signup({ ...request, isStore });
       reset();
@@ -49,9 +50,13 @@ export default function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 self-stretch my-9">
-      <div>
-        <div>소비자</div>
-        <div>사업자</div>
+      <div className="flex gap-6">
+        <div className="flex flex-1 items-center justify-center h-10 bg-slate-100 border-b-2 border-black px-4 cursor-pointer">
+          소비자
+        </div>
+        <div className="flex flex-1 items-center justify-center h-10 bg-slate-100 border-b-2 border-black px-4 cursor-pointer">
+          사업자
+        </div>
       </div>
       {inputProps.map((input) => (
         <div className="flex flex-col gap-2" key={input.id}>
