@@ -21,7 +21,6 @@ export default function UserForm() {
 
   const onSubmit: SubmitHandler<SignupUserProps> = async (request) => {
     const { email, password } = request;
-    console.log("request :", request);
 
     try {
       await signup({ ...request, isStore: true });
