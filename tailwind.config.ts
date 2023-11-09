@@ -7,14 +7,23 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      Bold: ["Pretendard-Bold"],
+      SemiBold: ["Pretendard-SemiBold"],
+      Medium: ["Pretendard-Medium"],
+      Regular: ["Pretendard-Regular"],
+      light: ["Pretendard-Light"],
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      color: {
+      colors: {
         white: "#ffffff",
         black: "#333333",
+        gray: "#AAAAAA",
+        orange: "#F15A23",
       },
     },
   },
