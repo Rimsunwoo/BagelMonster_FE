@@ -1,4 +1,4 @@
-import type { SigninFormProps, SignupFormProps } from "@/types/auth.type";
+import type { SigninFormProps, SignupAPI } from "@/types/auth.type";
 
 import { API_URL } from "./index";
 
@@ -16,7 +16,7 @@ export async function signin(request: SigninFormProps) {
   alert("로그인 성공");
 }
 
-export async function signup(request: SignupFormProps) {
+export async function signup(request: SignupAPI) {
   const response = await fetch(`${API_URL}/api/users/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
