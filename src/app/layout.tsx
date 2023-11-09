@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import Link from "next/link";
+import Header from "@/components/common/header/Header";
 
 import type { Metadata } from "next";
 
@@ -14,29 +14,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
-      <body className="max-w-[560px] mx-auto flex flex-col items-center">
-        <header className="w-full flex gap-5 border-2 border-black">
-          <h1>
-            <Link href="/">Bagel Monster</Link>
-          </h1>
-          <nav className="flex">
-            <ul>
-              <li>
-                <Link href="/list">가게리스트</Link>
-              </li>
-              <li>
-                <Link href="/cart">장바구니</Link>
-              </li>
-              <li>
-                <Link href="/signin">로그인</Link>
-              </li>
-              <li>
-                <Link href="/signup">회원가입</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main className="w-full p-[5%]">{children}</main>
+      <body className="max-w-[560px] mx-auto flex flex-col items-center relative">
+        <Header />
+        <main className="w-full my-[3vh]">{children}</main>
         <footer className="w-full flex gap-5 border-2 border-black">
           <div>
             <ul>
