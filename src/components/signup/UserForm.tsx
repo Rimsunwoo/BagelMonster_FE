@@ -34,7 +34,7 @@ export default function UserForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 self-stretch my-9">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 self-stretch mt-8">
       {userInputProps.map((input) => (
         <div className="flex flex-col gap-2" key={input.id}>
           <label className="flex text-label justify-between" htmlFor={input.id}>
