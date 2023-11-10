@@ -7,6 +7,13 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      Bold: ["Pretendard-Bold"],
+      SemiBold: ["Pretendard-SemiBold"],
+      Medium: ["Pretendard-Medium"],
+      Regular: ["Pretendard-Regular"],
+      light: ["Pretendard-Light"],
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
