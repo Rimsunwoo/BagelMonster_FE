@@ -5,11 +5,17 @@ export interface SigninFormProps {
   password: string;
 }
 
-export interface SignupFormProps extends SigninFormProps {
+export interface SignupUserProps extends SigninFormProps {
   passwordConfirm: string;
   name: string;
   phone: string;
-  isStore: boolean;
+}
+
+export interface SignupStoreProps extends SignupUserProps {
+  storeName: string;
+  address: string;
+  storePhone: string;
+  content: string;
 }
 
 export interface InputProps<FormType> {
@@ -18,3 +24,4 @@ export interface InputProps<FormType> {
   placeholder: string;
   type: HTMLInputTypeAttribute;
 }
+export type SignupAPI = Omit<SignupUserProps, "passwordConfirm"> & { isStore: boolean };

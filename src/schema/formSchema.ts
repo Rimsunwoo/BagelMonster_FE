@@ -33,6 +33,14 @@ const phone = yup
   .required("휴대전화를 입력해주세요.")
   .min(9, "휴대전화는 9자리 이상이어야합니다.")
   .max(13, "휴대전화는 13자리 이하이어야합니다.");
+const userValidation = { email, password, passwordConfirm, name, phone };
 
-export const signupSchema = yup.object().shape({ email, password, passwordConfirm, name, phone });
+const storeName = yup.string().required("상호명을 입력해주세요.");
+const address = yup.string().required("가게 주소를 입력해주세요.");
+const storePhone = yup.string().required("가게 전화번호를 입력해주세요.");
+const content = yup.string().required("가게 소개글을 입력해주세요.");
+const storeValidation = { storeName, address, storePhone, content };
+
+export const signupUserSchema = yup.object().shape({ ...userValidation });
+export const signupStoreSchema = yup.object().shape({ ...userValidation, ...storeValidation });
 export const signinSchema = yup.object().shape({ email, password });

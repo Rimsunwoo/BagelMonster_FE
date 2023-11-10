@@ -4,8 +4,8 @@ import type { SidebarProps } from "./Header";
 
 export default function HamburgerButton({ isOpenSidebar, openHandler }: SidebarProps) {
   return (
-    <div onClick={openHandler} className="hamburger-button">
-      <input type="checkbox" checked={isOpenSidebar} />
+    <div className="hamburger-button">
+      <input type="checkbox" checked={isOpenSidebar} onChange={openHandler} />
       <span />
       <span />
       <span />

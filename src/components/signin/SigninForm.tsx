@@ -27,7 +27,6 @@ export default function SigninForm() {
       signin(request);
       reset();
     } catch (error) {
-      console.log("error :", error);
       alert(error);
     }
   };

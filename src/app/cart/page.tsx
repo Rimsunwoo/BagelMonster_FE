@@ -1,7 +1,5 @@
 import ProductList from "@/components/cart/ProductList";
 
-export const PRICE_REG_EXR = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
-
 export default function Cart() {
   const testCount = 3;
   const testPrice = 19000;
@@ -36,7 +34,9 @@ export default function Cart() {
             </p>
             <p className="self-stretch justify-between items-center inline-flex text-lg leading-[150%]">
               <span className="text-[#333333] font-bold">총 결제금액</span>
-              <span className="text-[#f15a23] font-semibold">{testPrice.toString().replace(PRICE_REG_EXR, ",")}원</span>
+              <span className="text-[#f15a23] font-semibold">
+                {testPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
+              </span>
             </p>
           </div>
           <input

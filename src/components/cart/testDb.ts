@@ -1,4 +1,4 @@
-export const productList = [
+export const TEST_API_GET = [
   {
     id: "001",
     name: "테스트 베이글",
