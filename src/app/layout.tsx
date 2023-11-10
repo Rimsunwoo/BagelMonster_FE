@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <nav className="flex">
             <ul>
               <li>
-                <Link href="/list">가게리스트</Link>
+                <Link href="/stores">가게리스트</Link>
               </li>
               <li>
                 <Link href="/cart">장바구니</Link>

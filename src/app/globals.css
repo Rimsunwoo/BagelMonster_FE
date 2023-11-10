@@ -24,6 +24,9 @@ body {
   .flexcol {
     @apply flex flex-col;
   }
+  .flex-box {
+    @apply flex items-center justify-center;
+  }
   .text-title {
     @apply text-black text-2xl font-bold leading-[125%];
   }
@@ -37,12 +40,15 @@ body {
     @apply text-white text-center text-sm font-bold leading-[125%];
   }
   .auth-button {
-    @apply py-3 px-4 rounded bg-[#f15a23] cursor-pointer;
+    @apply py-3 px-4 rounded bg-[#FF3D00] cursor-pointer;
   }
   .social-button {
     @apply py-3 px-4 rounded bg-[#252525] cursor-pointer;
   }
   .auth-input {
     @apply h-[41px] py-3 px-4 rounded border bg-white;
+  }
+  .count-box {
+    @apply w-6 h-6 border font-medium border-[#DDDDDD] text-[#AAAAAA];
   }
 }
