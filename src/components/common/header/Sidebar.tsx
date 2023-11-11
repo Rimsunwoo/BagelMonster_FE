@@ -4,7 +4,7 @@ import type { SidebarProps } from "./Header";
 
 const links = [
   { href: "/", name: "home" },
-  { href: "/list", name: "가게리스트" },
+  { href: "/stores", name: "가게리스트" },
   { href: "/cart", name: "장바구니" },
   { href: "/signin", name: "로그인" },
   { href: "/signup", name: "회원가입" },

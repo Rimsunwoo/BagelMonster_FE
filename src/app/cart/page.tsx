@@ -8,9 +8,11 @@ export default function Cart() {
     <div className="w-full bg-white flex h-[120vh] flex-col gap-6">
       <div className="w-full flex flex-col items-center gap-6">
         <div className="w-full flex justify-between items-center px-[5%]">
-          <div className="flex gap-2 items-center text-zinc-800 text-[13px] font-medium leading-[125%]">
+          <div className="flex gap-2 items-center">
             <input className="checkbox" type="checkbox" id="selectAll" />
-            <label htmlFor="selectAll">전체선택</label>
+            <label className="text-zinc-800 text-[13px] font-medium leading-[125%] select-none" htmlFor="selectAll">
+              전체선택
+            </label>
           </div>
           <div className="flex gap-2 items-center text-[#888] text-[13px] font-normal leading-[125%]">
             <input className="cursor-pointer" type="button" value={"선택삭제"} />
