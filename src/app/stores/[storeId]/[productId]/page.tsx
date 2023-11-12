@@ -39,10 +39,10 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
 }
 
 const mockProduct: Product = {
-  productId: "a1",
+  productId: 1,
   storeName: "코끼리 베이글",
   name: "올리브치즈 베이글",
-  price: 7000,
+  price: "7000",
   productPictureUrl:
     "https://www.shinsegaefood.com/brand/milkandhoney/brand/milkhoney/images/sub/bagel/rolling_einstein_10.jpg",
   popularity: "1",
