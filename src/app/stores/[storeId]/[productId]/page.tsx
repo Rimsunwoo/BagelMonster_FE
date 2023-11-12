@@ -15,7 +15,7 @@ interface ProductDetailProps {
   };
 }
 
-export default function StoreDetail({ params: { productId } }: ProductDetailProps) {
+export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
   const { storeName, name, price, productPictureUrl, popularity, status, description } = mockProduct;
   return (
     <div>
@@ -39,13 +39,15 @@ export default function StoreDetail({ params: { productId } }: ProductDetailProp
 }
 
 const mockProduct: Product = {
-  productId: "a1",
+  productId: 1,
   storeName: "코끼리 베이글",
   name: "올리브치즈 베이글",
-  price: 7000,
+  price: "7000",
   productPictureUrl:
     "https://www.shinsegaefood.com/brand/milkandhoney/brand/milkhoney/images/sub/bagel/rolling_einstein_10.jpg",
   popularity: "1",
   status: true,
   description: "올리브와 치즈가 들어가 맛나요",
+  createdDate: "2023-11-06T15:00",
+  modifiedDate: "2023-11-06T15:00",
 };
