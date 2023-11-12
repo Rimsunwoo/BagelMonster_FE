@@ -1,12 +1,14 @@
 export interface Product {
-  productId: string;
-  name: string;
   storeName: string;
+  productId: number;
+  name: string;
   description: string;
-  price: number;
+  price: string;
   productPictureUrl: string;
   popularity: string;
   status: boolean;
+  createdDate: string;
+  modifiedDate: string;
 }
 
 export interface ProductApi {

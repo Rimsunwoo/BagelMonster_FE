@@ -24,7 +24,7 @@ export default function Header() {
     switch (pathname) {
       case "/":
         return "로고 예정";
-      case "/list":
+      case "/stores":
         return "가게리스트";
       case "/cart":
         return "장바구니";

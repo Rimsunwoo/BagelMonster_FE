@@ -218,4 +218,7 @@ body {
   .normal-button {
     @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-SemiBold;
   }
+  .info-box {
+    @apply text-gray inline-block w-[65px];
+  }
 }

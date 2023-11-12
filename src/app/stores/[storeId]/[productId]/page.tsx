@@ -15,7 +15,7 @@ interface ProductDetailProps {
   };
 }
 
-export default function StoreDetail({ params: { productId } }: ProductDetailProps) {
+export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
   const { storeName, name, price, productPictureUrl, popularity, status, description } = mockProduct;
   return (
     <div>
@@ -48,4 +48,6 @@ const mockProduct: Product = {
   popularity: "1",
   status: true,
   description: "올리브와 치즈가 들어가 맛나요",
+  createdDate: "2023-11-06T15:00",
+  modifiedDate: "2023-11-06T15:00",
 };
