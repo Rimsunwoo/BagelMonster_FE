@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
-      <body className="max-w-[560px] mx-auto flex flex-col items-center relative">
+      <body className="max-w-[560px] mx-auto flexcol items-center relative">
         <Header />
         <main className="w-full my-[3vh]">{children}</main>
         <Navigation />

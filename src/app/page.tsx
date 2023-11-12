@@ -79,8 +79,8 @@ export const mockData = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-10">
-      <div className="bg-[#FF3D00] px-5 flex flex-col justify-center gap-7 h-[50vh]">
+    <div className="flexcol gap-10">
+      <div className="bg-orange px-5 flexcol justify-center gap-7 h-[50vh]">
         <pre className="text-white text-2xl font-bold leading-[125%]">{`베이글 몬스터와
 어쩌구 저쩌구 하세요!`}</pre>
         <pre className="text-white text-[11px] font-normal leading-[150%] opacity-80">
@@ -90,7 +90,7 @@ export default function Home() {
         </pre>
       </div>
       <div>
-        <p className="text-[#333] text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (픽셀 고정)</p>
+        <p className="text-black text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (픽셀 고정)</p>
         <div className="relative overflow-x-scroll z-10 scroll-none">
           <div className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
             {mockData.map((data) => (
@@ -98,7 +98,7 @@ export default function Home() {
                 <Link href={`stores/${data.storeId}`} className="drag-none">
                   <Image src={TEST_IMG} alt="" className="w-[174px] h-[136px] drag-none" />
                   <div className="w-[174px] px-6 py-5">
-                    <p className="text-[#333] text-sm font-bold leading-[150%]">{data.name}</p>
+                    <p className="text-black text-sm font-bold leading-[150%]">{data.name}</p>
                     <p className="text-[#787878] text-[11px] font-normal leading-[150%]">{data.address}</p>
                   </div>
                 </Link>
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <p className="text-[#333] text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (비율 고정)</p>
+        <p className="text-black text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (비율 고정)</p>
         <div className="relative overflow-x-scroll z-10 scroll-none">
           <div className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
             {mockData.map((data) => (
@@ -116,7 +116,7 @@ export default function Home() {
                 <Link href={`stores/${data.storeId}`} className="drag-none">
                   <Image src={TEST_IMG} alt="" className="w-[224px] h-[180px] drag-none" />
                   <div className="w-[224px] px-6 py-5">
-                    <p className="text-[#333] text-sm font-bold leading-[150%]">{data.name}</p>
+                    <p className="text-black text-sm font-bold leading-[150%]">{data.name}</p>
                     <p className="text-[#787878] text-[11px] font-normal leading-[150%]">{data.address}</p>
                   </div>
                 </Link>
@@ -126,7 +126,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <p className="text-[#333] text-base font-semibold leading-[150%] px-5">
+        <p className="text-black text-base font-semibold leading-[150%] px-5">
           가까운 베이글가게 (이미지 16:9 비율 가로 200px)
         </p>
         <div className="relative overflow-x-scroll z-10 scroll-none">
@@ -136,7 +136,7 @@ export default function Home() {
                 <Link href={`stores/${data.storeId}`} className="drag-none">
                   <Image src={TEST_IMG} alt="" className="w-[200px] h-[112.5px] drag-none" />
                   <div className="w-[200px] px-6 py-5">
-                    <p className="text-[#333] text-sm font-bold leading-[150%]">{data.name}</p>
+                    <p className="text-black text-sm font-bold leading-[150%]">{data.name}</p>
                     <p className="text-[#787878] text-[11px] font-normal leading-[150%]">{data.address}</p>
                   </div>
                 </Link>
@@ -146,7 +146,7 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <p className="text-[#333] text-base font-semibold leading-[150%] px-5">
+        <p className="text-black text-base font-semibold leading-[150%] px-5">
           가까운 베이글가게 (이미지 정방형 비율 가로 200px)
         </p>
         <div className="relative overflow-x-scroll z-10 scroll-none">
@@ -156,7 +156,7 @@ export default function Home() {
                 <Link href={`stores/${data.storeId}`} className="drag-none">
                   <Image src={TEST_IMG} alt="" className="w-[200px] h-[200px] drag-none" />
                   <div className="w-[200px] px-6 py-5">
-                    <p className="text-[#333] text-sm font-bold leading-[150%]">{data.name}</p>
+                    <p className="text-black text-sm font-bold leading-[150%]">{data.name}</p>
                     <p className="text-[#787878] text-[11px] font-normal leading-[150%]">{data.address}</p>
                   </div>
                 </Link>

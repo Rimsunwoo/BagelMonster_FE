@@ -7,8 +7,8 @@ export default function signin() {
     <div className="w-[360px] bg-white">
       {/* <Image src="" alt="icon" width={90} height={45} className="bg-[#ff0000]/[.30]" /> */}
       <p className="text-title">로그인</p>
-      <div className="flex flex-col items-center gap-10 w-80">
-        <div className="flex flex-col gap-6 self-stretch">
+      <div className="flexcol items-center gap-10 w-80">
+        <div className="flexcol gap-6 self-stretch">
           <SigninForm />
           <div className="flex justify-end items-center gap-1 self-stretch text-[#999]">
             <input className="text-center text-xs leading-[150%] cursor-pointer" type="button" value="아이디 찾기" />
@@ -17,7 +17,7 @@ export default function signin() {
           </div>
           <span className="self-stretch h-px bg-[#d9d9d9]" />
         </div>
-        <div className="flex flex-col gap-3 self-stretch">
+        <div className="flexcol gap-3 self-stretch">
           <input className="self-stretch text-button social-button" type="button" value="카카오로 로그인하기" />
           <input className="self-stretch text-button social-button" type="button" value="구글 로그인하기" />
         </div>

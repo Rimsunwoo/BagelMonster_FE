@@ -18,7 +18,7 @@ export default function Tab({ label, currentTab, onChangeTabHandler }: TabProps)
       onClick={() => onChangeTabHandler(label)}
       className={`
           flex items-center justify-center cursor-pointer text-sm leading-[22px] pb-1 font-bold
-          ${currentTab === label ? "border-b-2 border-[#ff3d00] text-[#ff3d00]" : "border-none"}
+          ${currentTab === label ? "border-b-2 border-orange text-orange" : "border-none"}
           `}
     >
       {label}

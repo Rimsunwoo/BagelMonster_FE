@@ -22,8 +22,8 @@ export default function Navigation() {
           <li key={link.name}>
             <Link
               href={link.href}
-              className={`flex flex-col items-center justify-center py-4 px-7 ${
-                pathName === link.href ? "text-[#333]" : "text-[#aaa] opacity-50 hover:opacity-100"
+              className={`flexcol items-center justify-center py-4 px-7 ${
+                pathName === link.href ? "text-black" : "text-gray opacity-50 hover:opacity-100"
               }`}
             >
               <Icon href={link.href} width={32} height={32} />

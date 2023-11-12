@@ -60,130 +60,6 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-.checkbox[type="checkbox"] {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-
-  position: relative;
-  width: 20px;
-  height: 20px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-
-  border: 1px solid #333333;
-  border-radius: 2px;
-  transition: ease-in-out 200ms;
-  z-index: 0;
-
-  &:checked {
-    background-color: rgb(234 88 12 / var(--tw-bg-opacity));
-    border: 1px solid rgb(255 255231 235);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      width: 5px;
-      height: 1px;
-      background-color: #fff;
-      border: none;
-
-      transform: translate(-100%, -50%) rotate(45deg);
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      width: 9px;
-      height: 1px;
-      background-color: #fff;
-      border: none;
-
-      transform: translate(-25%, -125%) rotate(-45deg);
-    }
-  }
-}
-
-.count-button::-webkit-inner-spin-button {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-
-.hamburger-button {
-  display: block;
-  position: relative;
-  transform: translateY(10%);
-  z-index: 1;
-  width: 30px;
-  height: 25px;
-  -webkit-user-select: none;
-  user-select: none;
-
-  > input {
-    appearance: none;
-
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-
-    cursor: pointer;
-    opacity: 0.5;
-    z-index: 2;
-
-    -webkit-touch-callout: none;
-  }
-
-  > span {
-    display: block;
-    width: 100%;
-    height: 5px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-
-    background: #333;
-    border-radius: 3px;
-
-    z-index: 1;
-    transition: all 0.35s;
-  }
-
-  > span:nth-child(2) {
-    top: 0;
-  }
-
-  > input:checked ~ span:nth-child(2) {
-    top: 50%;
-    transform: translateY(-100%) rotate(-45deg);
-  }
-
-  > span:nth-child(3) {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  > input:checked ~ span:nth-child(3) {
-    opacity: 0;
-  }
-
-  > span:nth-child(4) {
-    top: 100%;
-    transform: translateY(-100%);
-  }
-  > input:checked ~ span:nth-child(4) {
-    top: 50%;
-    transform: translateY(-100%) rotate(45deg);
-  }
-}
-
 @layer components {
   .flexcol {
     @apply flex flex-col;
@@ -198,13 +74,13 @@ body {
     @apply text-black text-xs font-medium leading-[125%];
   }
   .text-input {
-    @apply text-[#aaaaaa] text-xs font-medium leading-[125%];
+    @apply text-gray text-xs font-medium leading-[125%];
   }
   .text-button {
     @apply text-white text-center text-sm font-bold leading-[125%];
   }
   .auth-button {
-    @apply py-3 px-4 rounded bg-[#FF3D00] cursor-pointer;
+    @apply py-3 px-4 rounded bg-orange cursor-pointer;
   }
   .social-button {
     @apply py-3 px-4 rounded bg-[#252525] cursor-pointer;
@@ -213,9 +89,25 @@ body {
     @apply h-[41px] py-3 px-4 rounded border bg-white;
   }
   .count-box {
-    @apply w-6 h-6 border font-medium border-[#DDDDDD] text-[#AAAAAA];
+    @apply w-6 h-6 border font-medium border-[#DDDDDD] text-gray;
   }
   .normal-button {
     @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-SemiBold;
+  }
+  .scroll-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-none {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .drag-none {
+    -webkit-user-drag: none;
+  }
+  .checkbox[type="checkbox"] {
+    @apply relative w-5 h-5 bg-white border border-black rounded-sm ease-in-out duration-200 appearance-none
+    checked:bg-orange checked:border checked:border-transparent
+    checked:before:top-1/2 checked:before:left-1/2 checked:before:absolute checked:before:w-[5px] checked:before:h-px checked:before:bg-white checked:before:border-none checked:before:-translate-x-full checked:before:-translate-y-1/2 checked:before:rotate-45
+    checked:after:top-1/2 checked:after:left-1/2 checked:after:absolute checked:after:w-[9px] checked:after:h-px checked:after:bg-white checked:after:border-none checked:after:-translate-x-1/4 checked:after:-translate-y-[125%] checked:after:-rotate-45;
   }
 }

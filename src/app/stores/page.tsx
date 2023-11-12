@@ -42,9 +42,9 @@ export default function Stores() {
   });
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flexcol gap-5">
       <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-center text-[#333] text-sm font-medium leading-[125%] select-none">
+        <div className="flex gap-2 items-center text-black text-sm font-medium leading-[125%] select-none">
           <input
             className="checkbox"
             type="checkbox"
@@ -60,7 +60,7 @@ export default function Stores() {
           {filterButton.map((button, index) => (
             <Fragment key={button.id}>
               {index !== 0 && <p className="cursor-default">|</p>}
-              <button className={filter === button.id ? "text-[#ff3d00]" : ""} onClick={() => handleFilter(button.id)}>
+              <button className={filter === button.id ? "text-orange" : ""} onClick={() => handleFilter(button.id)}>
                 {button.name}
               </button>
             </Fragment>

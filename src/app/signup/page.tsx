@@ -6,7 +6,7 @@ export default function Signup() {
   return (
     <div className="w-full bg-white">
       <p className="text-title">회원가입</p>
-      <div className="flex flex-col items-center">
+      <div className="flexcol items-center">
         <SignupForm />
         <div className="flex justify-center items-center gap-1 mt-1 text-label">
           <span>이미 계정이 있으신가요?</span>
