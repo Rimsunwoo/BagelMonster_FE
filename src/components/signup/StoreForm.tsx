@@ -4,11 +4,11 @@ import React from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 
-import { signin, signup } from "@/app/api/auth";
-import { signupStoreSchema } from "@/schema/formSchema";
+import { createStore } from "@/app/api/store";
+// import { signupStoreSchema } from "@/schema/formSchema";
 
 import { storeInputProps } from "./input.category";
 
@@ -16,34 +16,45 @@ import type { SignupStoreProps } from "@/types/auth.type";
 
 export default function StoreForm() {
   const router = useRouter();
-  const resolver = yupResolver(signupStoreSchema);
-  const { register, handleSubmit, formState, reset } = useForm<SignupStoreProps>({ resolver });
+  // const resolver = yupResolver(signupStoreSchema);
+  const { register, handleSubmit, formState, reset } = useForm<SignupStoreProps>();
   const { errors } = formState;
+  const [imgFile, setImgFile] = React.useState<File | null>(null);
+  console.log("imgFile :", imgFile);
+
+  const onChangeImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setImgFile(e.target.files![0]);
+  };
 
   const onSubmit: SubmitHandler<SignupStoreProps> = async (request) => {
-    const signinRequest = { email: request.email, password: request.password };
-
-    const signupRequest = {
-      email: request.email,
-      password: request.password,
-      name: request.name,
-      phone: request.phone,
-      isStore: true,
-    };
-
     // const createStoreRequest = {
     //   name: request.storeName,
     //   address: request.address,
+    //   storePictureUrl: request.storePictureUrl,
     //   phone: request.storePhone,
     //   content: request.content,
+    //   productCreatedTime: request.productCreatedTime,
+    //   openedTime: request.openedTime,
+    //   closedTime: request.closedTime,
+    //   closedDays: request.closedDays,
     // };
+    if (imgFile === null) return;
+
+    const createStoreRequest = {
+      name: "테스트 2번 가게",
+      address: "서울시 강남구 테헤란로 427",
+      phone: "010-1234-5678",
+      content: "테스트 2번 가게입니다.",
+      productCreatedTime: "11:00",
+      openedTime: "10:00",
+      closedTime: "19:00",
+      closedDays: "토, 일",
+    };
 
     try {
-      await signup(signupRequest);
       // 가게 등록
-      // await createStore(createStoreRequest)
+      await createStore(createStoreRequest, imgFile);
       reset();
-      await signin(signinRequest);
       router.push("/");
     } catch (error) {
       // #TODO alert 대신 toast로 변경
@@ -52,7 +63,8 @@ export default function StoreForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 self-stretch mt-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="flexcol gap-4 self-stretch mt-8">
+      <input type="file" onChange={(e) => onChangeImgFile(e)} />
       {storeInputProps.map((input) => (
         <div className="flex flex-col gap-2" key={input.id}>
           <label className="flex text-label justify-between" htmlFor={input.id}>
@@ -68,7 +80,7 @@ export default function StoreForm() {
           />
         </div>
       ))}
-      <input className="flex justify-center mt-4 auth-button text-button" type="submit" value="회원가입" />
+      <input className="flex justify-center mt-4 auth-button text-button" type="submit" value="가게 등록" />
     </form>
   );
 }

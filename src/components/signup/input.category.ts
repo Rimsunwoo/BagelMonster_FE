@@ -9,7 +9,6 @@ export const userInputProps: InputProps<SignupUserProps>[] = [
 ];
 
 export const storeInputProps: InputProps<SignupStoreProps>[] = [
-  ...userInputProps,
   { id: "storeName", label: "상호명", placeholder: "상호명을 입력해주세요", type: "text" },
   { id: "address", label: "가게 주소", placeholder: "가게 주소를 입력해주세요", type: "address" },
   { id: "storePhone", label: "가게 전화번호", placeholder: "가게 전화번호를 입력해주세요", type: "tel" },
