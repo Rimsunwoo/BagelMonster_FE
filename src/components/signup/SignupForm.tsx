@@ -15,7 +15,7 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="flex flex-col gap-4 self-stretch my-8">
+    <div className="flexcol gap-4 self-stretch my-8">
       <Tabs>
         <Tab currentTab={currentTab} label="일반회원" onChangeTabHandler={onChangeTabHandler} />
         <Tab currentTab={currentTab} label="사업자회원" onChangeTabHandler={onChangeTabHandler} />

@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 
 import Header from "@/components/common/header/Header";
+import Navigation from "@/components/common/navigation/Navigation";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 import type { Metadata } from "next";
 
@@ -14,23 +16,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
-      <body className="max-w-[560px] mx-auto flex flex-col items-center relative">
-        <Header />
-        <main className="w-full my-[3vh]">{children}</main>
-        <footer className="w-full flex gap-5 border-2 border-black">
-          <div>
-            <ul>
-              <li>
-                <a href="https://www.figma.com/file/kMyDunxRquMKm2Ebr0lEk5/BagleMonster?type=design&node-id=0%3A1&mode=design&t=fIQX0JszF6V6A5Al-1">
-                  피그마
-                </a>
-              </li>
-              <li>
-                <a href="https://ogig0818-surfsurf.notion.site/e9170d38d44e443ea9aead431785b2da">노션</a>
-              </li>
-            </ul>
-          </div>
-        </footer>
+      <body className="max-w-[560px] mx-auto flexcol items-center relative">
+        <ReduxProvider>
+          <Header />
+          <main className="w-full mt-[3vh] mb-20">{children}</main>
+          <Navigation />
+        </ReduxProvider>
       </body>
     </html>
   );

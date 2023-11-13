@@ -8,23 +8,25 @@ const config: Config = {
   ],
   theme: {
     fontFamily: {
-      Bold: ["Pretendard-Bold"],
-      SemiBold: ["Pretendard-SemiBold"],
-      Medium: ["Pretendard-Medium"],
-      Regular: ["Pretendard-Regular"],
+      bold: ["Pretendard-Bold"],
+      semiBold: ["Pretendard-SemiBold"],
+      medium: ["Pretendard-Medium"],
+      regular: ["Pretendard-Regular"],
       light: ["Pretendard-Light"],
     },
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
         white: "#ffffff",
         black: "#333333",
         gray: "#AAAAAA",
         green: "#55AF45",
         orange: "#FF3D00",
+      },
+      boxShadow: {
+        main: "0px 0px 15px 0px rgba(0, 0, 0, 0.1)",
+      },
+      dropShadow: {
+        navigation: "0px -1px 8px rgba(0, 0, 0, 0.15)",
       },
     },
   },

@@ -18,7 +18,7 @@ export default function Header() {
       case "/signup":
         return "회원가입";
       default:
-        return "홈";
+        return "Bagel Monster";
     }
   };
 

@@ -7,12 +7,13 @@ import { useForm } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 
-import { createStore } from "@/app/api/store";
 // import { signupStoreSchema } from "@/schema/formSchema";
 
 import { storeInputProps } from "./input.category";
 
 import type { SignupStoreProps } from "@/types/auth.type";
+
+import { createStore } from "@/app/api/store";
 
 export default function StoreForm() {
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function StoreForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="flexcol gap-4 self-stretch mt-8">
       <input type="file" onChange={(e) => onChangeImgFile(e)} />
       {storeInputProps.map((input) => (
-        <div className="flex flex-col gap-2" key={input.id}>
+        <div className="flexcol gap-2" key={input.id}>
           <label className="flex text-label justify-between" htmlFor={input.id}>
             {input.label}
             {errors[input.id] && <span className="text-label text-red-500">{errors[input.id]?.message}</span>}

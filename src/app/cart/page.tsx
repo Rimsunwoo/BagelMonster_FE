@@ -6,11 +6,11 @@ export default function Cart() {
 
   return (
     <div className="w-full bg-white flex h-[120vh] flex-col gap-6">
-      <div className="w-full flex flex-col items-center gap-6">
+      <div className="w-full flexcol items-center gap-6">
         <div className="w-full flex justify-between items-center px-[5%]">
           <div className="flex gap-2 items-center">
             <input className="checkbox" type="checkbox" id="selectAll" />
-            <label className="text-zinc-800 text-[13px] font-medium leading-[125%] select-none" htmlFor="selectAll">
+            <label className="text-black text-[13px] font-medium leading-[125%] select-none" htmlFor="selectAll">
               전체선택
             </label>
           </div>
@@ -29,13 +29,13 @@ export default function Cart() {
         <div className="w-full bg-[#f5f5f5] h-2.5" />
 
         <div className="w-full flex-col justify-start items-center flex gap-6 px-[5%]">
-          <div className="flex flex-col w-full">
+          <div className="flexcol w-full">
             <p className="self-stretch justify-between items-start inline-flex text-sm font-medium leading-[150%]">
-              <span className="text-[#aaaaaa]">주문 상품 수</span>
-              <span className="text-[#333333]">총 {testCount}개</span>
+              <span className="text-gray">주문 상품 수</span>
+              <span className="text-black">총 {testCount}개</span>
             </p>
             <p className="self-stretch justify-between items-center inline-flex text-lg leading-[150%]">
-              <span className="text-[#333333] font-bold">총 결제금액</span>
+              <span className="text-black font-bold">총 결제금액</span>
               <span className="text-[#f15a23] font-semibold">
                 {testPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
               </span>

@@ -32,7 +32,7 @@ export default function SigninForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 self-stretch my-9">
+    <form onSubmit={handleSubmit(onSubmit)} className="flexcol gap-4 self-stretch my-9">
       {inputProps.map((input) => (
         <Fragment key={input.id}>
           <label className="flex justify-between text-label" htmlFor={input.id}>

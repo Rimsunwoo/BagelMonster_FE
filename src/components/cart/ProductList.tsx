@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 
 import { TEST_API_GET } from "./testDb";
+import Counter from "../common/Counter";
 
 export default function ProductList() {
   return (
@@ -24,8 +25,8 @@ export default function ProductList() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <button>count button</button>
-                  <button className="border border-[#ddd] rounded-sm px-2 py-1 h-6 text-[#333] text-[13px] font-medium leading-[125%]">
+                  <Counter productId={product.id} />
+                  <button className="border border-[#ddd] rounded-sm px-2 py-1 h-6 text-black text-[13px] font-medium leading-[125%]">
                     선택 삭제
                   </button>
                 </div>
