@@ -92,19 +92,19 @@ export default function Home() {
       <div>
         <p className="text-black text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (픽셀 고정)</p>
         <div className="relative overflow-x-scroll z-10 scroll-none">
-          <div className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
+          <ul className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
             {mockData.map((data) => (
-              <div key={data.storeId} className="shadow-main rounded">
+              <li key={data.storeId} className="shadow-main rounded">
                 <Link href={`stores/${data.storeId}`} className="drag-none">
                   <Image src={TEST_IMG} alt="" className="w-[174px] h-[136px] drag-none" />
                   <div className="w-[174px] px-6 py-5">
-                    <p className="text-black text-sm font-bold leading-[150%]">{data.name}</p>
+                    <p className="text-black text-sm font-bold leading-[150%] truncate">{data.name}</p>
                     <p className="text-[#787878] text-[11px] font-normal leading-[150%]">{data.address}</p>
                   </div>
                 </Link>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
       <div>

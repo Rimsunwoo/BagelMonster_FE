@@ -1,22 +1,21 @@
-import { useCookies } from "react-cookie";
+import { useCookies } from "next-client-cookies";
 
 import { signinApi, signupApi } from "@/app/api/auth";
 
 import type { SigninFormProps, SignupAPI } from "@/types/auth.type";
 
 export default function useAuth() {
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const cookies = useCookies();
 
   const signin = async (request: SigninFormProps) => {
     const token = await signinApi(request);
-    const option = { path: "/", maxAge: 3600, httpOnly: true };
 
-    setCookie("token", token, option);
+    cookies.set("token", token);
   };
 
   const signout = () => {
     sessionStorage.removeItem("user");
-    removeCookie("token");
+    cookies.remove("token");
   };
 
   const signup = async (request: SignupAPI) => {
@@ -25,7 +24,7 @@ export default function useAuth() {
   };
 
   const isLogin = () => {
-    return cookies.token !== undefined;
+    return cookies.get("token") !== undefined;
   };
 
   return { signin, signout, signup, isLogin };

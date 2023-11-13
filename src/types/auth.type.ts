@@ -14,8 +14,13 @@ export interface SignupUserProps extends SigninFormProps {
 export interface SignupStoreProps extends SignupUserProps {
   storeName: string;
   address: string;
+  storePictureUrl: string;
   storePhone: string;
   content: string;
+  productCreatedTime: string;
+  openedTime: string;
+  closedTime: string;
+  closedDays: string;
 }
 
 export interface InputProps<FormType> {
