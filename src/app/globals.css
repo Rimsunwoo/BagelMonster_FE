@@ -110,4 +110,7 @@ body {
     checked:before:top-1/2 checked:before:left-1/2 checked:before:absolute checked:before:w-[5px] checked:before:h-px checked:before:bg-white checked:before:border-none checked:before:-translate-x-full checked:before:-translate-y-1/2 checked:before:rotate-45
     checked:after:top-1/2 checked:after:left-1/2 checked:after:absolute checked:after:w-[9px] checked:after:h-px checked:after:bg-white checked:after:border-none checked:after:-translate-x-1/4 checked:after:-translate-y-[125%] checked:after:-rotate-45;
   }
+  .info-box {
+    @apply text-gray inline-block w-[65px];
+  }
 }

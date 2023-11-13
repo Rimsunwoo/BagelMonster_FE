@@ -8,8 +8,8 @@ export default function Header() {
   const switchTitle = (pathname: string) => {
     switch (pathname) {
       case "/":
-        return "Bagel Monster";
-      case "/list":
+        return "로고 예정";
+      case "/stores":
         return "가게리스트";
       case "/cart":
         return "장바구니";
@@ -23,7 +23,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 w-full h-[70px] bg-[#fff] z-50 flexcol justify-center items-center">
+    <header className="sticky top-0 w-full h-[70px] bg-[#fff] z-50 flex justify-center items-center">
       <p className="text-stone-900 text-sm font-semibold leading-snug text-center">{switchTitle(pathname)}</p>
     </header>
   );

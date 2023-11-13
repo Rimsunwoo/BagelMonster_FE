@@ -6,30 +6,28 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 
-import { signin, signup } from "@/app/api/auth";
+import useAuth from "@/hooks/useAuth";
 import { signupUserSchema } from "@/schema/formSchema";
 
 import { userInputProps } from "./input.category";
 
 import type { SignupUserProps } from "@/types/auth.type";
 
-export default function UserForm() {
+export default function UserForm({ isStore }: { isStore: boolean }) {
   const router = useRouter();
   const resolver = yupResolver(signupUserSchema);
   const { register, handleSubmit, formState, reset } = useForm<SignupUserProps>({ resolver });
   const { errors } = formState;
 
-  const onSubmit: SubmitHandler<SignupUserProps> = async (request) => {
-    const { email, password } = request;
+  const { signup } = useAuth();
 
+  const onSubmit: SubmitHandler<SignupUserProps> = async (request) => {
     try {
-      await signup({ ...request, isStore: true });
+      await signup({ ...request, isStore });
       reset();
-      await signin({ email, password });
       router.push("/");
     } catch (error) {
-      // #TODO alert 대신 toast로 변경
-      alert(error);
+      console.error(error);
     }
   };
 

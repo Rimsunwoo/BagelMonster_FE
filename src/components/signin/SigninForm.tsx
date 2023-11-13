@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { signin } from "@/app/api/auth";
+import useAuth from "@/hooks/useAuth";
 import { signinSchema } from "@/schema/formSchema";
 
 import type { InputProps, SigninFormProps } from "@/types/auth.type";
@@ -16,7 +16,7 @@ export default function SigninForm() {
     { id: "email", label: "아이디", placeholder: "아이디를 입력해주세요", type: "email" },
     { id: "password", label: "비밀번호", placeholder: "비밀번호를 입력해주세요", type: "password" },
   ];
-
+  const { signin } = useAuth();
   const resolver = yupResolver(signinSchema);
   const { register, handleSubmit, formState, reset } = useForm<SigninFormProps>({ resolver });
   const { errors } = formState;
