@@ -9,11 +9,11 @@ import { useRouter } from "next/navigation";
 
 // import { signupStoreSchema } from "@/schema/formSchema";
 
+import { createStore } from "@/app/api/store";
+
 import { storeInputProps } from "./input.category";
 
 import type { SignupStoreProps } from "@/types/auth.type";
-
-import { createStore } from "@/app/api/store";
 
 export default function StoreForm() {
   const router = useRouter();
