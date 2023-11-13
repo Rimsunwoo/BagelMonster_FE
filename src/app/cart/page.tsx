@@ -10,7 +10,7 @@ export default function Cart() {
         <div className="w-full flex justify-between items-center px-[5%]">
           <div className="flex gap-2 items-center">
             <input className="checkbox" type="checkbox" id="selectAll" />
-            <label className="text-zinc-800 text-[13px] font-medium leading-[125%] select-none" htmlFor="selectAll">
+            <label className="text-black text-[13px] font-medium leading-[125%] select-none" htmlFor="selectAll">
               전체선택
             </label>
           </div>

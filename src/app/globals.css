@@ -89,10 +89,17 @@ body {
     @apply h-[41px] py-3 px-4 rounded border bg-white;
   }
   .count-box {
-    @apply w-6 h-6 border font-medium border-[#DDDDDD] text-gray;
+    @apply w-6 h-6 border border-[#DDDDDD] text-gray font-medium leading-none cursor-pointer;
   }
+  .count-box[type="number"]::-webkit-inner-spin-button {
+    @apply appearance-none;
+  }
+  .count-box[type="number"] {
+    @apply border-x-0 cursor-text focus:outline-none;
+  }
+
   .normal-button {
-    @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-SemiBold;
+    @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-semiBold;
   }
   .scroll-none::-webkit-scrollbar {
     display: none;

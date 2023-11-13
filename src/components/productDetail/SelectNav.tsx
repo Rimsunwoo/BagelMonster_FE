@@ -1,13 +1,15 @@
 "use client";
 
+import { useSelector } from "react-redux";
+
 import { usePathname } from "next/navigation";
 import Router from "next/router";
 
 import { addCart } from "@/app/api/product";
 
 import Counter from "../common/Counter";
-import useCounter from "../common/counter.hook";
 
+import type { RootState } from "@/redux/config/configStore";
 import type { Product, ProductApi } from "@/types/product.type";
 
 type SelectNavProps = Pick<Product, "name" | "price">;
@@ -16,7 +18,7 @@ export default function SelectNav({ name, price }: SelectNavProps) {
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
   const productId = pathName[3];
-  const [quantity, counterFunc] = useCounter();
+  const quantity = useSelector((state: RootState) => state.productCount[productId]);
   let totalPrice = (price * quantity).toLocaleString();
   const request = { storeId, productId, quantity };
   const onSubmitAddCart = async (request: ProductApi) => {
@@ -32,7 +34,7 @@ export default function SelectNav({ name, price }: SelectNavProps) {
     <section>
       <div className="flex justify-between mb-2">
         <h2 className="text-gray text-sm">{name}</h2>
-        <Counter counterFunc={counterFunc} count={quantity} />
+        <Counter productId={productId} />
       </div>
       <div className="flex justify-between text-sm mb-6">
         <h2 className="text-gray">개별 금액</h2>

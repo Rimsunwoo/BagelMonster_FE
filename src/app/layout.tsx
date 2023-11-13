@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import Header from "@/components/common/header/Header";
 import Navigation from "@/components/common/navigation/Navigation";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 import type { Metadata } from "next";
 
@@ -16,9 +17,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body className="max-w-[560px] mx-auto flexcol items-center relative">
-        <Header />
-        <main className="w-full my-[3vh]">{children}</main>
-        <Navigation />
+        <ReduxProvider>
+          <Header />
+          <main className="w-full mt-[3vh] mb-20">{children}</main>
+          <Navigation />
+        </ReduxProvider>
       </body>
     </html>
   );

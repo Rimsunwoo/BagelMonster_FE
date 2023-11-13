@@ -17,9 +17,9 @@ const mockOrder = {
 export default function Receipt() {
   return (
     <div className="w-full tracking-tight leading-tight px-[12px]">
-      <h2 className="mt-[68px] text-[32px] tracking-tight leading-tight font-Regular">
-        <span className=" font-Bold">주문</span>이 <br />
-        <span className=" font-Bold">완료</span>되었습니다 :)
+      <h2 className="mt-[68px] text-[32px] tracking-tight leading-tight font-regular">
+        <span className=" font-bold">주문</span>이 <br />
+        <span className=" font-bold">완료</span>되었습니다 :)
       </h2>
       <div className="mt-[62px]">
         <KakaoMap />
