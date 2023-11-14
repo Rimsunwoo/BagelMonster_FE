@@ -1,3 +1,6 @@
+"use client";
+import { usePathname } from "next/navigation";
+
 import StatusIcon from "../productDetail/StatusIcon";
 
 import type { Product } from "@/types/product.type";
@@ -7,10 +10,13 @@ interface StoreMenuProps {
 }
 
 export default function StoreMenu({ products }: StoreMenuProps) {
+  const currentPath = usePathname();
   return (
     <section>
       {products.length === 0 ? (
-        <h2 className="font-semibold">메뉴가 없습니다</h2>
+        <div>
+          <span>메뉴가 없습니다.</span>
+        </div>
       ) : (
         products.map((product: Product) => (
           <div className="flex w-full py-3 px-5 mb-[25px]" key={product.productId}>
