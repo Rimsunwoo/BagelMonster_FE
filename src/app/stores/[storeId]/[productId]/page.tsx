@@ -4,6 +4,7 @@ import Link from "next/link";
 import SelectNav from "@/components/productDetail/SelectNav";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
+import bagelDefault from "../../../../../public/bagelDefailt.jpg";
 import prevBtn from "../../../../../public/prevBtn.svg";
 import rightArrow from "../../../../../public/rightArrow.svg";
 
@@ -20,6 +21,13 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
   return (
     <div>
       {/* #TODO 실제 데이터는 Image태그로 변경 */}
+      <div className="w-full h-[350px]">
+        {productPictureUrl ? (
+          <Image src={productPictureUrl} alt="storeImage" width={560} height={350} fill />
+        ) : (
+          <Image src={bagelDefault} alt="bagelDefaultImg" fill />
+        )}
+      </div>
       <div className="w-full h-[350px] mb-6 bg-cover bg-no-repeat bg-center bg-[url('https://www.shinsegaefood.com/brand/milkandhoney/brand/milkhoney/images/sub/bagel/rolling_einstein_10.jpg')]" />
       <div className="px-5">
         <Image src={prevBtn} alt="prevButton" className="absolute top-0" />
