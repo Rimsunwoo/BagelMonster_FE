@@ -4,9 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getStoreDetail } from "@/app/api/store";
 import StoreCaution from "@/components/storeDetail/StoreCaution";
-import StoreInfo from "@/components/storeDetail/StoreInfo";
+import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
 import StoreIntro from "@/components/storeDetail/StoreIntro";
-import StoreMenu from "@/components/storeDetail/StoreMenu";
 interface StoreDetailProps {
   params: {
     storeId: string;
@@ -45,8 +44,7 @@ export default function StoreDetail({ params: { storeId } }: StoreDetailProps) {
   return (
     <>
       <StoreIntro name={name} content={content} />
-      <StoreInfo infoData={infoData} />
-      <StoreMenu products={products} />
+      <StoreInfoTab infoData={infoData} products={products} />
       <StoreCaution />
     </>
   );

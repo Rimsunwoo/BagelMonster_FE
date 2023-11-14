@@ -1,6 +1,6 @@
-import type { StoreInfo } from "@/types/store.type";
+import type { IStoreInfo } from "@/types/store.type";
 interface StoreInfoProps {
-  infoData: StoreInfo;
+  infoData: IStoreInfo;
 }
 
 export default function StoreInfo({ infoData }: StoreInfoProps) {
@@ -8,7 +8,7 @@ export default function StoreInfo({ infoData }: StoreInfoProps) {
 
   return (
     <section>
-      <div className="py-8 space-y-2">
+      <div className="pb-8 space-y-2">
         <p className="text-[13px]">
           <span className="info-box">영업시간</span>
           <span>{`${openedTime}~${closedTime}`}</span>

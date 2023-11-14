@@ -18,7 +18,7 @@ export interface IStore {
 
 export type StorePostApi = Omit<IStore, "storeId" | "products" | "createdDate" | "modifiedDate" | "storePictureUrl">;
 
-export interface StoreInfo {
+export interface IStoreInfo {
   name: string;
   address: string;
   phone: string;
@@ -27,7 +27,7 @@ export interface StoreInfo {
   closedDays: string;
 }
 
-export interface Store extends StoreInfo {
+export interface Store extends IStoreInfo {
   content: string;
   productCreatedTime: string;
   createdDate: string;
