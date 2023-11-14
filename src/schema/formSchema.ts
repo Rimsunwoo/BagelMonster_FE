@@ -39,8 +39,25 @@ const storeName = yup.string().required("상호명을 입력해주세요.");
 const address = yup.string().required("가게 주소를 입력해주세요.");
 const storePhone = yup.string().required("가게 전화번호를 입력해주세요.");
 const content = yup.string().required("가게 소개글을 입력해주세요.");
-const storeValidation = { storeName, address, storePhone, content };
+const productCreatedTime = yup.string().required("빵 나오는 시간을 입력해주세요.");
+const openedTime = yup.string().required("오픈 시간을 입력해주세요.");
+const closedTime = yup.string().required("마감 시간을 입력해주세요.");
+const closedDays = yup
+  .array(yup.string().required("휴무일을 선택해주세요."))
+  .required("휴무일을 선택해주세요.")
+  .typeError("휴무일을 선택해주세요.");
 
-export const signupUserSchema = yup.object().shape({ ...userValidation });
-export const signupStoreSchema = yup.object().shape({ ...userValidation, ...storeValidation });
+const storeValidation = {
+  storeName,
+  address,
+  storePhone,
+  content,
+  productCreatedTime,
+  openedTime,
+  closedTime,
+  closedDays,
+};
+
+export const signupUserSchema = yup.object().shape(userValidation);
+export const signupStoreSchema = yup.object().shape(storeValidation);
 export const signinSchema = yup.object().shape({ email, password });

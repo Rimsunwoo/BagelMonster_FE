@@ -4,7 +4,7 @@ import SignupForm from "@/components/signup/SignupForm";
 
 export default function Signup() {
   return (
-    <div className="w-full bg-white">
+    <div className="w-full px-5 bg-white">
       <p className="text-title">회원가입</p>
       <div className="flexcol items-center">
         <SignupForm />
