@@ -2,7 +2,6 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
 
 import useAuth from "@/hooks/useAuth";
 import { signupUserSchema } from "@/schema/formSchema";
@@ -12,7 +11,6 @@ import { userInputProps } from "./input.category";
 import type { SignupUserProps } from "@/types/auth.type";
 
 export default function UserForm({ isStore }: { isStore: boolean }) {
-  const router = useRouter();
   const resolver = yupResolver(signupUserSchema);
   const { register, handleSubmit, formState, reset } = useForm<SignupUserProps>({ resolver });
   const { errors } = formState;
@@ -23,7 +21,6 @@ export default function UserForm({ isStore }: { isStore: boolean }) {
     try {
       await signup({ ...request, isStore });
       reset();
-      router.push("/");
     } catch (error) {
       console.error(error);
     }

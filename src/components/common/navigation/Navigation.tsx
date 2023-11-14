@@ -3,16 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import useAuth from "@/hooks/useAuth";
+
 import Icon from "./Icon";
 
 export default function Navigation() {
   const pathName = usePathname();
+  const { isLogin, isStore } = useAuth();
+
+  const isUser = (type: "href" | "name") => {
+    if (!isLogin()) return type === "href" ? "/signin" : "로그인";
+    if (!isStore()) return type === "href" ? "/mypage" : "마이페이지";
+    return type === "href" ? "/mypage" : "가게 등록";
+  };
 
   const links = [
     { href: "/", name: "홈" },
-    { href: "/stores", name: "둘러보기" },
+    { href: "/stores", name: "가게 목록" },
     { href: "/cart", name: "장바구니" },
-    { href: "/mypage", name: "마이페이지" },
+    { href: isUser("href"), name: isUser("name") },
   ];
 
   return (

@@ -1,5 +1,19 @@
-import React from "react";
+"use client";
 
-export default function KakaoMap() {
-  return <div className="w-full h-[250px] border">Map</div>;
+import useGetCoordinates from "@/hooks/useGetCoordinates";
+import React from "react";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+
+interface KakaoMapProps {
+  address: string;
+}
+
+export default function KakaoMap({ address }: KakaoMapProps) {
+  const { position, isError } = useGetCoordinates(address);
+
+  return (
+    <Map center={position} className="w-full h-[320px] rounded-lg" level={4}>
+      <MapMarker position={position}></MapMarker>
+    </Map>
+  );
 }
