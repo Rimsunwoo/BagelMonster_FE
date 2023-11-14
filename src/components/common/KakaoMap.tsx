@@ -1,7 +1,7 @@
 "use client";
 
 import useGetCoordinates from "@/hooks/useGetCoordinates";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 interface KakaoMapProps {
