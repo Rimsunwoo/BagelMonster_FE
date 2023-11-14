@@ -14,9 +14,10 @@ export async function getProduct(storeId: string, productId: string) {
 }
 
 export async function addCart(request: ProductApi) {
+  const Authorization = document.cookie.replace("token=", " ").replace("%20", " ");
   const response = await fetch(`${API_URL}/api/carts`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization },
     body: JSON.stringify(request),
   });
 
