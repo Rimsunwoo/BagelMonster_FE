@@ -5,6 +5,7 @@ interface StoreInfoProps {
 
 export default function StoreInfo({ infoData }: StoreInfoProps) {
   const { openedTime, closedTime, closedDays, name, phone, address } = infoData;
+
   return (
     <section>
       <div className="py-8 space-y-2">
