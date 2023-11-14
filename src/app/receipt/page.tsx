@@ -33,7 +33,7 @@ export default function Receipt() {
         <ReceiptTextBox title="가게명" content={mockOrder.storeName} />
         <ReceiptTextBox title="전화번호" content={mockOrder.storeTel} />
         <ReceiptTextBox title="주소" content={mockOrder.storeAddress} />
-        <KakaoMap />
+        <KakaoMap address={mockOrder.storeAddress} />
       </div>
       <div className="flexcol gap-[24px] mt-[62px]">
         <OrderTotalPrice totalPrice={mockOrder.price - mockOrder.discount} />
