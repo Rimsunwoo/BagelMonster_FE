@@ -21,14 +21,13 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
   return (
     <div>
       {/* #TODO 실제 데이터는 Image태그로 변경 */}
-      <div className="w-full h-[350px]">
+      <div className="w-full h-[560px] overflow-hidden relative">
         {productPictureUrl ? (
-          <Image src={productPictureUrl} alt="storeImage" width={560} height={350} fill />
+          <Image src={productPictureUrl} alt="storeImage" fill />
         ) : (
           <Image src={bagelDefault} alt="bagelDefaultImg" fill />
         )}
       </div>
-      <div className="w-full h-[350px] mb-6 bg-cover bg-no-repeat bg-center bg-[url('https://www.shinsegaefood.com/brand/milkandhoney/brand/milkhoney/images/sub/bagel/rolling_einstein_10.jpg')]" />
       <div className="px-5">
         <Image src={prevBtn} alt="prevButton" className="absolute top-0" />
         <Link href="/" className="flex items-center mb-[11px]">
@@ -51,8 +50,7 @@ const mockProduct: Product = {
   storeName: "코끼리 베이글",
   name: "올리브치즈 베이글",
   price: 7000,
-  productPictureUrl:
-    "https://www.shinsegaefood.com/brand/milkandhoney/brand/milkhoney/images/sub/bagel/rolling_einstein_10.jpg",
+  productPictureUrl: "",
   popularity: "1",
   status: true,
   description: "올리브와 치즈가 들어가 맛나요",
