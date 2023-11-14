@@ -1,6 +1,6 @@
-import type { StorePostApi } from "@/types/store.type";
+import type { IStore, StorePostApi } from "@/types/store.type";
 
-import { API_URL } from ".";
+import { API_URL } from "./index";
 
 export async function getStore() {
   const Authorization = document.cookie.replace("auth=", "");
@@ -16,7 +16,7 @@ export async function getStore() {
     throw new Error("Store GET failed");
   }
 
-  return data;
+  return data.stores as IStore[];
 }
 
 export async function createStore(store: StorePostApi, file: File) {
