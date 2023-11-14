@@ -3,11 +3,8 @@ import type { IStore, StorePostApi } from "@/types/store.type";
 import { API_URL } from "./index";
 
 export async function getStore() {
-  const Authorization = document.cookie.replace("auth=", "");
-
   const response = await fetch(`${API_URL}/api/stores`, {
     method: "GET",
-    headers: { Authorization },
   });
 
   const data = await response.json();
@@ -35,4 +32,18 @@ export async function createStore(store: StorePostApi, file: File) {
   if (!response.ok) {
     throw new Error("Store POST failed");
   }
+}
+
+export async function getStoreDetail(storeId: string) {
+  const response = await fetch(`${API_URL}/api/stores/${storeId}`, {
+    method: "GET",
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error("StoreDetail GET failed");
+  }
+
+  return data;
 }

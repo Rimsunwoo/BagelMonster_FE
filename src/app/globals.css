@@ -120,4 +120,10 @@ body {
   .info-box {
     @apply text-gray inline-block w-[65px];
   }
+  .focus-tab {
+    @apply text-sm w-[15%] font-bold text-center pb-3 border-b-2 border-[#999999];
+  }
+  .info-focus-tab {
+    @apply border-b-2 border-orange text-orange;
+  }
 }
