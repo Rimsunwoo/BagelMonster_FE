@@ -8,16 +8,6 @@ import { CookiesProvider } from "next-client-cookies";
 
 import store from "@/redux/config/configStore";
 
-// const queryClient = new QueryClient({
-//   defaultOptions: {
-//     queries: {
-//       retry: false,
-//       refetchOnReconnect: false,
-//       refetchOnWindowFocus: false,
-//     },
-//   },
-// });
-
 export default function Provider({ children, cookieValue }: { children: React.ReactNode; cookieValue: any }) {
   const [queryClient] = useState(
     () =>
