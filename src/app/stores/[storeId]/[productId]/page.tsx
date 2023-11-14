@@ -1,6 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useQuery } from "@tanstack/react-query";
 import SelectNav from "@/components/productDetail/SelectNav";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
@@ -9,6 +10,8 @@ import prevBtn from "../../../../../public/prevBtn.svg";
 import rightArrow from "../../../../../public/rightArrow.svg";
 
 import type { Product } from "@/types/product.type";
+import { getProduct } from "@/app/api/product";
+import { usePathname } from "next/navigation";
 
 interface ProductDetailProps {
   params: {
@@ -17,11 +20,23 @@ interface ProductDetailProps {
 }
 
 export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
-  const { storeName, name, price, productPictureUrl, popularity, status, description } = mockProduct;
+  const pathName = usePathname().split("/");
+  const storeId = pathName[2];
+  const {
+    isPending,
+    isError,
+    data: productDetailData,
+  } = useQuery({ queryKey: ["productDetail", productId], queryFn: () => getProduct(storeId, productId) });
+  const { storeName, name, price, productPictureUrl, popularity, status, description } = productDetailData || {};
+  if (isPending) {
+    return <div>로딩중</div>;
+  }
+  if (isError) {
+    return <div>상품정보를 불러오는데 실패했습니다</div>;
+  }
   return (
     <div>
-      {/* #TODO 실제 데이터는 Image태그로 변경 */}
-      <div className="w-full h-[560px] overflow-hidden relative">
+      <div className="w-full h-[560px] overflow-hidden relative mb-6">
         {productPictureUrl ? (
           <Image src={productPictureUrl} alt="storeImage" fill />
         ) : (
@@ -44,16 +59,3 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
     </div>
   );
 }
-
-const mockProduct: Product = {
-  productId: 1,
-  storeName: "코끼리 베이글",
-  name: "올리브치즈 베이글",
-  price: 7000,
-  productPictureUrl: "",
-  popularity: "1",
-  status: true,
-  description: "올리브와 치즈가 들어가 맛나요",
-  createdDate: "2023-11-06T15:00",
-  modifiedDate: "2023-11-06T15:00",
-};
