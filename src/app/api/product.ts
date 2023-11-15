@@ -14,15 +14,20 @@ export async function getProduct(storeId: string, productId: string) {
 }
 
 export async function addCart(request: ProductApi) {
-  const Authorization = document.cookie.replace("token=", " ").replace("%20", " ");
+  const { storeId, productId, quantity, token } = request;
+  const Authorization = token;
+  const reqBody = { storeId, productId, quantity };
   const response = await fetch(`${API_URL}/api/carts`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization },
-    body: JSON.stringify(request),
+    body: JSON.stringify(reqBody),
   });
 
   if (!response.ok) {
-    throw new Error("장바구니 담기 실패");
+    let error = await response.json();
+    // let errArr = error.statusMessage;
+    alert(error.statusMessage);
+    throw new Error("error");
   }
 
   alert("장바구니 담기 성공");

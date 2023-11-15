@@ -8,7 +8,6 @@ import type { SigninFormProps, SignupAPI } from "@/types/auth.type";
 export default function useAuth() {
   const cookies = useCookies();
   const router = useRouter();
-
   const signin = async (request: SigninFormProps) => {
     const token = await signinApi(request);
 
@@ -32,11 +31,15 @@ export default function useAuth() {
   };
 
   const isStore = () => {
-    const userData = JSON.parse(sessionStorage.getItem("user") as string);
+    const userData = JSON.parse(sessionStorage.getItem("user") || "") || null;
     if (userData === null) return false;
 
     return userData.isStore as boolean;
   };
+  const getCookie = () => {
+    const cookie = cookies.get("token");
+    return cookie;
+  };
 
-  return { signin, signout, signup, isLogin, isStore };
+  return { signin, signout, signup, isLogin, isStore, getCookie };
 }

@@ -22,8 +22,8 @@ export default function SelectNav({ name, price }: SelectNavProps) {
   const productId = pathName[3];
   const quantity = useSelector((state: RootState) => state.productCount[productId]);
   let totalPrice = (price * quantity).toLocaleString();
-  const request = { storeId, productId, quantity };
-  const { isLogin } = useAuth();
+  const { isLogin, getCookie } = useAuth();
+  const request = { storeId, productId, quantity, token: getCookie() };
   const onSubmitAddCart = async (request: ProductApi) => {
     if (!isLogin()) {
       //#TODO alert=>toast변경
@@ -32,11 +32,15 @@ export default function SelectNav({ name, price }: SelectNavProps) {
       return;
     }
     try {
+      //장바구니 체크
+      //다른가게 상품이 담겨있는경우 => confirm
+      //같은가게 같은 상품이 담겨있는경우 => return
       await addCart(request);
       router.push(`/stores/${storeId}`);
     } catch (error) {
       // #TODO alert 대신 toast로 변경
-      alert(error);
+      console.log(error);
+      router.back();
     }
   };
   return (
