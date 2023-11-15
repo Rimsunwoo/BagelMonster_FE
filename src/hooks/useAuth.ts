@@ -54,5 +54,5 @@ export default function useAuth() {
     return cookie;
   };
 
-  return { signin, signout, signup, isLogin, isStore, getUserInfo };
+  return { signin, signout, signup, isLogin, isStore, getUserInfo, getCookie };
 }
