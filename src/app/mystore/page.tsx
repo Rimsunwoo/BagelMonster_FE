@@ -36,6 +36,7 @@ export default function page() {
     content,
     productCreatedTime,
     openedTime,
+    storePictureUrl,
     closedTime,
     closedDays,
     createdDate,
@@ -46,7 +47,7 @@ export default function page() {
 
   return (
     <>
-      <StoreIntro name={name} content={content} />
+      <StoreIntro name={name} content={content} isOpen={true} storePictureUrl={storePictureUrl} />
       <StoreInfoTab infoData={infoData} products={products} />
       <StoreCaution />
     </>

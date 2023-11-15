@@ -32,6 +32,7 @@ export default function StoreDetail({ params: { storeId } }: StoreDetailProps) {
     createdDate,
     modifiedDate,
     products,
+    storePictureUrl
   } = storeDetailData || {};
   const infoData = { name, address, phone, openedTime, closedTime, closedDays };
   let isOpen;
@@ -47,7 +48,7 @@ export default function StoreDetail({ params: { storeId } }: StoreDetailProps) {
   if (storeDetailData)
     return (
       <>
-        <StoreIntro name={name} content={content} isOpen={isOpen} />
+        <StoreIntro name={name} content={content} isOpen={isOpen} storePictureUrl={storePictureUrl} />
         <StoreInfoTab infoData={infoData} products={products} />
       </>
     );
