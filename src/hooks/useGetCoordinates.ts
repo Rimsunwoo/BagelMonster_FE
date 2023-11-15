@@ -1,4 +1,12 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 export interface PositionCoordinates {
   lng: number;

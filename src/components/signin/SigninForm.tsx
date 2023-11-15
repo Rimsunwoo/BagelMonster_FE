@@ -24,7 +24,7 @@ export default function SigninForm() {
   const onSubmit: SubmitHandler<SigninFormProps> = async ({ email, password }) => {
     const request = { email, password };
     try {
-      signin(request);
+      await signin(request);
       reset();
     } catch (error) {
       alert(error);
@@ -48,7 +48,7 @@ export default function SigninForm() {
           />
         </Fragment>
       ))}
-      <input className="flex justify-center auth-button text-button" type="submit" value="회원가입" />
+      <input className="flex justify-center auth-button text-button" type="submit" value="로그인" />
       {errors.root && <p className="text-red-500">{errors.root.message}</p>}
     </form>
   );
