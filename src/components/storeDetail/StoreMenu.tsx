@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import StatusIcon from "../productDetail/StatusIcon";
@@ -19,14 +20,18 @@ export default function StoreMenu({ products }: StoreMenuProps) {
         </div>
       ) : (
         products.map((product: Product) => (
-          <div className="flex w-full py-3 px-5 mb-[25px]" key={product.productId}>
+          <Link
+            href={`${currentPath}/${product.productId}`}
+            className="flex w-full py-3 px-5 mb-[25px]"
+            key={product.productId}
+          >
             <div className="bg-fuchsia-300 w-[45px] h-[45px] border">사진</div>
             <div className="gap-2 text-sm ml-5 mr-2">
               <h2 className="font-semibold">{product.name}</h2>
               <span className="text-orange">{Number(product.price).toLocaleString()}원</span>
             </div>
             {Number(product.popularity) > 3 && <StatusIcon status="HOT" />}
-          </div>
+          </Link>
         ))
       )}
     </section>
