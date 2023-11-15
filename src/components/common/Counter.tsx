@@ -31,7 +31,7 @@ export default function Counter({ defaultValue, productId }: CounterProps) {
     dispatch({ type, productId });
   };
 
-  const counterHandler2 = (e: ChangeEvent<HTMLInputElement>) => {
+  const counterDirectInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (productId === undefined) return;
     if (Number(e.target.value) < 1) return;
 
@@ -46,7 +46,7 @@ export default function Counter({ defaultValue, productId }: CounterProps) {
           className="count-box text-xs text-black text-center "
           value={counter[productId]}
           type="number"
-          onChange={(e) => counterHandler2(e)}
+          onChange={(e) => counterDirectInputHandler(e)}
         />
         <input className="count-box " value="+" type="button" onClick={() => counterHandler("plus")} />
       </div>

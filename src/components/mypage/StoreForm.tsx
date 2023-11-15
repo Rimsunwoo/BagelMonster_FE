@@ -53,7 +53,6 @@ export default function StoreForm() {
       await createStore(createStoreRequest, imgFile);
       reset();
     } catch (error) {
-      // #TODO alert 대신 toast로 변경
       console.error(error);
     }
   };
