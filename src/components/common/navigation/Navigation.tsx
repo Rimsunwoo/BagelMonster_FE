@@ -19,8 +19,8 @@ export default function Navigation() {
 
   const links = [
     { href: "/", name: "홈" },
-    { href: "/stores", name: "가게 목록" },
-    { href: "/cart", name: "장바구니" },
+    { href: "/stores", name: isLogin() && isStore() ? "내 가게" : "가게 목록" },
+    { href: "/cart", name: isLogin() && isStore() ? "주문 조회" : "장바구니" },
     { href: isUser("href"), name: isUser("name") },
   ];
 
