@@ -18,13 +18,13 @@ export default function StoreInfoTab({ infoData, products }: StoreInfoTabProps) 
 
   return (
     <>
-      <div className="flex my-8 w-full">
-        <h1 onClick={() => setTab(0)} className={tab == 0 ? `info-focus-tab focus-tab` : `focus-tab`}>
+      <div className="flex my-8 w-full ">
+        <h3 onClick={() => setTab(0)} className={tab == 0 ? `info-focus-tab focus-tab` : `focus-tab`}>
           <span>전체메뉴</span>
-        </h1>
-        <button onClick={() => setTab(1)} className={tab == 1 ? `info-focus-tab focus-tab ` : `focus-tab`}>
+        </h3>
+        <h3 onClick={() => setTab(1)} className={tab == 1 ? `info-focus-tab focus-tab ` : `focus-tab`}>
           가게정보
-        </button>
+        </h3>
         <div className="w-[80%] border-b-2 border-[#999999]"></div>
       </div>
       {tab === 0 ? <StoreMenu products={products} /> : <StoreInfo infoData={infoData} />}

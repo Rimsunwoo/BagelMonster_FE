@@ -1,15 +1,15 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import SelectNav from "@/components/productDetail/SelectNav";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
-import bagelDefault from "../../../../../public/bagelDefailt.jpg";
-import prevBtn from "../../../../../public/prevBtn.svg";
-import rightArrow from "../../../../../public/rightArrow.svg";
+import bagelDefault from "../../../../public/bagelDefault.jpg";
+import prevBtn from "../../../../public/prevBtn.svg";
+import rightArrow from "../../../../public/rightArrow.svg";
 
-import type { Product } from "@/types/product.type";
 import { getProduct } from "@/app/api/product";
 import { usePathname } from "next/navigation";
 
@@ -21,7 +21,7 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
   const pathName = usePathname().split("/");
-  const storeId = pathName[2];
+  const storeId = pathName[1];
   const {
     isPending,
     isError,

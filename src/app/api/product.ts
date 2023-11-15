@@ -1,4 +1,4 @@
-import type { ProductApi } from "@/types/product.type";
+import type { Product, ProductApi } from "@/types/product.type";
 
 import { API_URL } from ".";
 
@@ -9,7 +9,7 @@ export async function getProduct(storeId: string, productId: string) {
   if (!response.ok) {
     throw new Error("StoreDetail GET failed");
   }
-  const data = await response.json();
+  const data: Product = await response.json();
   return data;
 }
 

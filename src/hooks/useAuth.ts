@@ -33,16 +33,6 @@ export default function useAuth() {
     return cookies.get("token") !== undefined;
   };
 
-  const isStore = () => {
-    const sessionData = typeof window !== undefined ? sessionStorage.getItem("user") : null;
-    if (sessionData === null) return false;
-
-    const userData = JSON.parse(sessionData);
-    if (userData === null) return false;
-
-    return userData.isStore as boolean;
-  };
-
   const getUserInfo = () => {
     if (!isLogin()) return null;
 
@@ -51,6 +41,13 @@ export default function useAuth() {
 
     const userInfo: SessionUser = JSON.parse(sessionData);
     return userInfo;
+  };
+
+  const isStore = () => {
+    const userData = getUserInfo();
+    if (userData === null) return false;
+
+    return userData.isStore;
   };
 
   return { signin, signout, signup, isLogin, isStore, getUserInfo };

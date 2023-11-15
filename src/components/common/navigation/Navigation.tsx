@@ -25,14 +25,14 @@ export default function Navigation() {
 
   const storeLinkList = [
     { href: "/mystore", name: "내 가게" },
-    { href: "/cart", name: "주문 조회" },
-    { href: "/mypage", name: "가게 수정" },
+    { href: "/mystore/orderlist", name: "주문 조회" },
+    { href: "/mystore/edit", name: "가게 수정" },
   ];
 
   const linkList = isStore() ? storeLinkList : userLinkList;
 
   return (
-    <div className="fixed bottom-0 max-w-[560px] w-full bg-white h-20 drop-shadow-navigation rounded-t-[20px] z-50">
+    <nav className="fixed bottom-0 max-w-[560px] w-full bg-white h-20 drop-shadow-navigation rounded-t-[20px] z-50">
       <ul className="flex justify-around items-center h-full">
         {linkList.map((link) => (
           <li key={link.name}>
@@ -48,6 +48,6 @@ export default function Navigation() {
           </li>
         ))}
       </ul>
-    </div>
+    </nav>
   );
 }
