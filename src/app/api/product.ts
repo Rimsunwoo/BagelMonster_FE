@@ -15,6 +15,8 @@ export async function getProduct(storeId: string, productId: string) {
 
 export async function addCart(request: ProductApi) {
   const { storeId, productId, quantity, token } = request;
+  if (token === undefined) return;
+
   const Authorization = token;
   const reqBody = { storeId, productId, quantity };
   const response = await fetch(`${API_URL}/api/carts`, {
