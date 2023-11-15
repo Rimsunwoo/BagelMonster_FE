@@ -3,7 +3,7 @@ import { useCookies } from "next-client-cookies";
 
 import { signinApi, signupApi } from "@/app/api/auth";
 
-import type { SigninFormProps, SignupAPI } from "@/types/auth.type";
+import type { SessionUser, SigninFormProps, SignupAPI } from "@/types/auth.type";
 
 export default function useAuth() {
   const cookies = useCookies();
@@ -12,7 +12,9 @@ export default function useAuth() {
     const token = await signinApi(request);
 
     cookies.set("token", token);
-    router.push("/");
+
+    if (isStore()) router.push("/mystore");
+    else router.push("/");
   };
 
   const signout = () => {
@@ -23,23 +25,34 @@ export default function useAuth() {
 
   const signup = async (request: SignupAPI) => {
     await signupApi(request);
-    signin({ email: request.email, password: request.password });
+    await signin({ email: request.email, password: request.password });
   };
 
   const isLogin = () => {
     return cookies.get("token") !== undefined;
   };
 
+  const getUserInfo = () => {
+    if (!isLogin()) return null;
+
+    const sessionData = typeof window !== undefined ? sessionStorage.getItem("user") : null;
+    if (sessionData === null) return null;
+
+    const userInfo: SessionUser = JSON.parse(sessionData);
+    return userInfo;
+  };
+
   const isStore = () => {
-    const userData = JSON.parse(sessionStorage.getItem("user") || "") || null;
+    const userData = getUserInfo();
     if (userData === null) return false;
 
-    return userData.isStore as boolean;
+    return userData.isStore;
   };
+
   const getCookie = () => {
     const cookie = cookies.get("token");
     return cookie;
   };
 
-  return { signin, signout, signup, isLogin, isStore, getCookie };
+  return { signin, signout, signup, isLogin, isStore, getUserInfo, getCookie };
 }

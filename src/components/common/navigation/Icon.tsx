@@ -28,6 +28,8 @@ export default function Icon({ href, width, height }: IconProps) {
         return mypageIcon;
       case "/stores":
         return listIcon;
+      case "/mystore":
+        return homeIcon;
       case "/cart":
         return cartIcon;
       case "/signin":

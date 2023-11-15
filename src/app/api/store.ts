@@ -47,3 +47,21 @@ export async function getStoreDetail(storeId: string) {
 
   return data;
 }
+
+export async function getMyStore(token: string | undefined): Promise<IStore | undefined | null> {
+  if (token === undefined) return;
+
+  const response = await fetch(`${API_URL}/api/stores/mystore`, {
+    method: "GET",
+    headers: { Authorization: token },
+  });
+  console.log(response);
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (response.ok) {
+    return response.json();
+  }
+}
