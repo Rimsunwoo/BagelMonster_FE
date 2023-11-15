@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 
 import { usePathname } from "next/navigation";
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 
 import { addCart } from "@/app/api/product";
 
@@ -11,23 +11,36 @@ import Counter from "../common/Counter";
 
 import type { RootState } from "@/redux/config/configStore";
 import type { Product, ProductApi } from "@/types/product.type";
+import useAuth from "@/hooks/useAuth";
 
 type SelectNavProps = Pick<Product, "name" | "price">;
 
 export default function SelectNav({ name, price }: SelectNavProps) {
+  const router = useRouter();
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
   const productId = pathName[3];
   const quantity = useSelector((state: RootState) => state.productCount[productId]);
   let totalPrice = (price * quantity).toLocaleString();
-  const request = { storeId, productId, quantity };
+  const { isLogin, getCookie } = useAuth();
+  const request = { storeId, productId, quantity, token: getCookie() };
   const onSubmitAddCart = async (request: ProductApi) => {
+    if (!isLogin()) {
+      //#TODO alert=>toast변경
+      alert("로그인해주세요");
+      router.push("/");
+      return;
+    }
     try {
+      //장바구니 체크
+      //다른가게 상품이 담겨있는경우 => confirm
+      //같은가게 같은 상품이 담겨있는경우 => return
       await addCart(request);
-      Router.push(`/stores/${storeId}`);
+      router.push(`/stores/${storeId}`);
     } catch (error) {
       // #TODO alert 대신 toast로 변경
-      alert(error);
+      console.log(error);
+      router.back();
     }
   };
   return (
