@@ -3,9 +3,10 @@ import StatusIcon from "../productDetail/StatusIcon";
 interface StoreIntro {
   name: string;
   content: string;
+  isOpen: boolean | undefined;
 }
 
-export default function StoreIntro({ name, content }: StoreIntro) {
+export default function StoreIntro({ name, content, isOpen }: StoreIntro) {
   return (
     <section className="mb-10">
       <div className="bg-orange w-full h-[560px] mb-[23px]"></div>

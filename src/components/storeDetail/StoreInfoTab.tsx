@@ -7,6 +7,7 @@ import StoreMenu from "./StoreMenu";
 
 import type { Product } from "@/types/product.type";
 import type { IStoreInfo } from "@/types/store.type";
+import StoreCaution from "./StoreCaution";
 
 interface StoreInfoTabProps {
   infoData: IStoreInfo;
@@ -27,7 +28,14 @@ export default function StoreInfoTab({ infoData, products }: StoreInfoTabProps) 
         </h3>
         <div className="w-[80%] border-b-2 border-[#999999]"></div>
       </div>
-      {tab === 0 ? <StoreMenu products={products} /> : <StoreInfo infoData={infoData} />}
+      {tab === 0 ? (
+        <>
+          <StoreMenu products={products} />
+          <StoreCaution />
+        </>
+      ) : (
+        <StoreInfo infoData={infoData} />
+      )}
     </>
   );
 }
