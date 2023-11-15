@@ -1,4 +1,4 @@
-import StoreCard from "@/components/main/StoreCard";
+import SliderWrap from "@/components/main/SliderWrap";
 import Image from "next/image";
 
 export default function Home() {
@@ -16,43 +16,8 @@ export default function Home() {
       </div>
 
       <div>
-        <p className="text-black text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (피그마 픽셀)</p>
-        <div className="relative overflow-x-scroll z-10 scroll-none">
-          <ul className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
-            <StoreCard width={174} height={136} />
-          </ul>
-        </div>
-      </div>
-
-      <div>
-        <p className="text-black text-base font-semibold leading-[150%] px-5">요즘 인기있는 베이글 (피그마 비율)</p>
-        <div className="relative overflow-x-scroll z-10 scroll-none">
-          <div className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
-            <StoreCard width={224} height={180} />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <p className="text-black text-base font-semibold leading-[150%] px-5">
-          가까운 베이글가게 (이미지 16:9 비율 가로 200px)
-        </p>
-        <div className="relative overflow-x-scroll z-10 scroll-none">
-          <div className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
-            <StoreCard width={200} height={112.5} />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <p className="text-black text-base font-semibold leading-[150%] px-5">
-          가까운 베이글가게 (이미지 정방형 비율 가로 200px)
-        </p>
-        <div className="relative overflow-x-scroll z-10 scroll-none">
-          <div className={`flex gap-5 w-[1000px] select-none py-4 px-5`}>
-            <StoreCard width={200} height={200} />
-          </div>
-        </div>
+        <p className="text-black text-base font-semibold leading-[150%] px-5">새로 생긴 베이글</p>
+        <SliderWrap />
       </div>
     </div>
   );

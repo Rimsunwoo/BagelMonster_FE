@@ -32,7 +32,7 @@ export default function useAuth() {
   };
 
   const isStore = () => {
-    const userData = JSON.parse(sessionStorage.getItem("user") as string);
+    const userData = JSON.parse(sessionStorage.getItem("user") || "") || null;
     if (userData === null) return false;
 
     return userData.isStore as boolean;

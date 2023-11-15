@@ -10,7 +10,6 @@ import useAuth from "@/hooks/useAuth";
 
 export default function Mypage() {
   const router = useRouter();
-  const [isOpenStoreForm, setIsOpenStoreForm] = useState(false);
   const { signout, isLogin, isStore } = useAuth();
 
   if (!isLogin()) {
@@ -19,18 +18,15 @@ export default function Mypage() {
 
   return (
     <div>
-      <div className="flex justify-around">
-        <input className="p-4 border cursor-pointer" type="button" value="로그아웃" onClick={signout} />
-        {isStore() && (
-          <input
-            className="p-4 border cursor-pointer"
-            type="button"
-            value="가게 등록"
-            onClick={() => setIsOpenStoreForm(!isOpenStoreForm)}
-          />
-        )}
+      <div className="flexcol">
+        <input
+          className="flex justify-center mt-4 auth-button text-button bg-gray"
+          type="button"
+          value="로그아웃"
+          onClick={signout}
+        />
       </div>
-      {isOpenStoreForm && <StoreForm />}
+      {isStore() && <StoreForm />}
       {!isStore() && <OrderList />}
     </div>
   );
