@@ -1,4 +1,4 @@
-import type { ProductApi } from "@/types/product.type";
+import type { Product, ProductApi } from "@/types/product.type";
 
 import { API_URL } from ".";
 
@@ -9,19 +9,27 @@ export async function getProduct(storeId: string, productId: string) {
   if (!response.ok) {
     throw new Error("StoreDetail GET failed");
   }
-  const data = await response.json();
+  const data: Product = await response.json();
   return data;
 }
 
 export async function addCart(request: ProductApi) {
+  const { storeId, productId, quantity, token } = request;
+  if (token === undefined) return;
+
+  const Authorization = token;
+  const reqBody = { storeId, productId, quantity };
   const response = await fetch(`${API_URL}/api/carts`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
+    headers: { "Content-Type": "application/json", Authorization },
+    body: JSON.stringify(reqBody),
   });
 
   if (!response.ok) {
-    throw new Error("장바구니 담기 실패");
+    let error = await response.json();
+    // let errArr = error.statusMessage;
+    alert(error.statusMessage);
+    throw new Error("error");
   }
 
   alert("장바구니 담기 성공");

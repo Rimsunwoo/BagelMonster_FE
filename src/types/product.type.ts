@@ -15,4 +15,5 @@ export interface ProductApi {
   productId: string;
   storeId: string;
   quantity: number;
+  token: string | undefined;
 }
