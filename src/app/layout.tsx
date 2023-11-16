@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main className="w-full mt-[3vh] mb-20">{children}</main>
           <Navigation />
         </Provider>
-        <Script src={KAKAO_MAP_URL} strategy="beforeInteractive" />
+        {/* <Script src={KAKAO_MAP_URL} strategy="beforeInteractive" /> */}
       </body>
     </html>
   );

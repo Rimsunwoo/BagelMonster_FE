@@ -13,15 +13,9 @@ import { useCookies } from "next-client-cookies";
 import DropDown from "@/components/common/dropDown/DropDown";
 import DropDownItem from "@/components/common/dropDown/DropDownItem";
 
-interface ProductDetailProps {
-  params: {
-    productId: string;
-  };
-}
-
-export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
+export default function ProductDetail() {
   const pathName = usePathname().split("/");
-  const storeId = pathName[1];
+  const [storeId, productId] = pathName[2].split("-");
   const cookies = useCookies();
   const token = cookies.get("token");
 

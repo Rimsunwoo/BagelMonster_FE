@@ -34,3 +34,5 @@ export async function addCart(request: ProductApi) {
 
   alert("장바구니 담기 성공");
 }
+
+export async function editProduct() {}

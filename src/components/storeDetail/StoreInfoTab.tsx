@@ -11,9 +11,10 @@ import type { IStoreInfo } from "@/types/store.type";
 interface StoreInfoTabProps {
   infoData: IStoreInfo;
   products: Product[];
+  storeId?: number;
 }
 
-export default function StoreInfoTab({ infoData, products }: StoreInfoTabProps) {
+export default function StoreInfoTab({ infoData, products, storeId }: StoreInfoTabProps) {
   const [tab, setTab] = useState(0);
 
   return (
@@ -27,7 +28,7 @@ export default function StoreInfoTab({ infoData, products }: StoreInfoTabProps) 
         </h3>
         <div className="w-[80%] border-b-2 border-[#999999]"></div>
       </div>
-      {tab === 0 ? <StoreMenu products={products} /> : <StoreInfo infoData={infoData} />}
+      {tab === 0 ? <StoreMenu products={products} storeId={storeId} /> : <StoreInfo infoData={infoData} />}
     </>
   );
 }
