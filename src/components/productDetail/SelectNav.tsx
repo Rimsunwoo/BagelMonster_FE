@@ -17,12 +17,11 @@ type SelectNavProps = Pick<Product, "name" | "price">;
 
 export default function SelectNav({ name, price }: SelectNavProps) {
   const router = useRouter();
-  const { isLogin, getCookie } = useAuth();
+  const { isLogin, getCookie, signout } = useAuth();
 
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
   const productId = pathName[3];
-
   const quantity = useSelector((state: RootState) => state.productCount[productId]);
 
   let totalPrice = (price * quantity).toLocaleString();
@@ -36,22 +35,30 @@ export default function SelectNav({ name, price }: SelectNavProps) {
       return;
     }
     try {
-      //장바구니 체크
-      //다른가게 상품이 담겨있는경우 => confirm
-      //같은가게 같은 상품이 담겨있는경우 => return
       await addCart(request);
       router.push(`/stores/${storeId}`);
-    } catch (error) {
-      // #TODO alert 대신 toast로 변경
-      console.log(error);
-      router.back();
+    } catch (error: any) {
+      //  0 => 다른가게 상품
+      //  1 => 같은가게 같은상품 존재
+      const errCode = error.split(" ")[0];
+      if (errCode == 0) {
+        alert("다른가게의 상품이 존재합니다. 장바구니로 이동합니다.");
+        router.push("/cart");
+      } else if (errCode == 1) {
+        alert("이미 장바구니에 같은 상품이 존재합니다");
+        router.back();
+      } else if (errCode === "INVALID_TOKEN") {
+        alert("다시 로그인해주세요");
+        signout();
+        return;
+      }
     }
   };
   return (
     <section>
       <div className="flex justify-between mb-2">
         <h2 className="text-gray text-sm">{name}</h2>
-        <Counter productId={productId} />
+        <Counter productId={Number(productId)} />
       </div>
       <div className="flex justify-between text-sm mb-6">
         <h2 className="text-gray">개별 금액</h2>

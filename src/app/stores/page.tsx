@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { getStore } from "../api/store";
 import { getDistanceFromLatLonInKm } from "@/utils/distance";
+import isStoreOpen from "@/utils/isStoreOpen";
 
 interface ButtonProps {
   name: string;
@@ -61,13 +62,13 @@ export default function Stores() {
     });
   }, [storeData]);
 
-  const date = new Date();
-  const currentTime = `${date.getHours()}${date.getMinutes()}`;
+  // const date = new Date();
+  // const currentTime = `${date.getHours()}${date.getMinutes()}`;
 
   const isOpenData = storeData.filter((data) => {
-    const openTime = data.openedTime.replace(":", "").substring(0, 4);
-    const closeTime = data.closedTime.replace(":", "").substring(0, 4);
-    const isOpen = openTime < currentTime && closeTime > currentTime;
+    // const openTime = data.openedTime.replace(":", "").substring(0, 4);
+    // const closeTime = data.closedTime.replace(":", "").substring(0, 4);
+    const isOpen = isStoreOpen(data.openedTime, data.closedTime, data.closedDays);
 
     return showIsOpenStore ? isOpen : data;
   });

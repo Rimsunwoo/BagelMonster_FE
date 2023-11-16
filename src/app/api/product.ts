@@ -27,12 +27,10 @@ export async function addCart(request: ProductApi) {
 
   if (!response.ok) {
     let error = await response.json();
-    // let errArr = error.statusMessage;
-    alert(error.statusMessage);
-    throw new Error("error");
+    throw error.statusMessage;
+  } else {
+    alert("장바구니 담기 성공");
   }
-
-  alert("장바구니 담기 성공");
 }
 
 export async function editProduct() {}

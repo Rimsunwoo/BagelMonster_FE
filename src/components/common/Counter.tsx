@@ -9,7 +9,7 @@ import type { RootState } from "@/redux/config/configStore";
 
 interface CounterProps {
   defaultValue?: number;
-  productId: string;
+  productId: number;
 }
 
 export default function Counter({ defaultValue, productId }: CounterProps) {

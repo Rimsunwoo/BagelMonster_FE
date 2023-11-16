@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import StoreForm from "@/components/mypage/StoreForm";
 
 export default function page() {
-  const { isLogin, isStore, getUserInfo } = useAuth();
+  const { getUserInfo } = useAuth();
   const cookies = useCookies();
   const router = useRouter();
   const token = cookies.get("token");
@@ -36,6 +36,7 @@ export default function page() {
     content,
     productCreatedTime,
     openedTime,
+    storePictureUrl,
     closedTime,
     closedDays,
     createdDate,
@@ -47,7 +48,7 @@ export default function page() {
   console.log(data);
   return (
     <>
-      <StoreIntro name={name} content={content} />
+      <StoreIntro name={name} content={content} isOpen={true} storePictureUrl={storePictureUrl} />
       <StoreInfoTab infoData={infoData} products={products} storeId={data.storeId} />
       <StoreCaution />
     </>
