@@ -50,7 +50,7 @@ export default function SelectNav({ name, price }: SelectNavProps) {
     <section>
       <div className="flex justify-between mb-2">
         <h2 className="text-gray text-sm">{name}</h2>
-        <Counter productId={productId} />
+        <Counter productId={Number(productId)} />
       </div>
       <div className="flex justify-between text-sm mb-6">
         <h2 className="text-gray">개별 금액</h2>
