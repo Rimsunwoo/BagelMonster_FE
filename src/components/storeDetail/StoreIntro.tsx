@@ -1,5 +1,6 @@
-import StatusIcon from "../productDetail/StatusIcon";
 import Image from "next/image";
+
+import StatusIcon from "../productDetail/StatusIcon";
 interface StoreIntro {
   name: string;
   content: string;

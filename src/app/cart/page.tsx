@@ -1,13 +1,17 @@
 "use client";
 
-import ProductList from "@/components/cart/ProductList";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteCart, getCart, postOrder } from "../api/carts";
-import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/config/configStore";
+
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+
+import ProductList from "@/components/cart/ProductList";
+import useAuth from "@/hooks/useAuth";
+
+import { deleteCart, getCart, postOrder } from "../api/carts";
+
+import type { RootState } from "@/redux/config/configStore";
 
 interface BuyProductRequest {
   productId: number;

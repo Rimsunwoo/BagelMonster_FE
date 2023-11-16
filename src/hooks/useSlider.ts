@@ -1,5 +1,6 @@
-import { throttle } from "@/utils/throttle";
 import { useState } from "react";
+
+import { throttle } from "@/utils/throttle";
 
 interface UseSliderProps {
   scrollRef: React.RefObject<HTMLElement>;

@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 import { addCart } from "@/app/api/product";
+import useAuth from "@/hooks/useAuth";
 
 import Counter from "../common/Counter";
 
 import type { RootState } from "@/redux/config/configStore";
 import type { Product, ProductApi } from "@/types/product.type";
-import useAuth from "@/hooks/useAuth";
 
 type SelectNavProps = Pick<Product, "name" | "price">;
 

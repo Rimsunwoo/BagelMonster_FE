@@ -1,13 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import StatusIcon from "../productDetail/StatusIcon";
 
 import type { Product } from "@/types/product.type";
-
-import useAuth from "@/hooks/useAuth";
-import Image from "next/image";
 
 interface StoreMenuProps {
   products: Product[];

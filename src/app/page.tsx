@@ -1,5 +1,6 @@
-import SliderWrap from "@/components/main/SliderWrap";
 import Image from "next/image";
+
+import SliderWrap from "@/components/main/SliderWrap";
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { Product } from "./product.type";
+import type { Product } from "./product.type";
 
 export interface CartPostRequest {
   storeId: number;

@@ -1,21 +1,25 @@
 "use client";
 
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
+import { useCookies } from "next-client-cookies";
+
+import { getProduct } from "@/app/api/product";
+import DropDown from "@/components/common/dropDown/DropDown";
+import DropDownItem from "@/components/common/dropDown/DropDownItem";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
 import bagelDefault from "../../../../public/bagelDefault.jpg";
 import rightArrow from "../../../../public/rightArrow.svg";
 
-import { getProduct } from "@/app/api/product";
-import { usePathname } from "next/navigation";
-import { useCookies } from "next-client-cookies";
-import DropDown from "@/components/common/dropDown/DropDown";
-import DropDownItem from "@/components/common/dropDown/DropDownItem";
+interface ProductDetailProps {
+  params: {
+    storeIdAndProductId: string;
+  };
+}
 
-export default function ProductDetail() {
-  const pathName = usePathname().split("/");
-  const [storeId, productId] = pathName[2].split("-");
+export default function ProductDetail({ params: { storeIdAndProductId } }: ProductDetailProps) {
+  const [storeId, productId] = storeIdAndProductId.split("-");
   const cookies = useCookies();
   const token = cookies.get("token");
 
