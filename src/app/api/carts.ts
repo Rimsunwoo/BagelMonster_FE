@@ -45,6 +45,10 @@ export async function getMyOrder({ storeId, orderId, token }: GetOrderRequest) {
     headers: { "Content-Type": "application/json", Authorization: token },
   });
 
+  if (!response.ok) {
+    throw new Error("주문 불러오기 실패");
+  }
+
   const data = await response.json();
   return data as CartGetResponse;
 }
@@ -57,8 +61,12 @@ export async function getMyOrderList(token: string | undefined) {
     headers: { "Content-Type": "application/json", Authorization: token },
   });
 
+  if (!response.ok) {
+    throw new Error("주문 불러오기 실패");
+  }
+
   const data = await response.json();
-  return data;
+  return data.carts as CartGetResponse[];
 }
 
 export async function postOrder({ cartId, productList, totalPrice, token }: OrderPostRequest) {

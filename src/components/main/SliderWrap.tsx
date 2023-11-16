@@ -18,7 +18,7 @@ export default function SliderWrap() {
       onMouseLeave={onDragEnd}
     >
       <ul className={`flex gap-5  w-[1000px] select-none py-4 px-5`}>
-        <StoreCard width={174} height={136} />
+        <StoreCard />
       </ul>
     </div>
   );

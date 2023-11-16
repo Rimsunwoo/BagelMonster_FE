@@ -55,7 +55,6 @@ export async function getMyStore(token: string | undefined): Promise<IStore | un
     method: "GET",
     headers: { Authorization: token },
   });
-  console.log(response);
 
   if (response.status === 404) {
     return null;

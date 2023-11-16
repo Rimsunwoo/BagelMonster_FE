@@ -7,13 +7,6 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      bold: ["Pretendard-Bold"],
-      semiBold: ["Pretendard-SemiBold"],
-      medium: ["Pretendard-Medium"],
-      regular: ["Pretendard-Regular"],
-      light: ["Pretendard-Light"],
-    },
     extend: {
       colors: {
         white: "#ffffff",
