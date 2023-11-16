@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import StatusIcon from "../productDetail/StatusIcon";
 
 import type { Product } from "@/types/product.type";
-import useAuth from "@/hooks/useAuth";
 
 interface StoreMenuProps {
   products: Product[];
@@ -14,12 +12,9 @@ interface StoreMenuProps {
 
 export default function StoreMenu({ products }: StoreMenuProps) {
   const router = useRouter();
-  const { isStore } = useAuth();
   const currentPath = usePathname();
 
   const onClickMenu = (productId: number) => {
-    // if (isStore()) return false;
-
     router.push(`${currentPath}/${productId}`);
   };
 

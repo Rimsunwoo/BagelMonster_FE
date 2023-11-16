@@ -22,28 +22,24 @@ export default function KakaoMap({ address }: KakaoMapProps) {
   useEffect(() => {
     let isMounted = true;
 
-    const getCoordinates = () => {
-      window.kakao.maps.load(() => {
-        const geocoder = new kakao.maps.services.Geocoder();
-        geocoder.addressSearch(address, (data, status) => {
-          if (isMounted) {
-            if (status === kakao.maps.services.Status.OK) {
-              setIsError(false);
-              setPosition({ lng: +data[0].x, lat: +data[0].y });
-            } else {
-              setIsError(true);
-            }
+    window.kakao.maps.load(() => {
+      const geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, (data, status) => {
+        if (isMounted) {
+          if (status === kakao.maps.services.Status.OK) {
+            setIsError(false);
+            setPosition({ lng: +data[0].x, lat: +data[0].y });
+          } else {
+            setIsError(true);
           }
-        });
+        }
       });
-    };
-
-    getCoordinates();
+    });
 
     return () => {
       isMounted = false;
     };
-  }, [address]);
+  }, []);
 
   return (
     <Map center={position} className="w-full h-[320px] rounded-lg" level={4}>

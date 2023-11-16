@@ -18,11 +18,12 @@ type SelectNavProps = Pick<Product, "name" | "price">;
 export default function SelectNav({ name, price }: SelectNavProps) {
   const router = useRouter();
   const { isLogin, getCookie } = useAuth();
-  const quantity = useSelector((state: RootState) => state.productCount[productId]);
 
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
   const productId = pathName[3];
+
+  const quantity = useSelector((state: RootState) => state.productCount[productId]);
 
   let totalPrice = (price * quantity).toLocaleString();
   const request = { storeId, productId, quantity, token: getCookie() };
