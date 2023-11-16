@@ -72,7 +72,7 @@
     @apply absolute right-0 top-6 min-w-[60px] border border-black rounded-md bg-white;
   }
   .drop-down-item {
-    @apply flex-box h-[32px] font-regular text-center cursor-pointer;
+    @apply flex-box h-[32px] font-normal text-center cursor-pointer;
 
     &:last-child {
       @apply border-t-[1px];
