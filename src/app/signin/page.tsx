@@ -5,7 +5,6 @@ import SigninForm from "@/components/signin/SigninForm";
 export default function signin() {
   return (
     <div className="w-full px-5 bg-white">
-      {/* <Image src="" alt="icon" width={90} height={45} className="bg-[#ff0000]/[.30]" /> */}
       <p className="text-title">로그인</p>
       <div className="flexcol items-center gap-10 w-full">
         <div className="flexcol gap-6 self-stretch">
