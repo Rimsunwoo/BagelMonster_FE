@@ -58,6 +58,24 @@ const storeValidation = {
   closedDays,
 };
 
+const productName = yup.string().required("상품명을 입력해주세요.");
+const productDescription = yup.string().required("상품 설명을 입력해주세요.");
+const productPrice = yup
+  .number()
+  .required("상품 금액을 입력해주세요.")
+  .positive("금액은 음수가 될 수 없습니다.")
+  .integer("금액은 정수로 입력해주세요")
+  .min(100, "100원 이상 입력해주세요.")
+  .max(500000, "50만원 이하로 입력해주세요")
+  .default(100);
+
+const productValidation = {
+  productName,
+  productDescription,
+  productPrice,
+};
+
 export const signupUserSchema = yup.object().shape(userValidation);
 export const signupStoreSchema = yup.object().shape(storeValidation);
 export const signinSchema = yup.object().shape({ email, password });
+export const addOrModifyProductSchema = yup.object().shape(productValidation);

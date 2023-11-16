@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function AddMenu() {
+export default function EditMenu() {
   return <div>page</div>;
 }
