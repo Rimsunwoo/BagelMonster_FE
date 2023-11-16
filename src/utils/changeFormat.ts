@@ -1,4 +1,4 @@
-import { ProductGetResponse } from "@/types/cart.type";
+import type { ProductGetResponse } from "@/types/cart.type";
 
 export const changeFormat = {
   outer: (content: ProductGetResponse[]) => {

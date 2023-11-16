@@ -1,9 +1,11 @@
-import { getMyOrderList } from "@/app/api/carts";
-import useAuth from "@/hooks/useAuth";
-import { CartGetResponse, StoreStatus } from "@/types/cart.type";
-import { changeFormat } from "@/utils/changeFormat";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+
+import { getMyOrderList } from "@/app/api/carts";
+import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
+
+import type { StoreStatus } from "@/types/cart.type";
 
 export default function OrderList() {
   const { getCookie } = useAuth();

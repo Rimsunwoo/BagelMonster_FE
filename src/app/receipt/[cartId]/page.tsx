@@ -1,15 +1,16 @@
 "use client";
 
-import KakaoMap from "@/components/common/KakaoMap";
+import { useQuery } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
+
+import { getMyOrderList } from "@/app/api/carts";
 import OrderTotalPrice from "@/components/receipt/OrderTotalPrice";
 import ReceiptButtons from "@/components/receipt/ReceiptButtons";
 import ReceiptTextBox from "@/components/receipt/ReceiptTextBox";
-import { usePathname } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
-import { getMyOrderList } from "@/app/api/carts";
-import { StoreStatus } from "@/types/cart.type";
+
+import type { StoreStatus } from "@/types/cart.type";
 
 export default function Receipt() {
   const cartId = usePathname().replace("/receipt/", "");
