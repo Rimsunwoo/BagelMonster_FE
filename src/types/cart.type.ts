@@ -1,7 +1,25 @@
-export interface CartPostApi {
+import { Product } from "./product.type";
+
+export interface CartPostRequest {
   storeId: number;
   productId: number;
   quantity: number;
+}
+
+type StoreStatus = "NEWORDER" | "READ" | "SOLE" | "CANCELED";
+
+export type ProductGetResponse = Pick<Product, "productId" | "name" | "productPictureUrl" | "price"> & {
+  quantity: number;
+};
+
+export interface CartGetResponse {
+  cartId: number;
+  storeName: string;
+  products: ProductGetResponse[];
+  totalPrice: number;
+  storeStatus: StoreStatus;
+  createdDate: string;
+  modifiedDate: string;
 }
 
 export interface CartGetApi {

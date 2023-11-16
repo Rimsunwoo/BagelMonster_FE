@@ -2,17 +2,43 @@
 
 import { Fragment } from "react";
 
-import { TEST_API_GET } from "./testDb";
 import Counter from "../common/Counter";
+import { ProductGetResponse } from "@/types/cart.type";
+import { CartDeleteRequest } from "@/app/api/carts";
+import useAuth from "@/hooks/useAuth";
+import { UseMutationResult, useQueryClient } from "@tanstack/react-query";
 
-export default function ProductList() {
+interface ProductListProps {
+  productList: ProductGetResponse[] | undefined;
+  cartId: number | undefined;
+  selectItem: number[];
+  onSelectProduct: (productId: number) => void;
+  deleteCartMutation: UseMutationResult<void, Error, CartDeleteRequest, unknown>;
+}
+
+export default function ProductList(props: ProductListProps) {
+  const { productList, cartId, selectItem, onSelectProduct, deleteCartMutation } = props;
+  const { getCookie } = useAuth();
+
+  const deleteProduct = (productId: number) => {
+    if (cartId === undefined) return;
+    deleteCartMutation.mutate({ cartId, productId, token: getCookie() });
+  };
+
+  if (productList === undefined || cartId === undefined) return <p>현재 담으신 상품이 없습니다.</p>;
+
   return (
     <div className="w-full flex-col gap-6 flex px-[5%]">
-      {TEST_API_GET.map((product, index) => (
-        <Fragment key={product.id}>
+      {productList.map((product, index) => (
+        <Fragment key={product.productId}>
           {index !== 0 && <div className="w-full bg-[#ebebeb] h-px" />}
           <div className="w-full px-3 bg-white flex gap-3">
-            <input className="checkbox" type="checkbox" />
+            <input
+              className="checkbox"
+              type="checkbox"
+              checked={selectItem.includes(product.productId)}
+              onChange={() => onSelectProduct(product.productId)}
+            />
             <div className="gap-5 inline-flex items-center">
               <div className="w-24 h-24 bg-red-500 bg-opacity-20 rounded">이미지</div>
               <div className="flex-col gap-3 inline-flex">
@@ -25,8 +51,11 @@ export default function ProductList() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Counter productId={product.id} />
-                  <button className="border border-[#ddd] rounded-sm px-2 py-1 h-6 text-black text-[13px] font-medium leading-[125%]">
+                  <Counter defaultValue={product.quantity} productId={product.productId} />
+                  <button
+                    className="border border-[#ddd] rounded-sm px-2 py-1 h-6 text-black text-[13px] font-medium leading-[125%]"
+                    onClick={() => deleteProduct(product.productId)}
+                  >
                     선택 삭제
                   </button>
                 </div>
