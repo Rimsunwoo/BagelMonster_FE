@@ -15,15 +15,8 @@ export default function Mypage() {
   }
 
   return (
-    <div>
-      <div className="flexcol">
-        <input
-          className="flex justify-center mt-4 auth-button text-button bg-gray"
-          type="button"
-          value="로그아웃"
-          onClick={signout}
-        />
-      </div>
+    <div className="px-5">
+      <input className="w-full mt-4 auth-button text-button bg-gray" type="button" value="로그아웃" onClick={signout} />
       {isStore() && <StoreForm />}
       {!isStore() && <OrderList />}
     </div>

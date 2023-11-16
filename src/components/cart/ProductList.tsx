@@ -2,11 +2,13 @@
 
 import { Fragment } from "react";
 
-import Counter from "../common/Counter";
-import { ProductGetResponse } from "@/types/cart.type";
-import { CartDeleteRequest } from "@/app/api/carts";
 import useAuth from "@/hooks/useAuth";
-import { UseMutationResult, useQueryClient } from "@tanstack/react-query";
+
+import Counter from "../common/Counter";
+
+import type { CartDeleteRequest } from "@/app/api/carts";
+import type { ProductGetResponse } from "@/types/cart.type";
+import type { UseMutationResult } from "@tanstack/react-query";
 
 interface ProductListProps {
   productList: ProductGetResponse[] | undefined;

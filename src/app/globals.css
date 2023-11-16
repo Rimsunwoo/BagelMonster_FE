@@ -2,64 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; */
-}
-
-@font-face {
-  font-family: "Pretendard-Bold";
-  src:
-    local("Pretendard Bold"),
-    url("/public/fonts/Pretendard-Bold.woff") format("woff"),
-    url("/public/fonts/Pretendard-Bold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Pretendard-SemiBold";
-  src:
-    local("Pretendard Bold"),
-    url("/public/fonts/Pretendard-SemiBold.woff") format("woff"),
-    url("/public/fonts/Pretendard-SemiBold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Pretendard-Medium";
-  src:
-    local("Pretendard Medium"),
-    url("/public/fonts/Pretendard-Medium.woff") format("woff"),
-    url("/public/fonts/Pretendard-Medium.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Pretendard-Regular";
-  src:
-    local("Pretendard Regular"),
-    url("/public/fonts/Pretendard-Regular.woff") format("woff"),
-    url("/public/fonts/Pretendard-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Pretendard-Light";
-  src:
-    local("Pretendard Light"),
-    url("/public/fonts/Pretendard-Light.woff") format("woff"),
-    url("/public/fonts/Pretendard-Light.woff2") format("woff2");
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0; */
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-}
-
 @layer components {
   .flexcol {
     @apply flex flex-col;
@@ -99,7 +41,7 @@ body {
   }
 
   .normal-button {
-    @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-semiBold;
+    @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-semibold;
   }
   .scroll-none::-webkit-scrollbar {
     display: none;
@@ -130,7 +72,7 @@ body {
     @apply absolute right-0 top-6 min-w-[60px] border border-black rounded-md bg-white;
   }
   .drop-down-item {
-    @apply flex-box h-[32px] font-regular text-center cursor-pointer;
+    @apply flex-box h-[32px] font-normal text-center cursor-pointer;
 
     &:last-child {
       @apply border-t-[1px];
