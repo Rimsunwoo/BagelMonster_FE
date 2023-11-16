@@ -24,7 +24,6 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
-    "no-before-interactive-script-outside-document": false,
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

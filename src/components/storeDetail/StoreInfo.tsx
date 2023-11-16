@@ -7,7 +7,7 @@ export default function StoreInfo({ infoData }: StoreInfoProps) {
   const { openedTime, closedTime, closedDays, name, phone, address } = infoData;
 
   return (
-    <section>
+    <section className="mb-9">
       <div className="pb-8 space-y-2">
         <p className="text-[13px]">
           <span className="info-box">영업시간</span>

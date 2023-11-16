@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import StoreCard from "./StoreCard";
+
 import useSlider from "@/hooks/useSlider";
+
+import StoreCard from "./StoreCard";
 
 export default function SliderWrap() {
   const scrollRef = useRef<HTMLDivElement>(null);

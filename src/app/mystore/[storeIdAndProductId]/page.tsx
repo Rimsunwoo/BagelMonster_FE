@@ -1,27 +1,28 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import SelectNav from "@/components/productDetail/SelectNav";
+import Image from "next/image";
+import { useCookies } from "next-client-cookies";
+
+import { getProduct } from "@/app/api/product";
+import DropDown from "@/components/common/dropDown/DropDown";
+import DropDownItem from "@/components/common/dropDown/DropDownItem";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
 import bagelDefault from "../../../../public/bagelDefault.jpg";
-import prevBtn from "../../../../public/prevBtn.svg";
 import rightArrow from "../../../../public/rightArrow.svg";
-
-import { getProduct } from "@/app/api/product";
-import { usePathname } from "next/navigation";
 
 interface ProductDetailProps {
   params: {
-    productId: string;
+    storeIdAndProductId: string;
   };
 }
 
-export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
-  const pathName = usePathname().split("/");
-  const storeId = pathName[1];
+export default function ProductDetail({ params: { storeIdAndProductId } }: ProductDetailProps) {
+  const [storeId, productId] = storeIdAndProductId.split("-");
+  const cookies = useCookies();
+  const token = cookies.get("token");
+
   const {
     isPending,
     isError,
@@ -38,10 +39,12 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
     return <div>상품정보를 불러오는데 실패했습니다</div>;
   }
 
+  const onClickDropDownEdit = () => {};
+
   const { storeName, name, price, productPictureUrl, popularity, status, description } = productDetailData;
 
   return (
-    <div>
+    <section>
       <div className="w-full h-[560px] overflow-hidden relative mb-6">
         {productPictureUrl ? (
           <Image src={productPictureUrl} alt="storeImage" fill />
@@ -50,18 +53,22 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
         )}
       </div>
       <div className="px-5">
-        <Image src={prevBtn} alt="prevButton" className="absolute top-0" />
-        <Link href="/" className="flex items-center mb-[11px]">
-          <h1 className="text-sm">{storeName}</h1>
-          <Image src={rightArrow} alt="storeIcon" />
-        </Link>
-        <main className="flex items-center mb-7">
-          <h1 className="text-xl font-semibold mr-2">{name}</h1>
+        <div className="flex items-center justify-between mb-[11px]">
+          <div className="flex items-center gap-1 cursor-pointer">
+            <h2 className="text-sm">{storeName}</h2>
+            <Image src={rightArrow} alt="storeIcon" />
+          </div>
+          <DropDown>
+            <DropDownItem onClick={onClickDropDownEdit}>수정</DropDownItem>
+            <DropDownItem onClick={onClickDropDownEdit}>삭제</DropDownItem>
+          </DropDown>
+        </div>
+        <div className="flex items-center mb-7">
+          <h2 className="text-xl font-semibold mr-2">{name}</h2>
           <StatusIcon status="NEW" />
-        </main>
+        </div>
         <p className="border border-[#D9D9D9] px-4 py-3 mb-[60px] rounded-lg text-[11px]">{description}</p>
-        <SelectNav name={name} price={price} />
       </div>
-    </div>
+    </section>
   );
 }

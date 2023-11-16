@@ -3,9 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getStoreDetail } from "@/app/api/store";
-import StoreCaution from "@/components/storeDetail/StoreCaution";
 import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
 import StoreIntro from "@/components/storeDetail/StoreIntro";
+import isStoreOpen from "@/utils/isStoreOpen";
 interface StoreDetailProps {
   params: {
     storeId: string;
@@ -31,21 +31,24 @@ export default function StoreDetail({ params: { storeId } }: StoreDetailProps) {
     createdDate,
     modifiedDate,
     products,
+    storePictureUrl,
   } = storeDetailData || {};
   const infoData = { name, address, phone, openedTime, closedTime, closedDays };
-
+  let isOpen;
+  if (storeDetailData) {
+    isOpen = isStoreOpen(openedTime, closedTime, closedDays);
+  }
   if (isPending) {
     return <h1>로딩중</h1>;
   }
   if (isError) {
     return <h1>해당 가게를 찾을 수 없습니다</h1>;
   }
-
-  return (
-    <>
-      <StoreIntro name={name} content={content} />
-      <StoreInfoTab infoData={infoData} products={products} />
-      <StoreCaution />
-    </>
-  );
+  if (storeDetailData)
+    return (
+      <>
+        <StoreIntro name={name} content={content} isOpen={isOpen} storePictureUrl={storePictureUrl} />
+        <StoreInfoTab infoData={infoData} products={products} />
+      </>
+    );
 }

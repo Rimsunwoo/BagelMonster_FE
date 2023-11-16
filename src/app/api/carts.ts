@@ -1,4 +1,5 @@
-import { CartGetResponse, ProductGetResponse } from "@/types/cart.type";
+import type { CartGetResponse } from "@/types/cart.type";
+
 import { API_URL } from ".";
 
 interface GetOrderRequest {

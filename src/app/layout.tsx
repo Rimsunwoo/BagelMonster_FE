@@ -1,12 +1,11 @@
 import type { ReactNode } from "react";
 
+import localFont from "next/font/local";
 import { cookies } from "next/headers";
-import Script from "next/script";
 
 import Header from "@/components/common/header/Header";
 import Navigation from "@/components/common/navigation/Navigation";
 import Provider from "@/components/common/provider/Provider";
-import localFont from "next/font/local";
 
 import type { Metadata } from "next";
 
@@ -22,8 +21,6 @@ const myFont = localFont({
   display: "swap",
 });
 
-const KAKAO_MAP_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services&autoload=false`;
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" className={myFont.className}>
@@ -33,7 +30,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main className="w-full mt-[3vh] mb-20">{children}</main>
           <Navigation />
         </Provider>
-        <Script src={KAKAO_MAP_URL} strategy="beforeInteractive" />
       </body>
     </html>
   );
