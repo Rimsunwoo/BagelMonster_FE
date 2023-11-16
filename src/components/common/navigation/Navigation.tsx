@@ -25,8 +25,8 @@ export default function Navigation() {
 
   const storeLinkList = [
     { href: "/mystore", name: "내 가게" },
-    { href: "/mystore/orderlist", name: "주문 조회" },
-    { href: "/mystore/edit", name: "가게 수정" },
+    { href: "/mystore/orderlist", name: "새 주문 조회" },
+    { href: "/mypage", name: "마이페이지" },
   ];
 
   const linkList = isStore() ? storeLinkList : userLinkList;

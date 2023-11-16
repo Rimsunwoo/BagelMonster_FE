@@ -17,3 +17,8 @@ export interface ProductApi {
   quantity: number;
   token: string | undefined;
 }
+
+export interface ModifyProductFormData {
+  requestDto: Partial<Pick<Product, "name" | "description" | "price" | "status">>;
+  picture: File | null;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 interface KakaoMapProps {
@@ -12,24 +12,30 @@ export interface PositionCoordinates {
   lat: number;
 }
 
+const KAKAO_MAP_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services&autoload=false`;
+
 export default function KakaoMap({ address }: KakaoMapProps) {
   const [isError, setIsError] = useState(false);
-  const [position, setPosition] = useState<PositionCoordinates>({
-    lng: 0,
-    lat: 0,
-  });
+  const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const kakaoScript = document.createElement("script");
+    kakaoScript.src = KAKAO_MAP_URL;
+    document.head.appendChild(kakaoScript);
+
     let isMounted = true;
 
-    const getCoordinates = () => {
+    kakaoScript.onload = () => {
       window.kakao.maps.load(() => {
         const geocoder = new kakao.maps.services.Geocoder();
         geocoder.addressSearch(address, (data, status) => {
-          if (isMounted) {
+          if (mapRef.current !== null) {
             if (status === kakao.maps.services.Status.OK) {
               setIsError(false);
-              setPosition({ lng: +data[0].x, lat: +data[0].y });
+              const center = new window.kakao.maps.LatLng(+data[0].y, +data[0].x);
+              const options = { center, lever: 4 };
+              const map = new window.kakao.maps.Map(mapRef.current, options);
+              new window.kakao.maps.Marker({ map, position: center });
             } else {
               setIsError(true);
             }
@@ -38,16 +44,10 @@ export default function KakaoMap({ address }: KakaoMapProps) {
       });
     };
 
-    getCoordinates();
-
     return () => {
       isMounted = false;
     };
-  }, [address]);
+  }, [mapRef]);
 
-  return (
-    <Map center={position} className="w-full h-[320px] rounded-lg" level={4}>
-      <MapMarker position={position}></MapMarker>
-    </Map>
-  );
+  return <div id="container" ref={mapRef} className="w-full h-[320px] rounded-lg"></div>;
 }

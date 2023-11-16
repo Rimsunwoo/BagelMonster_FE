@@ -53,9 +53,8 @@ export async function getMyStore(token: string | undefined): Promise<IStore | un
 
   const response = await fetch(`${API_URL}/api/stores/mystore`, {
     method: "GET",
-    headers: { Authorization: token },
+    headers: { Authorization: token, "Content-Type": "application/json" },
   });
-  console.log(response);
 
   if (response.status === 404) {
     return null;

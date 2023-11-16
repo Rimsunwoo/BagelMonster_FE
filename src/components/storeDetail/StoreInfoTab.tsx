@@ -12,9 +12,10 @@ import StoreCaution from "./StoreCaution";
 interface StoreInfoTabProps {
   infoData: IStoreInfo;
   products: Product[];
+  storeId?: number;
 }
 
-export default function StoreInfoTab({ infoData, products }: StoreInfoTabProps) {
+export default function StoreInfoTab({ infoData, products, storeId }: StoreInfoTabProps) {
   const [tab, setTab] = useState(0);
 
   return (
@@ -30,7 +31,7 @@ export default function StoreInfoTab({ infoData, products }: StoreInfoTabProps) 
       </div>
       {tab === 0 ? (
         <>
-          <StoreMenu products={products} />
+          <StoreMenu products={products} storeId={storeId} />
           <StoreCaution />
         </>
       ) : (
