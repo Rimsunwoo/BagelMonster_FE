@@ -1,9 +1,10 @@
 "use client";
 
-import { getStore } from "@/app/api/store";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+
+import { getStore } from "@/app/api/store";
 
 export default function StoreCard({ width, height }: { width: number; height: number }) {
   const { data: storeData } = useQuery({

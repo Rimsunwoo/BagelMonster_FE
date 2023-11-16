@@ -1,17 +1,16 @@
 "use client";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
+import { usePathname } from "next/navigation";
+
+import { getProduct } from "@/app/api/product";
 import SelectNav from "@/components/productDetail/SelectNav";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
 import bagelDefault from "../../../../../public/bagelDefault.jpg";
 import prevBtn from "../../../../../public/prevBtn.svg";
 import rightArrow from "../../../../../public/rightArrow.svg";
-
-import type { Product } from "@/types/product.type";
-import { getProduct } from "@/app/api/product";
-import { usePathname } from "next/navigation";
 
 interface ProductDetailProps {
   params: {

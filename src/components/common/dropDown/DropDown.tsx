@@ -1,8 +1,10 @@
-import React, { ReactNode, useState } from "react";
+import type { ReactNode } from "react";
+import React, { useState } from "react";
 
-import threeDot from "../../../../public/threeDot.svg";
 import Image from "next/image";
+
 import DropDownWrapper from "./DropDownWrapper";
+import threeDot from "../../../../public/threeDot.svg";
 
 interface DropDownProps {
   children: ReactNode;

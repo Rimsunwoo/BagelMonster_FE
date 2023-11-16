@@ -6,9 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getStore } from "../api/store";
 import { getDistanceFromLatLonInKm } from "@/utils/distance";
 import isStoreOpen from "@/utils/isStoreOpen";
+
+import { getStore } from "../api/store";
 
 interface ButtonProps {
   name: string;

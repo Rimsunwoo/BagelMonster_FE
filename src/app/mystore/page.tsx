@@ -1,17 +1,20 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useCookies } from "next-client-cookies";
 import React from "react";
-import { getMyStore } from "../api/store";
-import StoreIntro from "@/components/storeDetail/StoreIntro";
-import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
-import StoreCaution from "@/components/storeDetail/StoreCaution";
-import useAuth from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
-import StoreForm from "@/components/mypage/StoreForm";
 
-export default function page() {
+import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
+
+import StoreForm from "@/components/mypage/StoreForm";
+import StoreCaution from "@/components/storeDetail/StoreCaution";
+import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
+import StoreIntro from "@/components/storeDetail/StoreIntro";
+import useAuth from "@/hooks/useAuth";
+
+import { getMyStore } from "../api/store";
+
+export default function MyStore() {
   const { getUserInfo } = useAuth();
   const cookies = useCookies();
   const router = useRouter();

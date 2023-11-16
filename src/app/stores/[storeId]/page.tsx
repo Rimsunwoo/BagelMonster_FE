@@ -3,7 +3,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getStoreDetail } from "@/app/api/store";
-import StoreCaution from "@/components/storeDetail/StoreCaution";
 import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
 import StoreIntro from "@/components/storeDetail/StoreIntro";
 import isStoreOpen from "@/utils/isStoreOpen";
@@ -32,7 +31,7 @@ export default function StoreDetail({ params: { storeId } }: StoreDetailProps) {
     createdDate,
     modifiedDate,
     products,
-    storePictureUrl
+    storePictureUrl,
   } = storeDetailData || {};
   const infoData = { name, address, phone, openedTime, closedTime, closedDays };
   let isOpen;
