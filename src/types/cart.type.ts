@@ -14,7 +14,10 @@ export type ProductGetResponse = Pick<Product, "productId" | "name" | "productPi
 
 export interface CartGetResponse {
   cartId: number;
+  storeId: number;
   storeName: string;
+  address: string;
+  phone: string;
   products: ProductGetResponse[];
   totalPrice: number;
   storeStatus: StoreStatus;

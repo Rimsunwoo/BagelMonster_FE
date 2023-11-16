@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 
 import { getMyOrderList } from "@/app/api/carts";
+import KakaoMap from "@/components/common/KakaoMap";
 import OrderTotalPrice from "@/components/receipt/OrderTotalPrice";
 import ReceiptButtons from "@/components/receipt/ReceiptButtons";
 import ReceiptTextBox from "@/components/receipt/ReceiptTextBox";
@@ -22,6 +23,7 @@ export default function Receipt() {
   });
 
   const myOrder = data?.find((order) => order.cartId === Number(cartId));
+  console.log("myOrder :", myOrder);
   if (!myOrder) return <p>찾을 수 없는 주문 내역입니다.</p>;
 
   const orderStatusHandler = (orderStatus: StoreStatus) => {
@@ -45,9 +47,9 @@ export default function Receipt() {
       </div>
       <div className="flexcol gap-[14px] py-[24px] border-b-[1px] border-[#C5C5C5]">
         <ReceiptTextBox title="가게명" content={myOrder.storeName} />
-        {/* <ReceiptTextBox title="전화번호" content={myOrder.phone} /> */}
-        {/* <ReceiptTextBox title="주소" content={myOrder.address} /> */}
-        {/* <KakaoMap address={myOrder.address} /> */}
+        <ReceiptTextBox title="전화번호" content={myOrder.phone} />
+        <ReceiptTextBox title="주소" content={myOrder.address} />
+        <KakaoMap address={myOrder.address} />
       </div>
       <div className="flexcol gap-[24px] mt-[62px]">
         <OrderTotalPrice totalPrice={myOrder.totalPrice} />
