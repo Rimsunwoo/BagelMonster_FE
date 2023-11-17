@@ -27,7 +27,8 @@ export default function ProductList(props: ProductListProps) {
     deleteCartMutation.mutate({ cartId, productId, token: getCookie() });
   };
 
-  if (productList === undefined || cartId === undefined) return <p>현재 담으신 상품이 없습니다.</p>;
+  if (productList === undefined || cartId === undefined || productList.length === 0)
+    return <p>현재 담으신 상품이 없습니다.</p>;
 
   return (
     <div className="w-full flex-col gap-6 flex px-[5%] select-none">
