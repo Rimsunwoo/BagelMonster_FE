@@ -1,27 +1,70 @@
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+
+import { getMyOrderList } from "@/app/api/carts";
+import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
+
+import type { StoreStatus } from "@/types/cart.type";
+
 export default function OrderList() {
+  const { getCookie } = useAuth();
+
+  const { data: myOrder } = useQuery({
+    queryKey: ["orderList"],
+    queryFn: () => getMyOrderList(getCookie()),
+  });
+
+  const orderStatus = (status: StoreStatus) => {
+    if (status === "READ") return "상품준비 중";
+    if (status === "SOLE") return "수령 완료";
+    if (status === "CANCELED") return "주문 취소";
+    return "주문접수 중";
+  };
+
+  if (myOrder === undefined) return <p className="text-center my-5">주문 내역이 없습니다.</p>;
+
   return (
-    <div>
-      <h2>주문내역</h2>
-      <ul>
-        <li>
-          <p>
-            <span>주문번호</span>
-            <span>12314549-1564654651-15261</span>
-          </p>
-          <p>
-            <span>주문일자</span>
-            <span>2023-04-04</span>
-          </p>
-          <p>
-            <span>주문상태</span>
-            <span>픽업완료</span>
-          </p>
-          <p>
-            <span>주문금액</span>
-            <span>19,300</span>
-          </p>
+    <>
+      {myOrder.map((data) => (
+        <li className="bg-white rounded-lg list-none border border-gray my-5 shadow-main" key={data.cartId}>
+          <Link className="w-full flex items-start gap-5 px-5 py-6 drag-none" href={`receipt/${data.cartId}`}>
+            <div className="w-full">
+              <p className="text-base font-bold leading-[150%]">{data.storeName}</p>
+              <div className="flex justify-around w-full gap-[6px] mt-2 text-[#787878] text-sm font-normal leading-[150%]">
+                <div className="flexcol">
+                  <div className="flex gap-3 w-60">
+                    <span className="font-semibold">주문 번호</span>
+                    <p>{data.cartId}</p>
+                  </div>
+                  <div className="flex gap-3 w-60">
+                    <span className="font-semibold">주문 일자</span>
+                    <p>{data.modifiedDate.replace("T", " ").slice(0, 16)}</p>
+                  </div>
+                  <div className="flex gap-3 w-60 text-[#787878] text-sm font-normal leading-[150%]">
+                    <span className="font-semibold">주문 상품</span>
+                    {data.products.length === 1 ? (
+                      <p>{data.products[0].name}</p>
+                    ) : (
+                      <p>{changeFormat.outer(data.products)}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flexcol">
+                  <div className="flex gap-3 w-60">
+                    <span className="font-semibold">주문 상태</span>
+                    <p>{orderStatus(data.storeStatus)}</p>
+                  </div>
+                  <div className="flex gap-3 w-60">
+                    <span className="font-semibold">주문 가격</span>
+                    <p>{data.totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
         </li>
-      </ul>
-    </div>
+      ))}
+    </>
   );
 }

@@ -101,7 +101,6 @@ export default function Cart() {
   };
 
   const productList = buyProduct.map((item) => ({ productId: item.productId, quantity: item.quantity }));
-  console.log("buyProduct :", buyProduct);
   const totalCount = buyProduct.reduce((acc, data) => acc + data.quantity, 0) ?? 0;
   const totalPrice = buyProduct.reduce((acc, data) => acc + data.quantity * data.price, 0) ?? 0;
 

@@ -6,7 +6,7 @@ export interface CartPostRequest {
   quantity: number;
 }
 
-type StoreStatus = "NEWORDER" | "READ" | "SOLE" | "CANCELED";
+export type StoreStatus = "NEWORDER" | "READ" | "SOLE" | "CANCELED";
 
 export type ProductGetResponse = Pick<Product, "productId" | "name" | "productPictureUrl" | "price"> & {
   quantity: number;
@@ -14,7 +14,10 @@ export type ProductGetResponse = Pick<Product, "productId" | "name" | "productPi
 
 export interface CartGetResponse {
   cartId: number;
+  storeId: number;
   storeName: string;
+  address: string;
+  phone: string;
   products: ProductGetResponse[];
   totalPrice: number;
   storeStatus: StoreStatus;

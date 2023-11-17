@@ -13,4 +13,3 @@ export function getDistanceFromLatLonInKm(lat1: number, lng1: number, lat2: numb
   const d = EARTH_RADIUS * c;
   return d;
 }
-
