@@ -5,8 +5,6 @@ import { getMyOrderList } from "@/app/api/carts";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
-import type { StoreStatus } from "@/types/cart.type";
-
 export default function OrderList() {
   const { getCookie } = useAuth();
 
@@ -14,13 +12,6 @@ export default function OrderList() {
     queryKey: ["orderList"],
     queryFn: () => getMyOrderList(getCookie()),
   });
-
-  const orderStatus = (status: StoreStatus) => {
-    if (status === "READ") return "상품준비 중";
-    if (status === "SOLE") return "수령 완료";
-    if (status === "CANCELED") return "주문 취소";
-    return "주문접수 중";
-  };
 
   if (myOrder === undefined) return <p className="text-center my-5">주문 내역이 없습니다.</p>;
 
@@ -53,7 +44,7 @@ export default function OrderList() {
                 <div className="flexcol">
                   <div className="flex gap-3 w-60">
                     <span className="font-semibold">주문 상태</span>
-                    <p>{orderStatus(data.storeStatus)}</p>
+                    <p>{changeFormat.orderStatus(data.storeStatus)}</p>
                   </div>
                   <div className="flex gap-3 w-60">
                     <span className="font-semibold">주문 가격</span>

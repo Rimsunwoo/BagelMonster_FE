@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="max-w-[560px] mx-auto flexcol items-center relative">
         <Provider cookieValue={cookies().getAll()}>
           <Header />
-          <main className="w-full mt-[3vh] mb-20">{children}</main>
+          <main className="w-full mt-[3vh] mb-28">{children}</main>
           <Navigation />
         </Provider>
       </body>

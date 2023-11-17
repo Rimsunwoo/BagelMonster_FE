@@ -113,7 +113,7 @@ export default function Cart() {
       token: getCookie(),
       totalPrice,
     });
-    router.push("/receipt");
+    router.push(`/receipt/${cartData.cartId}`);
   };
 
   return (
