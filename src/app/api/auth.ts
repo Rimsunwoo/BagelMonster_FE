@@ -9,11 +9,12 @@ export async function signinApi(request: SigninFormProps) {
     body: JSON.stringify(request),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("로그인 실패");
+    alert(data.statusMessage);
   }
 
-  const data = await response.json();
   sessionStorage.setItem("user", JSON.stringify(data));
 
   return response.headers.get("Authorization") as string;
@@ -26,7 +27,9 @@ export async function signupApi(request: SignupAPI) {
     body: JSON.stringify(request),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("회원가입에 실패했습니다.");
+    alert(data.statusMessage);
   }
 }

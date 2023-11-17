@@ -6,38 +6,38 @@ export async function getProduct(storeId: string, productId: string) {
   const response = await fetch(`${API_URL}/api/stores/${storeId}/products/${productId}`, {
     method: "GET",
   });
+
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("StoreDetail GET failed");
+    alert(data.statusMessage);
   }
-  const data: Product = await response.json();
-  return data;
+
+  return data as Product;
 }
 
 export async function addCart(request: ProductApi) {
   const { storeId, productId, quantity, token } = request;
-  if (token === undefined) return;
+  if (!token) throw new Error("로그인이 필요합니다.");
 
-  const Authorization = token;
   const reqBody = { storeId, productId, quantity };
   const response = await fetch(`${API_URL}/api/carts`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Authorization },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify(reqBody),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    let error = await response.json();
-    throw error.statusMessage;
-  } else {
-    alert("장바구니 담기 성공");
+    alert(data.statusMessage);
   }
 }
 
 export async function addProduct(req: AddOrModifyProductApi, storeId: string, token: string | undefined) {
-  if (token === undefined) return;
+  if (!token) throw new Error("로그인이 필요합니다.");
 
   const reqUrl = `${API_URL}/api/stores/${storeId}/products`;
-  const Authorization = token;
   const formData = new FormData();
 
   if (req.picture !== null) formData.append("picture", req.picture);
@@ -45,11 +45,15 @@ export async function addProduct(req: AddOrModifyProductApi, storeId: string, to
 
   const response = await fetch(reqUrl, {
     method: "POST",
-    headers: { Authorization },
+    headers: { Authorization: token },
     body: formData,
   });
 
-  console.log(response.ok);
+  const data = await response.json();
+
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
 }
 
 export async function modifyProduct(
@@ -58,7 +62,8 @@ export async function modifyProduct(
   productId: string,
   token: string | undefined,
 ) {
-  if (token === undefined) return;
+  if (!token) throw new Error("로그인이 필요합니다.");
+
   const reqUrl = `${API_URL}/api/stores/${storeId}/products/${productId}`;
   const Authorization = token;
   const formData = new FormData();
@@ -72,19 +77,26 @@ export async function modifyProduct(
     body: formData,
   });
 
-  console.log(response.ok);
+  const data = await response.json();
+
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
 }
 
 export async function deleteProduct(storeId: string, productId: string, token: string | undefined) {
-  if (token === undefined) return;
+  if (!token) throw new Error("로그인이 필요합니다.");
 
   const reqUrl = `${API_URL}/api/stores/${storeId}/products/${productId}`;
-  const Authorization = token;
 
   const response = await fetch(reqUrl, {
     method: "DELETE",
-    headers: { Authorization, type: "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
   });
 
-  console.log(response.ok);
+  const data = await response.json();
+
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
 }

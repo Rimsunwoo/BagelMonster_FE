@@ -11,10 +11,43 @@ export async function getStore() {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("Store GET failed");
+    alert(data.statusMessage);
   }
 
   return data.stores as IStore[];
+}
+
+export async function getStoreDetail(storeId: string) {
+  const response = await fetch(`${API_URL}/api/stores/${storeId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
+
+  return data;
+}
+
+export async function getMyStore(token: string | undefined) {
+  if (token === undefined) throw new Error("토큰이 없습니다.");
+
+  const response = await fetch(`${API_URL}/api/stores/mystore`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", Authorization: token },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    if (response.status === 404) return null;
+    alert(data.statusMessage);
+  }
+
+  return data as IStore;
 }
 
 export async function createStore(store: StorePostApi, file: File, token: string | undefined) {
@@ -30,46 +63,15 @@ export async function createStore(store: StorePostApi, file: File, token: string
     body: formData,
   });
 
-  if (!response.ok) {
-    throw new Error("Store POST failed");
-  }
-}
-
-export async function getStoreDetail(storeId: string) {
-  const response = await fetch(`${API_URL}/api/stores/${storeId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("StoreDetail GET failed");
-  }
-
-  return data as IStore;
-}
-
-export async function getMyStore(token: string | undefined) {
-  if (token === undefined) return;
-
-  const response = await fetch(`${API_URL}/api/stores/mystore`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json", Authorization: token },
-  });
-
-  if (response.status === 404) {
-    return null;
-  }
-
-  if (response.ok) {
-    const data = await response.json();
-    return data as IStore;
+    alert(data.statusMessage);
   }
 }
 
 export async function getAllOrder(token: string | undefined) {
-  if (token === undefined) return;
+  if (token === undefined) throw new Error("토큰이 없습니다.");
 
   return await getMyStore(token).then(async (myStore) => {
     if (!myStore) return;
@@ -78,11 +80,11 @@ export async function getAllOrder(token: string | undefined) {
       headers: { "Content-Type": "application/json", Authorization: token },
     });
 
-    if (!response.ok) {
-      throw new Error("주문내역을 불러오는데 실패하였습니다.");
-    }
-
     const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.statusMessage);
+    }
 
     return data.orders as OrderGetApi[];
   });
@@ -124,7 +126,9 @@ export async function deleteStore(storeId: number, token: string | undefined) {
     headers: { Authorization: token },
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("가게 삭제하는데 실패하였습니다.");
+    alert(data.statusMessage);
   }
 }
