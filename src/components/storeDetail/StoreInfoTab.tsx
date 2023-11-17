@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 import StoreCaution from "./StoreCaution";
 import StoreInfo from "./StoreInfo";
@@ -22,7 +22,7 @@ export default function StoreInfoTab({ infoData, products, storeId }: StoreInfoT
   const router = useRouter();
 
   const onClickAddMenu = () => {
-    router.push("/mystore/addmenu");
+    router.push(`/mystore/${storeId}/addmenu`);
   };
 
   return (

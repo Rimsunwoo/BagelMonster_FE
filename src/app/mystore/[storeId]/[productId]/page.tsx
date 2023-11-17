@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
 import { getProduct } from "@/app/api/product";
@@ -9,19 +10,21 @@ import DropDown from "@/components/common/dropDown/DropDown";
 import DropDownItem from "@/components/common/dropDown/DropDownItem";
 import StatusIcon from "@/components/productDetail/StatusIcon";
 
-import bagelDefault from "../../../../public/bagelDefault.jpg";
-import rightArrow from "../../../../public/rightArrow.svg";
+import bagelDefault from "../../../../../public/bagelDefault.jpg";
+import rightArrow from "../../../../../public/rightArrow.svg";
 
 interface ProductDetailProps {
   params: {
-    storeIdAndProductId: string;
+    productId: string;
   };
 }
 
-export default function ProductDetail({ params: { storeIdAndProductId } }: ProductDetailProps) {
-  const [storeId, productId] = storeIdAndProductId.split("-");
+export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
   const cookies = useCookies();
   const token = cookies.get("token");
+
+  const pathName = usePathname().split("/");
+  const storeId = pathName[2];
 
   const {
     isPending,

@@ -1,4 +1,4 @@
-import type { Product, ProductApi } from "@/types/product.type";
+import type { AddOrModifyProductApi, Product, ProductApi } from "@/types/product.type";
 
 import { API_URL } from ".";
 
@@ -33,4 +33,21 @@ export async function addCart(request: ProductApi) {
   }
 }
 
-export async function editProduct() {}
+export async function addProduct(req: AddOrModifyProductApi, storeId: string, token: string | undefined) {
+  if (token === undefined) return;
+
+  const reqUrl = `${API_URL}/api/stores/${storeId}/products`;
+  const Authorization = token;
+  const formData = new FormData();
+
+  if (req.picture !== null) formData.append("picture", req.picture);
+  formData.append("requestDto", new Blob([JSON.stringify(req.requestDto)], { type: "application/json" }));
+
+  const response = await fetch(reqUrl, {
+    method: "POST",
+    headers: { Authorization },
+    body: formData,
+  });
+
+  console.log(response);
+}

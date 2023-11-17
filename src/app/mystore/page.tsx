@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
 import StoreForm from "@/components/mypage/StoreForm";
-import StoreCaution from "@/components/storeDetail/StoreCaution";
 import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
 import StoreIntro from "@/components/storeDetail/StoreIntro";
 import useAuth from "@/hooks/useAuth";
@@ -17,8 +16,8 @@ import { getMyStore } from "../api/store";
 export default function MyStore() {
   const { getUserInfo } = useAuth();
   const cookies = useCookies();
-  const router = useRouter();
   const token = cookies.get("token");
+  const router = useRouter();
   const userInfo = getUserInfo();
 
   const { data, isError } = useQuery({
@@ -53,7 +52,6 @@ export default function MyStore() {
     <>
       <StoreIntro name={name} content={content} isOpen={true} storePictureUrl={storePictureUrl} />
       <StoreInfoTab infoData={infoData} products={products} storeId={data.storeId} />
-      <StoreCaution />
     </>
   );
 }
