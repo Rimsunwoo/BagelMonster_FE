@@ -34,7 +34,7 @@ export async function getCart(token: string | undefined) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("장바구니 담기 실패");
+    return null;
   }
 
   return data as CartGetResponse;
@@ -80,6 +80,7 @@ export async function postOrder({ cartId, productList, totalPrice, token }: Orde
     headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({ productList, totalPrice }),
   });
+  console.log("response :", response);
 
   if (!response.ok) {
     throw new Error("구매 실패");
