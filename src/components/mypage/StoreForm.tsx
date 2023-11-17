@@ -12,11 +12,11 @@ import { signupStoreSchema } from "@/schema/formSchema";
 
 import { days, storeInputProps } from "./input.category";
 
-import type { CreateStore } from "@/types/store.type";
+import type { StoreFormProps } from "@/types/store.type";
 
 export default function StoreForm() {
   const resolver = yupResolver(signupStoreSchema);
-  const { register, handleSubmit, formState, reset, setValue, watch } = useForm<CreateStore>({ resolver });
+  const { register, handleSubmit, formState, reset, setValue, watch } = useForm<StoreFormProps>({ resolver });
   const { getCookie } = useAuth();
   const { errors } = formState;
 
@@ -38,13 +38,13 @@ export default function StoreForm() {
     }
   };
 
-  const onSubmit: SubmitHandler<CreateStore> = async (request) => {
+  const onSubmit: SubmitHandler<StoreFormProps> = async (request) => {
     const closedDays = request.closedDays?.join(",");
 
     const createStoreRequest = {
-      name: request.storeName,
+      name: request.name,
       address: request.address,
-      phone: request.storePhone,
+      phone: request.phone,
       content: request.content,
       productCreatedTime: request.productCreatedTime,
       openedTime: request.openedTime,

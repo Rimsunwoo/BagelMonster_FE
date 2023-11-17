@@ -39,7 +39,6 @@ function StoreOrderList({ type }: Props) {
   };
 
   if (orderData === undefined) return <p>주문내역이 없습니다.</p>;
-  console.log("orderData :", orderData);
 
   const filterData = () => {
     if (type === "new") return orderData?.filter((data) => data.storeStatus === "NEWORDER");

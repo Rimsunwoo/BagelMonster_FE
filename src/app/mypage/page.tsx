@@ -22,6 +22,7 @@ export default function Mypage() {
 
     if (!myStore) return;
     deleteStore(myStore.storeId, getCookie());
+    router.push("/mystore");
   };
 
   return (
