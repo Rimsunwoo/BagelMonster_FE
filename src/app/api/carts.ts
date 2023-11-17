@@ -17,6 +17,12 @@ interface OrderPostRequest {
   token: string | undefined;
 }
 
+interface OrderStatusRequest {
+  orderId: number;
+  type: StoreStatus;
+  token: string | undefined;
+}
+
 export interface CartDeleteRequest {
   cartId: number;
   productId: number;
@@ -35,25 +41,26 @@ export async function getCart(token: string | undefined) {
 
   if (!response.ok) {
     if (data.statusCode === 404) return null;
-    throw new Error("장바구니 불러오기 실패");
+    alert(data.statusMessage);
   }
 
   return data as CartGetResponse;
 }
 
 export async function getMyOrder({ storeId, orderId, token }: GetOrderRequest) {
-  if (!token) throw new Error("로그인이 필요합니다.");
+  if (!token) throw alert("로그인이 필요합니다.");
 
   const response = await fetch(`${API_URL}/api/stores/${storeId}/orders/${orderId}`, {
     method: "GET",
     headers: { "Content-Type": "application/json", Authorization: token },
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("주문 불러오기 실패");
+    alert(data.statusMessage);
   }
 
-  const data = await response.json();
   return data as CartGetResponse;
 }
 
@@ -65,11 +72,12 @@ export async function getMyOrderList(token: string | undefined) {
     headers: { "Content-Type": "application/json", Authorization: token },
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("주문 불러오기 실패");
+    alert(data.statusMessage);
   }
 
-  const data = await response.json();
   return data.carts as CartGetResponse[];
 }
 
@@ -81,10 +89,11 @@ export async function postOrder({ cartId, productList, totalPrice, token }: Orde
     headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify({ productList, totalPrice }),
   });
-  console.log("response :", response);
+
+  const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("구매 실패");
+    alert(data.statusMessage);
   }
 }
 
@@ -96,15 +105,11 @@ export async function deleteCart({ cartId, productId, token }: CartDeleteRequest
     headers: { "Content-Type": "application/json", Authorization: token },
   });
 
-  if (!response.ok) {
-    throw new Error("장바구니 삭제 실패");
-  }
-}
+  const data = await response.json();
 
-interface OrderStatusRequest {
-  orderId: number;
-  type: StoreStatus;
-  token: string | undefined;
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
 }
 
 export async function onChangeOrderStatus({ orderId, type, token }: OrderStatusRequest) {
@@ -125,6 +130,8 @@ export async function onChangeOrderStatus({ orderId, type, token }: OrderStatusR
 
     const data = await response.json();
 
-    if (!response.ok) throw data.statusMessage;
+    if (!response.ok) {
+      alert(data.statusMessage);
+    }
   });
 }
