@@ -18,15 +18,23 @@ export interface IStore {
   products: Product[];
 }
 
-export interface CreateStore {
-  storeName: string;
+export interface StoreProps {
+  name: string;
   address: string;
-  storePhone: string;
+  phone: string;
   content: string;
   productCreatedTime: string;
   openedTime: string;
   closedTime: string;
+}
+
+export interface StoreFormProps extends StoreProps {
   closedDays: string[];
+}
+
+export interface StorePutApi extends StoreProps {
+  storeId: number;
+  closedDays: string;
 }
 
 export interface InputProps<FormType> {

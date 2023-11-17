@@ -1,29 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
+import ModifyStoreForm from "./ModifyStoreForm";
 import StoreCaution from "./StoreCaution";
 import StoreInfo from "./StoreInfo";
 import StoreMenu from "./StoreMenu";
 
+import type { RootState } from "@/redux/config/configStore";
 import type { Product } from "@/types/product.type";
-import type { IStoreInfo } from "@/types/store.type";
 
 interface StoreInfoTabProps {
-  infoData: IStoreInfo;
   products: Product[];
   storeId?: number;
 }
 
-export default function StoreInfoTab({ infoData, products, storeId }: StoreInfoTabProps) {
+export default function StoreInfoTab({ products, storeId }: StoreInfoTabProps) {
+  const { editState } = useSelector((state: RootState) => state.editStore);
   const [tab, setTab] = useState(0);
-  const router = useRouter();
-
-  const onClickAddMenu = () => {
-    router.push(`/mystore/${storeId}/addmenu`);
-  };
 
   return (
     <>
@@ -36,20 +33,22 @@ export default function StoreInfoTab({ infoData, products, storeId }: StoreInfoT
         </button>
         <div className="w-[70%] border-b-2 border-[#999999]">
           {storeId && (
-            <button onClick={onClickAddMenu} className="text-sm w-[20%] h-[39px] font-bold text-center pb-3">
+            <Link
+              href={`/mystore/${storeId}/addmenu`}
+              className="inline-flex items-center justify-center text-sm w-[20%] h-[39px] font-bold text-center pb-3"
+            >
               메뉴추가
-            </button>
+            </Link>
           )}
         </div>
       </div>
-      {tab === 0 ? (
+      {tab === 0 && (
         <>
           <StoreMenu products={products} storeId={storeId} />
           <StoreCaution />
         </>
-      ) : (
-        <StoreInfo infoData={infoData} />
       )}
+      {tab === 1 && (editState ? <ModifyStoreForm /> : <StoreInfo />)}
     </>
   );
 }

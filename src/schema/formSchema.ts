@@ -51,9 +51,9 @@ const closedDays = yup
   .typeError("휴무일을 선택해주세요.");
 
 const storeValidation = {
-  storeName,
+  name: storeName,
   address,
-  storePhone,
+  phone: storePhone,
   content,
   productCreatedTime,
   openedTime,

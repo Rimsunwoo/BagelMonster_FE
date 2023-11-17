@@ -1,5 +1,5 @@
 import type { OrderGetApi } from "@/types/cart.type";
-import type { IStore, StorePostApi } from "@/types/store.type";
+import type { IStore, StorePostApi, StorePutApi } from "@/types/store.type";
 
 import { API_URL } from "./index";
 
@@ -88,6 +88,34 @@ export async function getAllOrder(token: string | undefined) {
 
     return data.orders as OrderGetApi[];
   });
+}
+
+interface ModifyStoreRequest {
+  store: StorePutApi;
+  token: string | undefined;
+  file: File | undefined;
+}
+
+export async function modifyStore({ store, token, file }: ModifyStoreRequest) {
+  if (token === undefined) throw alert("토큰이 없습니다.");
+  const formData = new FormData();
+
+  formData.append("requestDto", new Blob([JSON.stringify(store)], { type: "application/json" }));
+  if (file) {
+    formData.append("picture", file);
+  }
+
+  const response = await fetch(`${API_URL}/api/stores/${store.storeId}`, {
+    method: "PUT",
+    headers: { Authorization: token },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
 }
 
 export async function deleteStore(storeId: number, token: string | undefined) {

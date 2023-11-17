@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
+import { changeFormat } from "@/utils/changeFormat";
 import { getDistanceFromLatLonInKm } from "@/utils/distance";
 import isStoreOpen from "@/utils/isStoreOpen";
 
@@ -63,14 +64,8 @@ export default function Stores() {
     });
   }, [storeData]);
 
-  // const date = new Date();
-  // const currentTime = `${date.getHours()}${date.getMinutes()}`;
-
   const isOpenData = storeData.filter((data) => {
-    // const openTime = data.openedTime.replace(":", "").substring(0, 4);
-    // const closeTime = data.closedTime.replace(":", "").substring(0, 4);
     const isOpen = isStoreOpen(data.openedTime, data.closedTime, data.closedDays);
-
     return showIsOpenStore ? isOpen : data;
   });
 
@@ -128,7 +123,7 @@ export default function Stores() {
               <div>
                 <p className="text-base font-bold leading-[150%]">{data.name}</p>
                 <div className="flex gap-[6px] mt-2 text-[#787878] text-xs font-normal leading-[150%]">
-                  <p>{`영업시간 : ${data.openedTime.substring(0, 5)}~${data.closedTime.substring(0, 5)}`}</p>
+                  <p>{`영업시간 : ${changeFormat.time(data.openedTime, data.closedTime)}`}</p>
                   <p>|</p>
                   <p>{data.closedDays}</p>
                 </div>
