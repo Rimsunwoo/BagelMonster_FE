@@ -6,7 +6,7 @@ export default function AddMenu() {
   return (
     <div>
       <section>
-        <AddOrModifyProductForm />
+        <AddOrModifyProductForm type="add" />
       </section>
     </div>
   );

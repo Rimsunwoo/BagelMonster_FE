@@ -2,7 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
 import { getProduct } from "@/app/api/product";
@@ -20,9 +21,10 @@ interface ProductDetailProps {
 }
 
 export default function ProductDetail({ params: { productId } }: ProductDetailProps) {
+  const router = useRouter();
   const cookies = useCookies();
   const token = cookies.get("token");
-
+  console.log("=>>", productId);
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
 
@@ -42,9 +44,15 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
     return <div>상품정보를 불러오는데 실패했습니다</div>;
   }
 
-  const onClickDropDownEdit = () => {};
-
   const { storeName, name, price, productPictureUrl, popularity, status, description } = productDetailData;
+
+  const param = { name, description, price, status, productPictureUrl, productId };
+  const editURLObj = {
+    pathname: `/mystore/${storeId}/editmenu`,
+    query: param,
+  };
+
+  const onClickDropDownDelete = () => {};
 
   return (
     <section>
@@ -62,8 +70,10 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
             <Image src={rightArrow} alt="storeIcon" />
           </div>
           <DropDown>
-            <DropDownItem onClick={onClickDropDownEdit}>수정</DropDownItem>
-            <DropDownItem onClick={onClickDropDownEdit}>삭제</DropDownItem>
+            <DropDownItem>
+              <Link href={editURLObj}>수정</Link>
+            </DropDownItem>
+            <DropDownItem onClick={onClickDropDownDelete}>삭제</DropDownItem>
           </DropDown>
         </div>
         <div className="flex items-center mb-7">
