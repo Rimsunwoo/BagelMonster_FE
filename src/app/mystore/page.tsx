@@ -47,7 +47,6 @@ export default function MyStore() {
   } = data;
   const infoData = { name, address, phone, openedTime, closedTime, closedDays };
 
-  console.log(data);
   return (
     <>
       <StoreIntro name={name} content={content} isOpen={true} storePictureUrl={storePictureUrl} />

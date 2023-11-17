@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
-import { getProduct } from "@/app/api/product";
+import { deleteProduct, getProduct } from "@/app/api/product";
 import DropDown from "@/components/common/dropDown/DropDown";
 import DropDownItem from "@/components/common/dropDown/DropDownItem";
 import StatusIcon from "@/components/productDetail/StatusIcon";
@@ -24,7 +24,7 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
   const router = useRouter();
   const cookies = useCookies();
   const token = cookies.get("token");
-  console.log("=>>", productId);
+
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
 
@@ -52,7 +52,18 @@ export default function ProductDetail({ params: { productId } }: ProductDetailPr
     query: param,
   };
 
-  const onClickDropDownDelete = () => {};
+  const onClickDropDownDelete = async () => {
+    try {
+      const isConfirm = confirm("정말 삭제하시겠습니까?");
+      if (!isConfirm) return;
+
+      await deleteProduct(storeId, productId, token);
+      router.push("/mystore");
+    } catch (error) {
+      alert("오류 발생");
+      router.push("/mystore");
+    }
+  };
 
   return (
     <section>

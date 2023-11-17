@@ -14,11 +14,6 @@ export default function DropDownWrapper(props: DropDownWrapperProps) {
     e.preventDefault();
     if (dropDownRef.current === null) return;
 
-    const isItem = dropDownRef.current.contains(e.target as HTMLElement);
-    if (isItem) {
-      console.log("수정으로 변신");
-    }
-
     setIsOpen(false);
   };
 
