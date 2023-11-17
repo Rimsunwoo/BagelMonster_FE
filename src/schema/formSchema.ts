@@ -2,6 +2,7 @@ import * as yup from "yup";
 
 const emailRegExp = /^[a-zA-Z0-9]+(.[_a-z0-9-]+)*@(?:\w+\.)+\w+$/;
 const passwordRegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?`~^&])[A-Za-z\d@$!%*#?`~^&]{8,}$/;
+const phoneRegExp = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
 
 const email = yup
   .string()
@@ -32,7 +33,52 @@ const phone = yup
   .string()
   .required("휴대전화를 입력해주세요.")
   .min(9, "휴대전화는 9자리 이상이어야합니다.")
-  .max(13, "휴대전화는 13자리 이하이어야합니다.");
+  .max(13, "휴대전화는 13자리 이하이어야합니다.")
+  .matches(phoneRegExp, "XXX-XXXX-XXXX 형식으로 입력해주세요.");
 
-export const signupSchema = yup.object().shape({ email, password, passwordConfirm, name, phone });
+const userValidation = { email, password, passwordConfirm, name, phone };
+
+const storeName = yup.string().required("상호명을 입력해주세요.");
+const address = yup.string().required("가게 주소를 입력해주세요.");
+const storePhone = yup.string().required("가게 전화번호를 입력해주세요.");
+const content = yup.string().required("가게 소개글을 입력해주세요.");
+const productCreatedTime = yup.string().required("빵 나오는 시간을 입력해주세요.");
+const openedTime = yup.string().required("오픈 시간을 입력해주세요.");
+const closedTime = yup.string().required("마감 시간을 입력해주세요.");
+const closedDays = yup
+  .array(yup.string().required("휴무일을 선택해주세요."))
+  .required("휴무일을 선택해주세요.")
+  .typeError("휴무일을 선택해주세요.");
+
+const storeValidation = {
+  name: storeName,
+  address,
+  phone: storePhone,
+  content,
+  productCreatedTime,
+  openedTime,
+  closedTime,
+  closedDays,
+};
+
+const productName = yup.string().required("상품명을 입력해주세요.");
+const productDescription = yup.string().required("상품 설명을 입력해주세요.");
+const productPrice = yup
+  .number()
+  .required("상품 금액을 입력해주세요.")
+  .positive("금액은 음수가 될 수 없습니다.")
+  .integer("금액은 정수로 입력해주세요")
+  .min(100, "100원 이상 입력해주세요.")
+  .max(500000, "50만원 이하로 입력해주세요")
+  .default(100);
+
+const productValidation = {
+  productName,
+  productDescription,
+  productPrice,
+};
+
+export const signupUserSchema = yup.object().shape(userValidation);
+export const signupStoreSchema = yup.object().shape(storeValidation);
 export const signinSchema = yup.object().shape({ email, password });
+export const addOrModifyProductSchema = yup.object().shape(productValidation);

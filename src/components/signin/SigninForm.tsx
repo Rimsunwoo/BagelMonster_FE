@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { signin } from "@/app/api/auth";
+import useAuth from "@/hooks/useAuth";
 import { signinSchema } from "@/schema/formSchema";
 
 import type { InputProps, SigninFormProps } from "@/types/auth.type";
@@ -16,7 +16,7 @@ export default function SigninForm() {
     { id: "email", label: "아이디", placeholder: "아이디를 입력해주세요", type: "email" },
     { id: "password", label: "비밀번호", placeholder: "비밀번호를 입력해주세요", type: "password" },
   ];
-
+  const { signin } = useAuth();
   const resolver = yupResolver(signinSchema);
   const { register, handleSubmit, formState, reset } = useForm<SigninFormProps>({ resolver });
   const { errors } = formState;
@@ -24,16 +24,15 @@ export default function SigninForm() {
   const onSubmit: SubmitHandler<SigninFormProps> = async ({ email, password }) => {
     const request = { email, password };
     try {
-      signin(request);
+      await signin(request);
       reset();
     } catch (error) {
-      console.log("error :", error);
       alert(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 self-stretch my-9">
+    <form onSubmit={handleSubmit(onSubmit)} className="flexcol gap-4 self-stretch my-9">
       {inputProps.map((input) => (
         <Fragment key={input.id}>
           <label className="flex justify-between text-label" htmlFor={input.id}>
@@ -49,7 +48,7 @@ export default function SigninForm() {
           />
         </Fragment>
       ))}
-      <input className="flex justify-center auth-button text-button" type="submit" value="회원가입" />
+      <input className="flex justify-center auth-button text-button" type="submit" value="로그인" />
       {errors.root && <p className="text-red-500">{errors.root.message}</p>}
     </form>
   );

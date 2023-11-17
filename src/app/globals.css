@@ -2,27 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255; */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0; */
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-}
-
 @layer components {
   .flexcol {
     @apply flex flex-col;
+  }
+  .flex-box {
+    @apply flex items-center justify-center;
   }
   .text-title {
     @apply text-black text-2xl font-bold leading-[125%];
@@ -31,18 +16,66 @@ body {
     @apply text-black text-xs font-medium leading-[125%];
   }
   .text-input {
-    @apply text-[#aaaaaa] text-xs font-medium leading-[125%];
+    @apply text-gray text-xs font-medium leading-[125%];
   }
   .text-button {
     @apply text-white text-center text-sm font-bold leading-[125%];
   }
   .auth-button {
-    @apply py-3 px-4 rounded bg-[#f15a23] cursor-pointer;
+    @apply py-3 px-4 rounded bg-orange cursor-pointer;
   }
   .social-button {
     @apply py-3 px-4 rounded bg-[#252525] cursor-pointer;
   }
   .auth-input {
     @apply h-[41px] py-3 px-4 rounded border bg-white;
+  }
+  .count-box {
+    @apply w-6 h-6 border border-[#DDDDDD] text-gray font-medium leading-none cursor-pointer;
+  }
+  .count-box[type="number"]::-webkit-inner-spin-button {
+    @apply appearance-none;
+  }
+  .count-box[type="number"] {
+    @apply border-x-0 cursor-text focus:outline-none;
+  }
+
+  .normal-button {
+    @apply flex justify-center items-center w-[144px] h-[44px] py-3 px-4 rounded font-semibold;
+  }
+  .scroll-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-none {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .drag-none {
+    -webkit-user-drag: none;
+  }
+  .checkbox[type="checkbox"] {
+    @apply relative w-5 h-5 bg-white border border-black rounded-sm ease-in-out duration-200 appearance-none
+    checked:bg-orange checked:border checked:border-transparent
+    checked:before:top-1/2 checked:before:left-1/2 checked:before:absolute checked:before:w-[5px] checked:before:h-px checked:before:bg-white checked:before:border-none checked:before:-translate-x-full checked:before:-translate-y-1/2 checked:before:rotate-45
+    checked:after:top-1/2 checked:after:left-1/2 checked:after:absolute checked:after:w-[9px] checked:after:h-px checked:after:bg-white checked:after:border-none checked:after:-translate-x-1/4 checked:after:-translate-y-[125%] checked:after:-rotate-45;
+  }
+  .info-box {
+    @apply text-gray inline-block w-[65px];
+  }
+  .focus-tab {
+    @apply text-sm w-[15%] font-bold text-center pb-3 border-b-2 border-[#999999];
+  }
+  .info-focus-tab {
+    @apply border-b-2 border-orange text-orange;
+  }
+  .drop-down {
+    @apply absolute right-0 top-6 min-w-[60px] border border-black rounded-md bg-white;
+  }
+  .drop-down-item {
+    @apply flex-box h-[32px] font-normal text-center cursor-pointer;
+
+    &:last-child {
+      @apply border-t-[1px];
+    }
   }
 }

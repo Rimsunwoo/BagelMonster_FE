@@ -1,32 +1,35 @@
-import type { SigninFormProps, SignupFormProps } from "@/types/auth.type";
+import type { SigninFormProps, SignupAPI } from "@/types/auth.type";
 
-import { API_URL } from "./index";
+import { API_URL } from ".";
 
-export async function signin(request: SigninFormProps) {
+export async function signinApi(request: SigninFormProps) {
   const response = await fetch(`${API_URL}/api/users/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(request),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("로그인 실패");
+    alert(data.statusMessage);
   }
 
-  alert("로그인 성공");
+  sessionStorage.setItem("user", JSON.stringify(data));
+
+  return response.headers.get("Authorization") as string;
 }
 
-export async function signup(request: SignupFormProps) {
+export async function signupApi(request: SignupAPI) {
   const response = await fetch(`${API_URL}/api/users/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(request),
   });
 
-  if (!response.ok) {
-    throw new Error("회원가입에 실패했습니다.");
-  }
+  const data = await response.json();
 
-  // #TODO alert 대신 toast로 변경
-  alert("회원가입에 성공했습니다.");
+  if (!response.ok) {
+    alert(data.statusMessage);
+  }
 }

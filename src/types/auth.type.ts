@@ -1,15 +1,20 @@
 import type { HTMLInputTypeAttribute } from "react";
 
+export interface SessionUser {
+  name: string;
+  phone: string;
+  isStore: boolean;
+}
+
 export interface SigninFormProps {
   email: string;
   password: string;
 }
 
-export interface SignupFormProps extends SigninFormProps {
+export interface SignupUserProps extends SigninFormProps {
   passwordConfirm: string;
   name: string;
   phone: string;
-  isStore: boolean;
 }
 
 export interface InputProps<FormType> {
@@ -18,3 +23,5 @@ export interface InputProps<FormType> {
   placeholder: string;
   type: HTMLInputTypeAttribute;
 }
+
+export type SignupAPI = Omit<SignupUserProps, "passwordConfirm"> & { isStore: boolean };
