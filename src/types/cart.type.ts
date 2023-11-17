@@ -6,7 +6,7 @@ export interface CartPostRequest {
   quantity: number;
 }
 
-export type StoreStatus = "NEWORDER" | "READ" | "SOLE" | "CANCELED";
+export type StoreStatus = "NEWORDER" | "READ" | "SOLD" | "CANCELED";
 
 export type ProductGetResponse = Pick<Product, "productId" | "name" | "productPictureUrl" | "price"> & {
   quantity: number;
@@ -41,4 +41,14 @@ interface CartProduct {
   price: number;
   quantity: number;
   productPictureUrl: string;
+}
+
+export interface OrderGetApi {
+  orderId: number;
+  storeName: string;
+  products: CartProduct[];
+  totalPrice: number;
+  storeStatus: StoreStatus;
+  createdDate: string;
+  modifiedDate: string;
 }

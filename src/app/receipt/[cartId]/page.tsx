@@ -23,7 +23,6 @@ export default function Receipt() {
   });
 
   const myOrder = data?.find((order) => order.cartId === Number(cartId));
-  console.log("myOrder :", myOrder);
   if (!myOrder) return <p>찾을 수 없는 주문 내역입니다.</p>;
 
   const orderStatusHandler = (orderStatus: StoreStatus) => {

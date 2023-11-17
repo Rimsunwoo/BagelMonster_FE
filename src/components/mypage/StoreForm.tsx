@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { createStore } from "@/app/api/store";
+import useAuth from "@/hooks/useAuth";
 import { signupStoreSchema } from "@/schema/formSchema";
 
 import { days, storeInputProps } from "./input.category";
@@ -15,20 +16,24 @@ import type { CreateStore } from "@/types/store.type";
 
 export default function StoreForm() {
   const resolver = yupResolver(signupStoreSchema);
-  const { register, handleSubmit, formState, reset, setValue, getValues } = useForm<CreateStore>({ resolver });
-  const getClosedDays = getValues("closedDays");
-  const isSelectClosedDays = JSON.stringify(getClosedDays) === JSON.stringify(["연중무휴"]);
-
+  const { register, handleSubmit, formState, reset, setValue, watch } = useForm<CreateStore>({ resolver });
+  const { getCookie } = useAuth();
   const { errors } = formState;
 
   const [imgFile, setImgFile] = React.useState<File | null>(null);
+
+  const isNoneHoliday = () => {
+    const holiday = watch("closedDays");
+    if (holiday === undefined) return false;
+    return holiday[0] === "연중무휴";
+  };
 
   const onChangeImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImgFile(e.target.files![0]);
   };
 
   const onChangeClosedDays = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
+    if (e.target.checked && e.target.id === "none") {
       setValue("closedDays", ["연중무휴"]);
     }
   };
@@ -50,7 +55,7 @@ export default function StoreForm() {
     if (imgFile === null) return;
 
     try {
-      await createStore(createStoreRequest, imgFile);
+      await createStore(createStoreRequest, imgFile, getCookie());
       reset();
     } catch (error) {
       console.error(error);
@@ -91,8 +96,8 @@ export default function StoreForm() {
             className="checkbox"
             type="checkbox"
             id="none"
-            checked={isSelectClosedDays}
-            onChange={(e) => onChangeClosedDays(e)}
+            checked={isNoneHoliday()}
+            {...register("closedDays", { onChange: (e) => onChangeClosedDays(e) })}
           />
           연중무휴
         </label>

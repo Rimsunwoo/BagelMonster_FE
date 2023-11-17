@@ -2,6 +2,7 @@ import * as yup from "yup";
 
 const emailRegExp = /^[a-zA-Z0-9]+(.[_a-z0-9-]+)*@(?:\w+\.)+\w+$/;
 const passwordRegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?`~^&])[A-Za-z\d@$!%*#?`~^&]{8,}$/;
+const phoneRegExp = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
 
 const email = yup
   .string()
@@ -32,7 +33,9 @@ const phone = yup
   .string()
   .required("휴대전화를 입력해주세요.")
   .min(9, "휴대전화는 9자리 이상이어야합니다.")
-  .max(13, "휴대전화는 13자리 이하이어야합니다.");
+  .max(13, "휴대전화는 13자리 이하이어야합니다.")
+  .matches(phoneRegExp, "XXX-XXXX-XXXX 형식으로 입력해주세요.");
+
 const userValidation = { email, password, passwordConfirm, name, phone };
 
 const storeName = yup.string().required("상호명을 입력해주세요.");

@@ -7,7 +7,7 @@ export default function Header() {
   const pathname = usePathname();
 
   const isLogo = () => {
-    return pathname === "/" || pathname === "/signin" || pathname === "/signup" ? true : false;
+    return pathname === "/stores" || pathname === "/cart" || pathname === "/reciept" ? false : true;
   };
 
   const switchTitle = () => {
@@ -25,7 +25,7 @@ export default function Header() {
       case "/reciept":
         return "주문내역";
       default:
-        return "Bagel Monster";
+        return "/headerLogo.png";
     }
   };
 

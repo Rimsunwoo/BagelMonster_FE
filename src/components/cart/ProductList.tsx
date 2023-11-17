@@ -30,7 +30,7 @@ export default function ProductList(props: ProductListProps) {
   if (productList === undefined || cartId === undefined) return <p>현재 담으신 상품이 없습니다.</p>;
 
   return (
-    <div className="w-full flex-col gap-6 flex px-[5%]">
+    <div className="w-full flex-col gap-6 flex px-[5%] select-none">
       {productList.map((product, index) => (
         <Fragment key={product.productId}>
           {index !== 0 && <div className="w-full bg-[#ebebeb] h-px" />}
