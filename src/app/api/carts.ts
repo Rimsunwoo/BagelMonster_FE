@@ -34,7 +34,8 @@ export async function getCart(token: string | undefined) {
   const data = await response.json();
 
   if (!response.ok) {
-    return null;
+    if (data.statusCode === 404) return null;
+    throw new Error("장바구니 불러오기 실패");
   }
 
   return data as CartGetResponse;

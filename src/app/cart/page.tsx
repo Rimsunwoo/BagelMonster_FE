@@ -116,7 +116,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="w-full bg-white flex h-[120vh] flex-col gap-6">
+    <div className="w-full bg-white flex flex-col gap-6">
       <div className="w-full flexcol items-center gap-6">
         <div className="w-full flex justify-between items-center px-[5%]">
           <div className="flex gap-2 items-center">
