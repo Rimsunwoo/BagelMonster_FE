@@ -51,3 +51,26 @@ export async function addProduct(req: AddOrModifyProductApi, storeId: string, to
 
   console.log(response);
 }
+
+export async function modifyProduct(
+  req: AddOrModifyProductApi,
+  storeId: string,
+  productId: string,
+  token: string | undefined,
+) {
+  if (token === undefined) return;
+  const reqUrl = `${API_URL}/api/stores/${storeId}/products/${productId}`;
+  const Authorization = token;
+  const formData = new FormData();
+
+  if (req.picture !== null) formData.append("picture", req.picture);
+  formData.append("requestDto", new Blob([JSON.stringify(req.requestDto)], { type: "application/json" }));
+
+  const response = await fetch(reqUrl, {
+    method: "PUT",
+    headers: { Authorization },
+    body: formData,
+  });
+
+  console.log(response);
+}

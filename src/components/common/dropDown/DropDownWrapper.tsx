@@ -11,6 +11,7 @@ export default function DropDownWrapper(props: DropDownWrapperProps) {
   const dropDownRef = useRef<HTMLUListElement>(null);
 
   const onClickItem = (e: MouseEvent) => {
+    e.preventDefault();
     if (dropDownRef.current === null) return;
 
     const isItem = dropDownRef.current.contains(e.target as HTMLElement);
@@ -22,9 +23,9 @@ export default function DropDownWrapper(props: DropDownWrapperProps) {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", onClickItem);
+    document.addEventListener("click", onClickItem);
     return () => {
-      document.removeEventListener("mousedown", onClickItem);
+      document.removeEventListener("click", onClickItem);
     };
   }, []);
 
