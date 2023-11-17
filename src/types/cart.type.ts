@@ -35,7 +35,7 @@ export interface CartGetApi {
   modifiedDate: string;
 }
 
-interface CartProduct {
+export interface CartProduct {
   productId: number;
   name: string;
   price: number;

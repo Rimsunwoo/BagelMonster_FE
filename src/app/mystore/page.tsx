@@ -1,56 +1,43 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { useCookies } from "next-client-cookies";
 
 import StoreForm from "@/components/mypage/StoreForm";
 import StoreInfoTab from "@/components/storeDetail/StoreInfoTab";
 import StoreIntro from "@/components/storeDetail/StoreIntro";
 import useAuth from "@/hooks/useAuth";
+import { setStore } from "@/redux/modules/editStoreSlice";
+import isStoreOpen from "@/utils/isStoreOpen";
 
 import { getMyStore } from "../api/store";
 
 export default function MyStore() {
-  const { getUserInfo } = useAuth();
-  const cookies = useCookies();
-  const token = cookies.get("token");
-  const router = useRouter();
+  const { getUserInfo, getCookie } = useAuth();
   const userInfo = getUserInfo();
+  const dispatch = useDispatch();
 
   const { data, isError } = useQuery({
     queryKey: ["mystore", userInfo?.name],
-    queryFn: () => getMyStore(token),
+    queryFn: () => getMyStore(getCookie()),
   });
 
-  if (data === null) {
-    return <StoreForm />;
-  }
-  if (data === undefined) return <div>토큰이 없음</div>;
-  if (isError) return <div>가게가 없거나 </div>;
+  useEffect(() => {
+    dispatch(setStore(data));
+  }, [data, dispatch]);
 
-  const {
-    name,
-    address,
-    phone,
-    content,
-    productCreatedTime,
-    openedTime,
-    storePictureUrl,
-    closedTime,
-    closedDays,
-    createdDate,
-    modifiedDate,
-    products,
-  } = data;
-  const infoData = { name, address, phone, openedTime, closedTime, closedDays };
+  if (data === null) return <StoreForm />;
+
+  if (data === undefined || isError) return <div>등록된 가게가 없거나 로그인 정보가 올바르지 않습니다.</div>;
+
+  const { products, openedTime, closedTime, closedDays } = data;
 
   return (
     <>
-      <StoreIntro name={name} content={content} isOpen={true} storePictureUrl={storePictureUrl} />
-      <StoreInfoTab infoData={infoData} products={products} storeId={data.storeId} />
+      <StoreIntro isOpen={isStoreOpen(openedTime, closedTime, closedDays)} />
+      <StoreInfoTab products={products} storeId={data.storeId} />
     </>
   );
 }
