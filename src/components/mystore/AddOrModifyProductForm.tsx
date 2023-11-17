@@ -5,22 +5,34 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
-import { addProduct } from "@/app/api/product";
+import { addProduct, modifyProduct } from "@/app/api/product";
 import { addOrModifyProductSchema } from "@/schema/formSchema";
 
 import { AddOrModifyProductFormInput, type ProductForm } from "./addOrModifyProductInput.category";
 
 import type { AddOrModifyProductApi } from "@/types/product.type";
 
-interface AddOrModifyProductFormProps {}
+interface AddOrModifyProductFormProps {
+  type: "add" | "modify";
+}
 
-export default function AddOrModifyProductForm(props: AddOrModifyProductFormProps) {
+export default function AddOrModifyProductForm({ type }: AddOrModifyProductFormProps) {
   const router = useRouter();
   const cookies = useCookies();
   const token = cookies.get("token");
+
+  const searchParams = useSearchParams();
+  const pastInfo = {
+    id: searchParams.get("productId"),
+    name: searchParams.get("name"),
+    description: searchParams.get("description"),
+    price: searchParams.get("price") !== null ? Number(searchParams.get("price")) : null,
+    status: searchParams.get("status") !== null ? (searchParams.get("status") === "true" ? true : false) : null,
+    picture: searchParams.get("productPictureUrl"),
+  };
 
   const pathName = usePathname().split("/");
   const storeId = pathName[2];
@@ -32,7 +44,9 @@ export default function AddOrModifyProductForm(props: AddOrModifyProductFormProp
   const { register, handleSubmit, formState } = useForm<ProductForm>({
     resolver,
     defaultValues: {
-      productPrice: 100,
+      productName: pastInfo.name ?? "",
+      productDescription: pastInfo.description ?? "",
+      productPrice: pastInfo.price ?? 100,
     },
   });
   const { errors } = formState;
@@ -51,7 +65,9 @@ export default function AddOrModifyProductForm(props: AddOrModifyProductFormProp
         picture: productImg,
       };
 
-      await addProduct(formData, storeId, token);
+      if (type === "add") await addProduct(formData, storeId, token);
+      if (type === "modify") await modifyProduct(formData, storeId, pastInfo.id!, token);
+
       router.push("/mystore");
     } catch (error) {
       console.error(error);
@@ -92,11 +108,14 @@ export default function AddOrModifyProductForm(props: AddOrModifyProductFormProp
           id="productStatus"
           className="cursor-pointer"
           onClick={onClickProductStatus}
-          defaultChecked={productStatus}
+          defaultChecked={pastInfo.status === null ? productStatus : pastInfo.status}
         />
       </div>
       <div className="flexcol items-start gap-2">
-        <input type="file" onChange={(e) => onChangeImgFile(e)} />
+        <label className="text-label cursor-pointer" htmlFor="productImage">
+          사진 업로드/변경
+        </label>
+        <input id="productImage" type="file" onChange={(e) => onChangeImgFile(e)} />
       </div>
       <button className="flex justify-center mt-4 auth-button text-button">상품 추가하기</button>
     </form>

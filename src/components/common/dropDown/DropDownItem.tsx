@@ -3,7 +3,7 @@ import React from "react";
 
 interface DropDownItemProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function DropDownItem(props: DropDownItemProps) {
