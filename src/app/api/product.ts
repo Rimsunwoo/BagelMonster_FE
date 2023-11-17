@@ -49,7 +49,7 @@ export async function addProduct(req: AddOrModifyProductApi, storeId: string, to
     body: formData,
   });
 
-  console.log(response);
+  console.log(response.ok);
 }
 
 export async function modifyProduct(
@@ -72,5 +72,19 @@ export async function modifyProduct(
     body: formData,
   });
 
-  console.log(response);
+  console.log(response.ok);
+}
+
+export async function deleteProduct(storeId: string, productId: string, token: string | undefined) {
+  if (token === undefined) return;
+
+  const reqUrl = `${API_URL}/api/stores/${storeId}/products/${productId}`;
+  const Authorization = token;
+
+  const response = await fetch(reqUrl, {
+    method: "DELETE",
+    headers: { Authorization, type: "application/json" },
+  });
+
+  console.log(response.ok);
 }
