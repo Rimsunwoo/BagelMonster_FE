@@ -30,7 +30,10 @@ export default function Cart() {
   const [buyProduct, setBuyProduct] = useState<BuyProductRequest[]>([]);
 
   useEffect(() => {
-    if (!cartData) return;
+    if (!cartData) {
+      setBuyProduct([]);
+      return;
+    }
     cartData.products.forEach((product) => {
       setBuyProduct((prev) => [
         ...prev,
@@ -54,16 +57,12 @@ export default function Cart() {
 
   const deleteCartMutation = useMutation({
     mutationFn: deleteCart,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["carts"] });
-    },
+    onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ["carts"] }),
   });
 
   const postOrderMutation = useMutation({
     mutationFn: postOrder,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["carts", cartData?.cartId] });
-    },
+    onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ["carts"] }),
   });
 
   const onSelectProduct = (productId: number) => {
@@ -117,7 +116,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="w-full bg-white flex h-[120vh] flex-col gap-6">
+    <div className="w-full bg-white flex flex-col gap-6">
       <div className="w-full flexcol items-center gap-6">
         <div className="w-full flex justify-between items-center px-[5%]">
           <div className="flex gap-2 items-center">
