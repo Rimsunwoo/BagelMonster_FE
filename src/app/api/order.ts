@@ -1,27 +1,10 @@
 import { getMyStore } from "./store";
 
 import type { Token } from "@/types/auth.type";
-import type { GetCartResponse, PatchOrderRequest } from "@/types/cart.type";
-import type { GetOrderResponse } from "@/types/order.type";
+import type { GetCartResponse } from "@/types/cart.type";
+import type { GetOrderResponse, PatchOrderRequest } from "@/types/order.type";
 
 import { API_URL } from ".";
-
-// export async function getMyOrder({ storeId, orderId, token }: GetOrderRequest) {
-//   if (!token) throw alert("로그인이 필요합니다.");
-
-//   const response = await fetch(`${API_URL}/api/stores/${storeId}/orders/${orderId}`, {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json", Authorization: token },
-//   });
-
-//   const data = await response.json();
-
-//   if (!response.ok) {
-//     alert(data.statusMessage);
-//   }
-
-//   return data as GetCartResponse;
-// }
 
 export async function getMyOrderList(token: Token) {
   if (!token) throw new Error("로그인이 필요합니다.");
