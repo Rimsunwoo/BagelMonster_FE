@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { IStore } from "@/types/store.type";
 
 export interface editStoreState {
-  editState: boolean;
+  modifyState: boolean;
   storeInfo: IStore;
 }
 
 const initialState: editStoreState | null | undefined = {
-  editState: false,
+  modifyState: false,
   storeInfo: {
     storeId: 0,
     name: "",
@@ -26,8 +26,8 @@ const initialState: editStoreState | null | undefined = {
   },
 };
 
-const editStore = createSlice({
-  name: "editStore",
+const ModifyStore = createSlice({
+  name: "ModifyStore",
   initialState,
   reducers: {
     setStore: (state, action) => {
@@ -35,18 +35,18 @@ const editStore = createSlice({
       state.storeInfo = { ...action.payload };
     },
 
-    setEditStore: (state, action) => {
+    setModifyStore: (state, action) => {
       if (!action.payload) return;
       const { target, value } = action.payload;
       state.storeInfo = { ...state.storeInfo, [target]: value };
     },
 
-    isEdit: (state) => {
-      state.editState = !state.editState;
+    isModify: (state) => {
+      state.modifyState = !state.modifyState;
     },
   },
 });
 
-export const { setStore, setEditStore, isEdit } = editStore.actions;
+export const { setStore, setModifyStore, isModify } = ModifyStore.actions;
 
-export default editStore.reducer;
+export default ModifyStore.reducer;

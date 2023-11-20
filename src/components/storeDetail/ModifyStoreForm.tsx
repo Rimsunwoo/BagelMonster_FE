@@ -5,17 +5,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { modifyStore } from "@/app/api/store";
 import useAuth from "@/hooks/useAuth";
-import { isEdit, setEditStore } from "@/redux/modules/editStoreSlice";
+import { isModify, setModifyStore } from "@/redux/modules/editStoreSlice";
 
 import { days } from "../mypage/input.category";
 
 import type { RootState } from "@/redux/config/configStore";
 
-// @TODO useForm
-// @TODO 유효성 검사
 export default function ModifyStoreForm() {
   const { isStore, getCookie, getUserInfo } = useAuth();
-  const { editState, storeInfo } = useSelector((state: RootState) => state.editStore);
+  const { modifyState, storeInfo } = useSelector((state: RootState) => state.ModifyStore);
   const { openedTime, closedTime, closedDays, name, phone, address } = storeInfo;
 
   const [week, setWeek] = useState<string[]>(closedDays.split(", "));
@@ -43,12 +41,12 @@ export default function ModifyStoreForm() {
   };
 
   useEffect(() => {
-    dispatch(setEditStore({ target: "closedDays", value: week.join(", ") }));
+    dispatch(setModifyStore({ target: "closedDays", value: week.join(", ") }));
   }, [dispatch, week]);
 
   const onChangeInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    dispatch(setEditStore({ target: name, value }));
+    dispatch(setModifyStore({ target: name, value }));
   };
 
   const onChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,14 +73,14 @@ export default function ModifyStoreForm() {
     };
 
     modifyStoreMutate.mutate({ store: request, token: getCookie(), file: imgFile });
-    dispatch(isEdit());
+    dispatch(isModify());
   };
 
   return (
     <section className="mb-9">
       <input type="file" accept="image/*" onChange={(e) => onChangeImg(e)} />
 
-      {editState && isStore() && (
+      {modifyState && isStore() && (
         <input
           type="button"
           className="auth-button flex items-center justify-center w-full text-white my-2"

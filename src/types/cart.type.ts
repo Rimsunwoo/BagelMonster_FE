@@ -1,18 +1,8 @@
-import type { Product } from "./product.type";
+import type { ProductGetResponse } from "./product.type";
 
-export interface CartPostRequest {
-  storeId: number;
-  productId: number;
-  quantity: number;
-}
+export type StoreOrderStatus = "NEWORDER" | "READ" | "SOLD" | "CANCELED";
 
-export type StoreStatus = "NEWORDER" | "READ" | "SOLD" | "CANCELED";
-
-export type ProductGetResponse = Pick<Product, "productId" | "name" | "productPictureUrl" | "price"> & {
-  quantity: number;
-};
-
-export interface CartGetResponse {
+export interface GetCartResponse {
   cartId: number;
   storeId: number;
   storeName: string;
@@ -20,35 +10,27 @@ export interface CartGetResponse {
   phone: string;
   products: ProductGetResponse[];
   totalPrice: number;
-  storeStatus: StoreStatus;
+  storeStatus: StoreOrderStatus;
   createdDate: string;
   modifiedDate: string;
 }
 
-export interface CartGetApi {
-  cartId: number;
-  storeName: string;
-  products: CartProduct[];
-  totalPrice: number;
-  request: string;
-  createdDate: string;
-  modifiedDate: string;
-}
-
-export interface CartProduct {
-  productId: number;
-  name: string;
-  price: number;
+export interface PostCartRequest {
+  productId: string;
+  storeId: string;
   quantity: number;
-  productPictureUrl: string;
+  token: string | undefined;
 }
 
-export interface OrderGetApi {
-  orderId: number;
-  storeName: string;
-  products: CartProduct[];
+export interface PatchCartRequest {
+  cartId: number;
+  productList: { productId: number; quantity: number }[];
   totalPrice: number;
-  storeStatus: StoreStatus;
-  createdDate: string;
-  modifiedDate: string;
+  token: string | undefined;
+}
+
+export interface DeleteCartRequest {
+  cartId: number;
+  productId: number;
+  token: string | undefined;
 }

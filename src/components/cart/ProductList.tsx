@@ -9,8 +9,8 @@ import { changeFormat } from "@/utils/changeFormat";
 
 import Counter from "../common/Counter";
 
-import type { CartDeleteRequest } from "@/app/api/carts";
-import type { ProductGetResponse } from "@/types/cart.type";
+import type { DeleteCartRequest } from "@/types/cart.type";
+import type { ProductGetResponse } from "@/types/product.type";
 import type { UseMutationResult } from "@tanstack/react-query";
 
 interface ProductListProps {
@@ -18,7 +18,7 @@ interface ProductListProps {
   cartId: number | undefined;
   selectItem: number[];
   onSelectProduct: (productId: number) => void;
-  deleteCartMutation: UseMutationResult<void, Error, CartDeleteRequest, unknown>;
+  deleteCartMutation: UseMutationResult<void, Error, DeleteCartRequest, unknown>;
 }
 
 export default function ProductList(props: ProductListProps) {

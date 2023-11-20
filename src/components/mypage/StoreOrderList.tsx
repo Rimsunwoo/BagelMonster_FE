@@ -2,8 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { onChangeOrderStatus } from "@/app/api/carts";
-import { getAllOrder } from "@/app/api/store";
+import { changeOrderStatus, getAllOrderToStore } from "@/app/api/order";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
@@ -17,12 +16,12 @@ function StoreOrderList({ type }: Props) {
 
   const { data: orderData } = useQuery({
     queryKey: ["orderList"],
-    queryFn: () => getAllOrder(token),
+    queryFn: () => getAllOrderToStore(token),
   });
   const queryClient = useQueryClient();
 
   const onChangeOrderStatusMutate = useMutation({
-    mutationFn: onChangeOrderStatus,
+    mutationFn: changeOrderStatus,
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["orderList"] }),
   });
 

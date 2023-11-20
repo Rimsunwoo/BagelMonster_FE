@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { changeFormat } from "@/utils/changeFormat";
@@ -27,9 +28,9 @@ export default function StoreMenu({ products, storeId }: StoreMenuProps) {
     <section>
       <ol>
         {products.length === 0 ? (
-          <li className="flex w-full py-3 px-5 mb-[25px] cursor-pointer">
-            <span>메뉴 등록하기</span>
-          </li>
+          <Link className="flex w-full py-3 px-5 mb-[25px] cursor-pointer" href={`mystore/${storeId}/addmenu`}>
+            메뉴 등록하기
+          </Link>
         ) : (
           products.map((product: Product) => (
             <li

@@ -55,7 +55,7 @@ export default function StoreForm() {
     if (imgFile === null) return;
 
     try {
-      await createStore(createStoreRequest, imgFile, getCookie());
+      await createStore({ createStoreRequest, imgFile, token: getCookie() });
       reset();
     } catch (error) {
       console.error(error);

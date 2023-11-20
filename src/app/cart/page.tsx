@@ -10,7 +10,7 @@ import ProductList from "@/components/cart/ProductList";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
-import { deleteCart, getCart, postOrder } from "../api/carts";
+import { deleteCart, getCart, PatchCartToBuy } from "../api/carts";
 
 import type { RootState } from "@/redux/config/configStore";
 
@@ -72,7 +72,7 @@ export default function Cart() {
   });
 
   const postOrderMutation = useMutation({
-    mutationFn: postOrder,
+    mutationFn: PatchCartToBuy,
     onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ["carts"] }),
   });
 

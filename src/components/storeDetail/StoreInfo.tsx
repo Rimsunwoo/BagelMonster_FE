@@ -1,25 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import useAuth from "@/hooks/useAuth";
-import { isEdit } from "@/redux/modules/editStoreSlice";
+import { isModify } from "@/redux/modules/editStoreSlice";
 import { changeFormat } from "@/utils/changeFormat";
 
 import type { RootState } from "@/redux/config/configStore";
 
 export default function StoreInfo() {
   const { isStore } = useAuth();
-  const { editState, storeInfo } = useSelector((state: RootState) => state.editStore);
+  const { modifyState, storeInfo } = useSelector((state: RootState) => state.ModifyStore);
   const { openedTime, closedTime, closedDays, name, phone, address } = storeInfo;
 
   const dispatch = useDispatch();
 
   const handleEdit = () => {
-    dispatch(isEdit());
+    dispatch(isModify());
   };
 
   return (
     <section className="mb-9">
-      {!editState && isStore() && (
+      {!modifyState && isStore() && (
         <input
           type="button"
           className="auth-button flex items-center justify-center w-full text-white my-2"

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import editStore from "../modules/editStoreSlice";
+import ModifyStore from "../modules/editStoreSlice";
 import productCount from "../modules/productCountSlice";
 const store = configureStore({
-  reducer: { productCount, editStore },
+  reducer: { productCount, ModifyStore },
 });
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

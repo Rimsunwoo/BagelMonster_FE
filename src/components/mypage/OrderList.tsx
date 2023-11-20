@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
-import { getMyOrderList } from "@/app/api/carts";
+import { getMyOrderList } from "@/app/api/order";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 

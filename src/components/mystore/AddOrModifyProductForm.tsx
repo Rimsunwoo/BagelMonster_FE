@@ -6,9 +6,9 @@ import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCookies } from "next-client-cookies";
 
 import { addProduct, modifyProduct } from "@/app/api/product";
+import useAuth from "@/hooks/useAuth";
 import { addOrModifyProductSchema } from "@/schema/formSchema";
 
 import { AddOrModifyProductFormInput, type ProductForm } from "./addOrModifyProductInput.category";
@@ -21,8 +21,7 @@ interface AddOrModifyProductFormProps {
 
 export default function AddOrModifyProductForm({ type }: AddOrModifyProductFormProps) {
   const router = useRouter();
-  const cookies = useCookies();
-  const token = cookies.get("token");
+  const { getCookie } = useAuth();
 
   const searchParams = useSearchParams();
   const pastInfo = {
@@ -65,8 +64,8 @@ export default function AddOrModifyProductForm({ type }: AddOrModifyProductFormP
         picture: productImg,
       };
 
-      if (type === "add") await addProduct(formData, storeId, token);
-      if (type === "modify") await modifyProduct(formData, storeId, pastInfo.id!, token);
+      if (type === "add") await addProduct(formData, storeId, getCookie());
+      if (type === "modify") await modifyProduct(formData, storeId, pastInfo.id!, getCookie());
 
       router.push("/mystore");
     } catch (error) {

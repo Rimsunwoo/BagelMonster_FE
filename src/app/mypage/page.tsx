@@ -21,7 +21,7 @@ export default function Mypage() {
     const myStore = await getMyStore(getCookie());
 
     if (!myStore) return;
-    deleteStore(myStore.storeId, getCookie());
+    deleteStore({ storeId: myStore.storeId, token: getCookie() });
     router.push("/mystore");
   };
 

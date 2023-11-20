@@ -1,4 +1,5 @@
-import type { ProductGetResponse, StoreStatus } from "@/types/cart.type";
+import type { StoreOrderStatus } from "@/types/cart.type";
+import type { ProductGetResponse } from "@/types/product.type";
 
 export const changeFormat = {
   outer: (content: ProductGetResponse[]) => {
@@ -7,7 +8,7 @@ export const changeFormat = {
     if (contentLength === 1) return content[0].name;
     else return `${content[0].name} 외 ${contentLength - 1}개`;
   },
-  orderStatus: (status: StoreStatus) => {
+  orderStatus: (status: StoreOrderStatus) => {
     if (status === "READ") return "상품준비 중";
     if (status === "SOLD") return "판매 완료";
     if (status === "CANCELED") return "주문 취소";

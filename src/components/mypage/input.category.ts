@@ -1,4 +1,5 @@
-import type { InputProps, StoreFormProps } from "@/types/store.type";
+import type { InputProps } from "@/types/auth.type";
+import type { StoreFormProps } from "@/types/store.type";
 
 export const storeInputProps: InputProps<StoreFormProps>[] = [
   { id: "name", label: "상호명", placeholder: "상호명을 입력해주세요", type: "text" },

@@ -1,5 +1,4 @@
-import type { HTMLInputTypeAttribute } from "react";
-
+import type { Token } from "./auth.type";
 import type { Product } from "./product.type";
 
 export interface IStore {
@@ -18,7 +17,7 @@ export interface IStore {
   products: Product[];
 }
 
-export interface StoreProps {
+interface StoreProps {
   name: string;
   address: string;
   phone: string;
@@ -37,28 +36,18 @@ export interface StorePutApi extends StoreProps {
   closedDays: string;
 }
 
-export interface InputProps<FormType> {
-  id: keyof FormType;
-  label: string;
-  placeholder: string;
-  type: HTMLInputTypeAttribute;
+export interface ModifyStoreRequest {
+  store: StorePutApi;
+  token: Token;
+  file: File | undefined;
 }
 
-export type StorePostApi = Omit<IStore, "storeId" | "products" | "createdDate" | "modifiedDate" | "storePictureUrl">;
-
-export interface IStoreInfo {
-  name: string;
-  address: string;
-  phone: string;
-  openedTime: string;
-  closedTime: string;
-  closedDays: string;
+export interface StoreDeleteRequest {
+  storeId: number;
+  token: Token;
 }
-
-export interface Store extends IStoreInfo {
-  content: string;
-  productCreatedTime: string;
-  createdDate: string;
-  modifiedDate: string;
-  products: Product[];
+export interface StorePostRequest {
+  createStoreRequest: Omit<IStore, "storeId" | "products" | "createdDate" | "modifiedDate" | "storePictureUrl">;
+  imgFile: File;
+  token: Token;
 }

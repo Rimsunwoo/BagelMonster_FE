@@ -19,7 +19,7 @@ interface StoreInfoTabProps {
 }
 
 export default function StoreInfoTab({ products, storeId }: StoreInfoTabProps) {
-  const { editState } = useSelector((state: RootState) => state.editStore);
+  const { modifyState } = useSelector((state: RootState) => state.ModifyStore);
   const [tab, setTab] = useState(0);
 
   return (
@@ -48,7 +48,7 @@ export default function StoreInfoTab({ products, storeId }: StoreInfoTabProps) {
           <StoreCaution />
         </>
       )}
-      {tab === 1 && (editState ? <ModifyStoreForm /> : <StoreInfo />)}
+      {tab === 1 && (modifyState ? <ModifyStoreForm /> : <StoreInfo />)}
     </>
   );
 }
