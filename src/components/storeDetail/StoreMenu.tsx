@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
+import { changeFormat } from "@/utils/changeFormat";
+
 import StatusIcon from "../productDetail/StatusIcon";
 
 import type { Product } from "@/types/product.type";
@@ -40,7 +42,7 @@ export default function StoreMenu({ products, storeId }: StoreMenuProps) {
               </div>
               <div className="gap-2 text-sm ml-5 mr-2">
                 <h4 className="font-semibold">{product.name}</h4>
-                <span className="text-orange">{Number(product.price).toLocaleString()}원</span>
+                <span className="text-orange">{changeFormat.price(product.price)}원</span>
               </div>
               {Number(product.popularity) > 3 && <StatusIcon status="HOT" />}
             </li>

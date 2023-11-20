@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 
 import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
 
 import Counter from "../common/Counter";
 
@@ -49,7 +50,7 @@ export default function ProductList(props: ProductListProps) {
                   <p className=" text-zinc-800 text-base font-bold leading-snug">{product.name}</p>
                   <div className="justify-start items-center gap-1 inline-flex">
                     <p className="text-[#f15a23] text-sm font-bold leading-tight">
-                      {String(product.price).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
+                      {changeFormat.price(product.price)}원
                     </p>
                   </div>
                 </div>

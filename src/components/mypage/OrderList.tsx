@@ -48,7 +48,7 @@ export default function OrderList() {
                   </div>
                   <div className="flex gap-3 w-60">
                     <span className="font-semibold">주문 가격</span>
-                    <p>{data.totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</p>
+                    <p>{changeFormat.price(data.totalPrice)}원</p>
                   </div>
                 </div>
               </div>

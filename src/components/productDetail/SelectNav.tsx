@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { addCart } from "@/app/api/product";
 import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
 
 import Counter from "../common/Counter";
 
@@ -24,7 +25,6 @@ export default function SelectNav({ name, price }: SelectNavProps) {
   const productId = pathName[3];
   const quantity = useSelector((state: RootState) => state.productCount[productId]);
 
-  let totalPrice = (price * quantity).toLocaleString();
   const request = { storeId, productId, quantity, token: getCookie() };
 
   const onSubmitAddCart = async (request: ProductApi) => {
@@ -62,11 +62,11 @@ export default function SelectNav({ name, price }: SelectNavProps) {
       </div>
       <div className="flex justify-between text-sm mb-6">
         <h2 className="text-gray">개별 금액</h2>
-        <h2>{price}원</h2>
+        <h2>{changeFormat.price(price)}원</h2>
       </div>
       <div className="flex justify-between mb-6 text-lg font-semibold">
         <h2>총 금액</h2>
-        <span className="text-orange">{totalPrice}원</span>
+        <span className="text-orange">{changeFormat.totalPrice({ price, quantity })}원</span>
       </div>
       <button className="w-full flex justify-center auth-button text-button" onClick={() => onSubmitAddCart(request)}>
         장바구니 담기

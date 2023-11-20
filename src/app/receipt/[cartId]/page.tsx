@@ -51,7 +51,7 @@ export default function Receipt() {
         <KakaoMap address={myOrder.address} />
       </div>
       <div className="flexcol gap-[24px] mt-[62px]">
-        <OrderTotalPrice totalPrice={myOrder.totalPrice} />
+        <OrderTotalPrice totalPrice={changeFormat.price(myOrder.totalPrice)} />
         <ReceiptButtons />
       </div>
     </div>

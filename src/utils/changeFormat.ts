@@ -15,4 +15,10 @@ export const changeFormat = {
   time: (openedTime: string, closedTime: string) => {
     return `${openedTime.substring(0, 5)}~${closedTime.substring(0, 5)}`;
   },
+  price: (price: number) => {
+    return price.toLocaleString();
+  },
+  totalPrice: ({ price, quantity }: { price: number; quantity: number }) => {
+    return (price * quantity).toLocaleString();
+  },
 };

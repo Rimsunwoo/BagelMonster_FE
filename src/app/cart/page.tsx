@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 import ProductList from "@/components/cart/ProductList";
 import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
 
 import { deleteCart, getCart, postOrder } from "../api/carts";
 
@@ -159,9 +160,7 @@ export default function Cart() {
             </p>
             <p className="self-stretch justify-between items-center inline-flex text-lg leading-[150%]">
               <span className="text-black font-bold">총 결제금액</span>
-              <span className="text-[#f15a23] font-semibold">
-                {totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
-              </span>
+              <span className="text-[#f15a23] font-semibold">{changeFormat.price(totalPrice)}원</span>
             </p>
           </div>
           <input
