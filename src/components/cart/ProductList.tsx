@@ -2,6 +2,8 @@
 
 import { Fragment } from "react";
 
+import Image from "next/image";
+
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
@@ -40,11 +42,12 @@ export default function ProductList(props: ProductListProps) {
             <input
               className="checkbox"
               type="checkbox"
+              id={product.name}
               checked={selectItem.includes(product.productId)}
               onChange={() => onSelectProduct(product.productId)}
             />
-            <div className="gap-5 inline-flex items-center">
-              <div className="w-24 h-24 bg-red-500 bg-opacity-20 rounded">이미지</div>
+            <label htmlFor={product.name} className="gap-5 inline-flex items-center">
+              <Image src={product.productPictureUrl} alt={product.name} width={96} height={96} className="rounded" />
               <div className="flex-col gap-3 inline-flex">
                 <div className="flex-col gap-2 flex">
                   <p className=" text-zinc-800 text-base font-bold leading-snug">{product.name}</p>
@@ -64,7 +67,7 @@ export default function ProductList(props: ProductListProps) {
                   </button>
                 </div>
               </div>
-            </div>
+            </label>
           </div>
         </Fragment>
       ))}
