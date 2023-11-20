@@ -30,7 +30,7 @@ export default function StoreInfo() {
       <div className="pb-8 space-y-2">
         <p className="text-[13px]">
           <span className="info-box">영업시간</span>
-          <span>{`${changeFormat.time(openedTime, closedTime)}`}</span>
+          <span>{`${changeFormat.DuringTime(openedTime, closedTime)}`}</span>
         </p>
         <p className="text-[13px]">
           <span className="info-box">휴무일</span>

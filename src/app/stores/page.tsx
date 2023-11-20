@@ -123,7 +123,7 @@ export default function Stores() {
               <div>
                 <p className="text-base font-bold leading-[150%]">{data.name}</p>
                 <div className="flex gap-[6px] mt-2 text-[#787878] text-xs font-normal leading-[150%]">
-                  <p>{`영업시간 : ${changeFormat.time(data.openedTime, data.closedTime)}`}</p>
+                  <p>{`영업시간 : ${changeFormat.DuringTime(data.openedTime, data.closedTime)}`}</p>
                   <p>|</p>
                   <p>{data.closedDays}</p>
                 </div>

@@ -40,7 +40,7 @@ export default function Receipt() {
       </h2>
       <div className="flexcol gap-[14px] mt-[40px] py-[24px] border-y-[1px] border-[#C5C5C5]">
         <ReceiptTextBox title="주문 상태" content={orderStatusHandler(myOrder.storeStatus)} />
-        <ReceiptTextBox title="주문 시간" content={myOrder?.modifiedDate.replace("T", " ").slice(0, 16)} />
+        <ReceiptTextBox title="주문 시간" content={changeFormat.time(myOrder?.modifiedDate)} />
         <ReceiptTextBox title="주문 번호" content={myOrder.cartId} />
         <ReceiptTextBox title="주문 상품명" content={changeFormat.outer(myOrder.products)} />
       </div>

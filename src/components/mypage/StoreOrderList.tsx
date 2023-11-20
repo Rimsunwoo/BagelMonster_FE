@@ -66,7 +66,7 @@ function StoreOrderList({ type }: Props) {
                   </div>
                   <div className="flex gap-3 w-60">
                     <span className="font-semibold">주문 일자</span>
-                    <p>{data.modifiedDate.replace("T", " ").slice(0, 16)}</p>
+                    <p>{changeFormat.time(data.modifiedDate)}</p>
                   </div>
                   <div className="flex gap-3 w-60 text-[#787878] text-sm font-normal leading-[150%]">
                     <span className="font-semibold">주문 상품</span>

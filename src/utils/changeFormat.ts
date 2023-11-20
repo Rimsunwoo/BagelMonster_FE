@@ -13,8 +13,11 @@ export const changeFormat = {
     if (status === "CANCELED") return "주문 취소";
     return "주문접수 중";
   },
-  time: (openedTime: string, closedTime: string) => {
-    return `${openedTime.substring(0, 5)}~${closedTime.substring(0, 5)}`;
+  time: (DataTime: string) => {
+    return DataTime.replace("T", " ").slice(0, 16);
+  },
+  DuringTime: (DataOpenedTime: string, DataClosedTime: string) => {
+    return `${DataOpenedTime.substring(0, 5)}~${DataClosedTime.substring(0, 5)}`;
   },
   price: (price: number) => {
     return price.toLocaleString();
