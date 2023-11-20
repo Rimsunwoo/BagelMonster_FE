@@ -1,5 +1,5 @@
-import type { OrderGetApi } from "@/types/cart.type";
-import type { IStore, StorePostApi, StorePutApi } from "@/types/store.type";
+import type { Token } from "@/types/auth.type";
+import type { IStore, ModifyStoreRequest, StoreDeleteRequest, StorePostRequest } from "@/types/store.type";
 
 import { API_URL } from "./index";
 
@@ -32,7 +32,7 @@ export async function getStoreDetail(storeId: string) {
   return data;
 }
 
-export async function getMyStore(token: string | undefined) {
+export async function getMyStore(token: Token) {
   if (token === undefined) throw new Error("토큰이 없습니다.");
 
   const response = await fetch(`${API_URL}/api/stores/mystore`, {
@@ -50,12 +50,12 @@ export async function getMyStore(token: string | undefined) {
   return data as IStore;
 }
 
-export async function createStore(store: StorePostApi, file: File, token: string | undefined) {
+export async function createStore({ createStoreRequest, imgFile, token }: StorePostRequest) {
   if (token === undefined) throw new Error("토큰이 없습니다.");
   const formData = new FormData();
 
-  formData.append("requestDto", new Blob([JSON.stringify(store)], { type: "application/json" }));
-  formData.append("picture", file);
+  formData.append("requestDto", new Blob([JSON.stringify(createStoreRequest)], { type: "application/json" }));
+  formData.append("picture", imgFile);
 
   const response = await fetch(`${API_URL}/api/stores`, {
     method: "POST",
@@ -68,32 +68,6 @@ export async function createStore(store: StorePostApi, file: File, token: string
   if (!response.ok) {
     alert(data.statusMessage);
   }
-}
-
-export async function getAllOrder(token: string | undefined) {
-  if (token === undefined) throw new Error("토큰이 없습니다.");
-
-  return await getMyStore(token).then(async (myStore) => {
-    if (!myStore) return;
-    const response = await fetch(`${API_URL}/api/stores/${myStore.storeId}/orders`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json", Authorization: token },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      alert(data.statusMessage);
-    }
-
-    return data.orders as OrderGetApi[];
-  });
-}
-
-interface ModifyStoreRequest {
-  store: StorePutApi;
-  token: string | undefined;
-  file: File | undefined;
 }
 
 export async function modifyStore({ store, token, file }: ModifyStoreRequest) {
@@ -118,7 +92,7 @@ export async function modifyStore({ store, token, file }: ModifyStoreRequest) {
   }
 }
 
-export async function deleteStore(storeId: number, token: string | undefined) {
+export async function deleteStore({ storeId, token }: StoreDeleteRequest) {
   if (token === undefined) throw new Error("토큰이 없습니다.");
 
   const response = await fetch(`${API_URL}/api/stores/${storeId}`, {

@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 
 import ProductList from "@/components/cart/ProductList";
 import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
 
-import { deleteCart, getCart, postOrder } from "../api/carts";
+import { deleteCart, getCart, PatchCartToBuy } from "../api/carts";
 
 import type { RootState } from "@/redux/config/configStore";
 
@@ -28,10 +29,12 @@ export default function Cart() {
   const { data: cartData } = useQuery({ queryKey: ["carts"], queryFn: () => getCart(getCookie()) });
 
   const [buyProduct, setBuyProduct] = useState<BuyProductRequest[]>([]);
+  const [total, setTotal] = useState<Omit<BuyProductRequest, "productId">>({ price: 0, quantity: 0 });
 
   useEffect(() => {
     if (!cartData) {
       setBuyProduct([]);
+      setTotal({ price: 0, quantity: 0 });
       return;
     }
     cartData.products.forEach((product) => {
@@ -39,6 +42,10 @@ export default function Cart() {
         ...prev,
         { productId: product.productId, quantity: product.quantity, price: product.price },
       ]);
+    });
+    setTotal({
+      price: cartData.products.reduce((acc, data) => acc + data.quantity * data.price, 0),
+      quantity: cartData.products.reduce((acc, data) => acc + data.quantity, 0),
     });
   }, [cartData]);
 
@@ -52,6 +59,10 @@ export default function Cart() {
         return item;
       });
       setBuyProduct(newProduct);
+      setTotal({
+        price: newProduct.reduce((acc, data) => acc + data.quantity * data.price, 0),
+        quantity: newProduct.reduce((acc, data) => acc + data.quantity, 0),
+      });
     }
   }, [counter]);
 
@@ -61,7 +72,7 @@ export default function Cart() {
   });
 
   const postOrderMutation = useMutation({
-    mutationFn: postOrder,
+    mutationFn: PatchCartToBuy,
     onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ["carts"] }),
   });
 
@@ -99,18 +110,15 @@ export default function Cart() {
     });
   };
 
-  const productList = buyProduct.map((item) => ({ productId: item.productId, quantity: item.quantity }));
-  const totalCount = buyProduct.reduce((acc, data) => acc + data.quantity, 0) ?? 0;
-  const totalPrice = buyProduct.reduce((acc, data) => acc + data.quantity * data.price, 0) ?? 0;
-
   const buyHandler = () => {
     if (!cartData) return;
+    const productList = buyProduct.map((item) => ({ productId: item.productId, quantity: item.quantity }));
 
     postOrderMutation.mutate({
       cartId: cartData.cartId,
       productList,
       token: getCookie(),
-      totalPrice,
+      totalPrice: total.price,
     });
     router.push(`/receipt/${cartData.cartId}`);
   };
@@ -155,13 +163,11 @@ export default function Cart() {
           <div className="flexcol w-full">
             <p className="self-stretch justify-between items-start inline-flex text-sm font-medium leading-[150%]">
               <span className="text-gray">주문 상품 수</span>
-              <span className="text-black">총 {totalCount}개</span>
+              <span className="text-black">총 {total.quantity}개</span>
             </p>
             <p className="self-stretch justify-between items-center inline-flex text-lg leading-[150%]">
               <span className="text-black font-bold">총 결제금액</span>
-              <span className="text-[#f15a23] font-semibold">
-                {totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
-              </span>
+              <span className="text-[#f15a23] font-semibold">{changeFormat.price(total.price)}원</span>
             </p>
           </div>
           <input

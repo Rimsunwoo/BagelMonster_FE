@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 
-import { getMyOrderList } from "@/app/api/carts";
+import { getMyOrderList } from "@/app/api/order";
 import KakaoMap from "@/components/common/KakaoMap";
 import OrderTotalPrice from "@/components/receipt/OrderTotalPrice";
 import ReceiptButtons from "@/components/receipt/ReceiptButtons";
@@ -11,7 +11,7 @@ import ReceiptTextBox from "@/components/receipt/ReceiptTextBox";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
-import type { StoreStatus } from "@/types/cart.type";
+import type { StoreOrderStatus } from "@/types/cart.type";
 
 export default function Receipt() {
   const cartId = usePathname().replace("/receipt/", "");
@@ -25,7 +25,7 @@ export default function Receipt() {
   const myOrder = data?.find((order) => order.cartId === Number(cartId));
   if (!myOrder) return <p>찾을 수 없는 주문 내역입니다.</p>;
 
-  const orderStatusHandler = (orderStatus: StoreStatus) => {
+  const orderStatusHandler = (orderStatus: StoreOrderStatus) => {
     if (orderStatus === "NEWORDER") return "주문 접수 중";
     if (orderStatus === "READ") return "주문 접수 완료";
     if (orderStatus === "CANCELED") return "주문 취소";
@@ -40,7 +40,7 @@ export default function Receipt() {
       </h2>
       <div className="flexcol gap-[14px] mt-[40px] py-[24px] border-y-[1px] border-[#C5C5C5]">
         <ReceiptTextBox title="주문 상태" content={orderStatusHandler(myOrder.storeStatus)} />
-        <ReceiptTextBox title="주문 시간" content={myOrder?.modifiedDate.replace("T", " ").slice(0, 16)} />
+        <ReceiptTextBox title="주문 시간" content={changeFormat.time(myOrder?.modifiedDate)} />
         <ReceiptTextBox title="주문 번호" content={myOrder.cartId} />
         <ReceiptTextBox title="주문 상품명" content={changeFormat.outer(myOrder.products)} />
       </div>
@@ -51,7 +51,7 @@ export default function Receipt() {
         <KakaoMap address={myOrder.address} />
       </div>
       <div className="flexcol gap-[24px] mt-[62px]">
-        <OrderTotalPrice totalPrice={myOrder.totalPrice} />
+        <OrderTotalPrice totalPrice={changeFormat.price(myOrder.totalPrice)} />
         <ReceiptButtons />
       </div>
     </div>

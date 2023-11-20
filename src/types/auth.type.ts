@@ -1,5 +1,7 @@
 import type { HTMLInputTypeAttribute } from "react";
 
+export type Token = string | undefined;
+
 export interface SessionUser {
   name: string;
   phone: string;

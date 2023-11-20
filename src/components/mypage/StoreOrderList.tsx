@@ -2,8 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { onChangeOrderStatus } from "@/app/api/carts";
-import { getAllOrder } from "@/app/api/store";
+import { changeOrderStatus, getAllOrderToStore } from "@/app/api/order";
 import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
@@ -17,12 +16,12 @@ function StoreOrderList({ type }: Props) {
 
   const { data: orderData } = useQuery({
     queryKey: ["orderList"],
-    queryFn: () => getAllOrder(token),
+    queryFn: () => getAllOrderToStore(token),
   });
   const queryClient = useQueryClient();
 
   const onChangeOrderStatusMutate = useMutation({
-    mutationFn: onChangeOrderStatus,
+    mutationFn: changeOrderStatus,
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["orderList"] }),
   });
 
@@ -66,7 +65,7 @@ function StoreOrderList({ type }: Props) {
                   </div>
                   <div className="flex gap-3 w-60">
                     <span className="font-semibold">주문 일자</span>
-                    <p>{data.modifiedDate.replace("T", " ").slice(0, 16)}</p>
+                    <p>{changeFormat.time(data.modifiedDate)}</p>
                   </div>
                   <div className="flex gap-3 w-60 text-[#787878] text-sm font-normal leading-[150%]">
                     <span className="font-semibold">주문 상품</span>
@@ -84,7 +83,7 @@ function StoreOrderList({ type }: Props) {
                   </div>
                   <div className="flex gap-3 w-60">
                     <span className="font-semibold">주문 가격</span>
-                    <p>{data.totalPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</p>
+                    <p>{changeFormat.price(data.totalPrice)}원</p>
                   </div>
                 </div>
               </div>

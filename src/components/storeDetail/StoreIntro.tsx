@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Image from "next/image";
 
-import { setEditStore } from "@/redux/modules/editStoreSlice";
+import { setModifyStore } from "@/redux/modules/editStoreSlice";
 
 import StatusIcon from "../productDetail/StatusIcon";
 
@@ -13,12 +13,12 @@ interface StoreIntro {
 }
 
 export default function StoreIntro({ isOpen }: StoreIntro) {
-  const { editState, storeInfo } = useSelector((state: RootState) => state.editStore);
+  const { modifyState, storeInfo } = useSelector((state: RootState) => state.ModifyStore);
   const dispatch = useDispatch();
 
   const onChangeInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    dispatch(setEditStore({ target: name, value }));
+    dispatch(setModifyStore({ target: name, value }));
   };
 
   return (
@@ -28,7 +28,7 @@ export default function StoreIntro({ isOpen }: StoreIntro) {
       </div>
       {isOpen && <span className="text-sm font-semibold text-orange inline-block mb-[14px]">지금 영업중</span>}
       <div className="flex items-center gap-2 mb-[14px] text-xl font-bold">
-        {editState ? (
+        {modifyState ? (
           <input
             className="border rounded-md px-2"
             type="text"
@@ -42,7 +42,7 @@ export default function StoreIntro({ isOpen }: StoreIntro) {
         )}
         <StatusIcon status="NEW" />
       </div>
-      {editState ? (
+      {modifyState ? (
         <textarea
           className="border w-full h-[100px] resize-none rounded-md px-3 text-gray text-[11px]"
           name="content"

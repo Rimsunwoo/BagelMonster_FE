@@ -23,16 +23,18 @@ export default function Icon({ href, width, height }: IconProps) {
     switch (href) {
       case "/":
         return homeIcon;
+      case "/mystore":
+        return homeIcon;
       case "/mypage":
+        return mypageIcon;
+      case "/signin":
         return mypageIcon;
       case "/stores":
         return listIcon;
-      case "/mystore":
-        return homeIcon;
       case "/cart":
         return cartIcon;
-      case "/signin":
-        return mypageIcon;
+      case "/mystore/orderlist":
+        return cartIcon;
     }
   };
 

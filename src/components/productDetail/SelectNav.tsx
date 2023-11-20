@@ -5,13 +5,15 @@ import { useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-import { addCart } from "@/app/api/product";
+import { PostCart } from "@/app/api/carts";
 import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
 
 import Counter from "../common/Counter";
 
 import type { RootState } from "@/redux/config/configStore";
-import type { Product, ProductApi } from "@/types/product.type";
+import type { PostCartRequest } from "@/types/cart.type";
+import type { Product } from "@/types/product.type";
 
 type SelectNavProps = Pick<Product, "name" | "price">;
 
@@ -24,10 +26,9 @@ export default function SelectNav({ name, price }: SelectNavProps) {
   const productId = pathName[3];
   const quantity = useSelector((state: RootState) => state.productCount[productId]);
 
-  let totalPrice = (price * quantity).toLocaleString();
   const request = { storeId, productId, quantity, token: getCookie() };
 
-  const onSubmitAddCart = async (request: ProductApi) => {
+  const onSubmitAddCart = async (request: PostCartRequest) => {
     if (!isLogin()) {
       //#TODO alert=>toast변경
       alert("로그인해주세요");
@@ -35,7 +36,7 @@ export default function SelectNav({ name, price }: SelectNavProps) {
       return;
     }
     try {
-      await addCart(request);
+      await PostCart(request);
       router.push(`/stores/${storeId}`);
     } catch (error: any) {
       //  0 => 다른가게 상품
@@ -62,11 +63,11 @@ export default function SelectNav({ name, price }: SelectNavProps) {
       </div>
       <div className="flex justify-between text-sm mb-6">
         <h2 className="text-gray">개별 금액</h2>
-        <h2>{price}원</h2>
+        <h2>{changeFormat.price(price)}원</h2>
       </div>
       <div className="flex justify-between mb-6 text-lg font-semibold">
         <h2>총 금액</h2>
-        <span className="text-orange">{totalPrice}원</span>
+        <span className="text-orange">{changeFormat.totalPrice({ price, quantity })}원</span>
       </div>
       <button className="w-full flex justify-center auth-button text-button" onClick={() => onSubmitAddCart(request)}>
         장바구니 담기

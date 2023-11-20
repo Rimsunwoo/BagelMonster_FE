@@ -11,8 +11,9 @@ export async function signinApi(request: SigninFormProps) {
 
   const data = await response.json();
 
-  if (!response.ok) {
+  if (!response.ok || data.statusCode === 400) {
     alert(data.statusMessage);
+    return;
   }
 
   sessionStorage.setItem("user", JSON.stringify(data));

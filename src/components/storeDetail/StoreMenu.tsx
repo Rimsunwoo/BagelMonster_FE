@@ -1,7 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
+import { changeFormat } from "@/utils/changeFormat";
 
 import StatusIcon from "../productDetail/StatusIcon";
 
@@ -25,9 +28,9 @@ export default function StoreMenu({ products, storeId }: StoreMenuProps) {
     <section>
       <ol>
         {products.length === 0 ? (
-          <li className="flex w-full py-3 px-5 mb-[25px] cursor-pointer">
-            <span>메뉴 등록하기</span>
-          </li>
+          <Link className="flex w-full py-3 px-5 mb-[25px] cursor-pointer" href={`mystore/${storeId}/addmenu`}>
+            메뉴 등록하기
+          </Link>
         ) : (
           products.map((product: Product) => (
             <li
@@ -40,7 +43,7 @@ export default function StoreMenu({ products, storeId }: StoreMenuProps) {
               </div>
               <div className="gap-2 text-sm ml-5 mr-2">
                 <h4 className="font-semibold">{product.name}</h4>
-                <span className="text-orange">{Number(product.price).toLocaleString()}원</span>
+                <span className="text-orange">{changeFormat.price(product.price)}원</span>
               </div>
               {Number(product.popularity) > 3 && <StatusIcon status="HOT" />}
             </li>

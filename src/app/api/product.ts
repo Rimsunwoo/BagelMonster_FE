@@ -1,4 +1,5 @@
-import type { AddOrModifyProductApi, Product, ProductApi } from "@/types/product.type";
+import type { Token } from "@/types/auth.type";
+import type { AddOrModifyProductApi, Product } from "@/types/product.type";
 
 import { API_URL } from ".";
 
@@ -16,25 +17,7 @@ export async function getProduct(storeId: string, productId: string) {
   return data as Product;
 }
 
-export async function addCart(request: ProductApi) {
-  const { storeId, productId, quantity, token } = request;
-  if (!token) throw new Error("로그인이 필요합니다.");
-
-  const reqBody = { storeId, productId, quantity };
-  const response = await fetch(`${API_URL}/api/carts`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: token },
-    body: JSON.stringify(reqBody),
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    alert(data.statusMessage);
-  }
-}
-
-export async function addProduct(req: AddOrModifyProductApi, storeId: string, token: string | undefined) {
+export async function addProduct(req: AddOrModifyProductApi, storeId: string, token: Token) {
   if (!token) throw new Error("로그인이 필요합니다.");
 
   const reqUrl = `${API_URL}/api/stores/${storeId}/products`;
@@ -56,16 +39,10 @@ export async function addProduct(req: AddOrModifyProductApi, storeId: string, to
   }
 }
 
-export async function modifyProduct(
-  req: AddOrModifyProductApi,
-  storeId: string,
-  productId: string,
-  token: string | undefined,
-) {
+export async function modifyProduct(req: AddOrModifyProductApi, storeId: string, productId: string, token: Token) {
   if (!token) throw new Error("로그인이 필요합니다.");
 
   const reqUrl = `${API_URL}/api/stores/${storeId}/products/${productId}`;
-  const Authorization = token;
   const formData = new FormData();
 
   if (req.picture !== null) formData.append("picture", req.picture);
@@ -73,7 +50,7 @@ export async function modifyProduct(
 
   const response = await fetch(reqUrl, {
     method: "PUT",
-    headers: { Authorization },
+    headers: { Authorization: token },
     body: formData,
   });
 
@@ -84,7 +61,7 @@ export async function modifyProduct(
   }
 }
 
-export async function deleteProduct(storeId: string, productId: string, token: string | undefined) {
+export async function deleteProduct(storeId: string, productId: string, token: Token) {
   if (!token) throw new Error("로그인이 필요합니다.");
 
   const reqUrl = `${API_URL}/api/stores/${storeId}/products/${productId}`;

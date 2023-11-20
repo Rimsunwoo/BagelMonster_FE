@@ -119,11 +119,13 @@ export default function Stores() {
         {filterData().map((data) => (
           <li className="bg-white rounded-lg" key={data.storeId}>
             <Link className="w-full flex items-start gap-5 px-5 py-6 drag-none" href={`stores/${data.storeId}`}>
-              <Image src={data.storePictureUrl} alt="store" width={50} height={50} className="drag-none" />
+              <div className="h-[60px] w-[60px] relative">
+                <Image src={data.storePictureUrl} alt="store" fill className="drag-none" />
+              </div>
               <div>
                 <p className="text-base font-bold leading-[150%]">{data.name}</p>
                 <div className="flex gap-[6px] mt-2 text-[#787878] text-xs font-normal leading-[150%]">
-                  <p>{`영업시간 : ${changeFormat.time(data.openedTime, data.closedTime)}`}</p>
+                  <p>{`영업시간 : ${changeFormat.DuringTime(data.openedTime, data.closedTime)}`}</p>
                   <p>|</p>
                   <p>{data.closedDays}</p>
                 </div>

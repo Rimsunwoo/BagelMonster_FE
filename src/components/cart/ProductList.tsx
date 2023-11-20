@@ -2,12 +2,15 @@
 
 import { Fragment } from "react";
 
+import Image from "next/image";
+
 import useAuth from "@/hooks/useAuth";
+import { changeFormat } from "@/utils/changeFormat";
 
 import Counter from "../common/Counter";
 
-import type { CartDeleteRequest } from "@/app/api/carts";
-import type { ProductGetResponse } from "@/types/cart.type";
+import type { DeleteCartRequest } from "@/types/cart.type";
+import type { ProductGetResponse } from "@/types/product.type";
 import type { UseMutationResult } from "@tanstack/react-query";
 
 interface ProductListProps {
@@ -15,7 +18,7 @@ interface ProductListProps {
   cartId: number | undefined;
   selectItem: number[];
   onSelectProduct: (productId: number) => void;
-  deleteCartMutation: UseMutationResult<void, Error, CartDeleteRequest, unknown>;
+  deleteCartMutation: UseMutationResult<void, Error, DeleteCartRequest, unknown>;
 }
 
 export default function ProductList(props: ProductListProps) {
@@ -39,17 +42,20 @@ export default function ProductList(props: ProductListProps) {
             <input
               className="checkbox"
               type="checkbox"
+              id={product.name}
               checked={selectItem.includes(product.productId)}
               onChange={() => onSelectProduct(product.productId)}
             />
-            <div className="gap-5 inline-flex items-center">
-              <div className="w-24 h-24 bg-red-500 bg-opacity-20 rounded">이미지</div>
+            <label htmlFor={product.name} className="gap-5 inline-flex items-center">
+              <div className="w-24 h-24px relative">
+                <Image src={product.productPictureUrl} alt={product.name} width={96} height={96} className="rounded" />
+              </div>
               <div className="flex-col gap-3 inline-flex">
                 <div className="flex-col gap-2 flex">
                   <p className=" text-zinc-800 text-base font-bold leading-snug">{product.name}</p>
                   <div className="justify-start items-center gap-1 inline-flex">
                     <p className="text-[#f15a23] text-sm font-bold leading-tight">
-                      {String(product.price).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
+                      {changeFormat.price(product.price)}원
                     </p>
                   </div>
                 </div>
@@ -63,7 +69,7 @@ export default function ProductList(props: ProductListProps) {
                   </button>
                 </div>
               </div>
-            </div>
+            </label>
           </div>
         </Fragment>
       ))}

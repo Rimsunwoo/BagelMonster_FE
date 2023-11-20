@@ -11,11 +11,12 @@ export interface Product {
   modifiedDate: string;
 }
 
-export interface ProductApi {
-  productId: string;
-  storeId: string;
+export interface ProductGetResponse {
+  productId: number;
+  name: string;
+  price: number;
   quantity: number;
-  token: string | undefined;
+  productPictureUrl: string;
 }
 
 export interface AddOrModifyProductApi {
