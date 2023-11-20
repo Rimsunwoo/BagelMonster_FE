@@ -10,6 +10,7 @@ export default function useAuth() {
   const router = useRouter();
   const signin = async (request: SigninFormProps) => {
     const token = await signinApi(request);
+    if (token === undefined) return;
 
     cookies.set("token", token);
 
