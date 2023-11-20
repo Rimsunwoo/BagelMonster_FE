@@ -28,9 +28,9 @@ export default function MyStore() {
     dispatch(setStore(data));
   }, [data, dispatch]);
 
-  if (data === null) return <StoreForm />;
+  if (!data) return <StoreForm />;
 
-  if (data === undefined || isError) return <div>등록된 가게가 없거나 로그인 정보가 올바르지 않습니다.</div>;
+  if (isError) return <div>등록된 가게가 없거나 로그인 정보가 올바르지 않습니다.</div>;
 
   const { products, openedTime, closedTime, closedDays } = data;
 
