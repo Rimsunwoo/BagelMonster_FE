@@ -5,6 +5,7 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
 
 import { createStore } from "@/app/api/store";
 import useAuth from "@/hooks/useAuth";
@@ -15,6 +16,7 @@ import { days, storeInputProps } from "./input.category";
 import type { StoreFormProps } from "@/types/store.type";
 
 export default function StoreForm() {
+  const router = useRouter();
   const resolver = yupResolver(signupStoreSchema);
   const { register, handleSubmit, formState, reset, setValue, watch } = useForm<StoreFormProps>({ resolver });
   const { getCookie } = useAuth();
@@ -57,6 +59,7 @@ export default function StoreForm() {
     try {
       await createStore({ createStoreRequest, imgFile, token: getCookie() });
       reset();
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
