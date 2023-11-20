@@ -47,7 +47,9 @@ export default function ProductList(props: ProductListProps) {
               onChange={() => onSelectProduct(product.productId)}
             />
             <label htmlFor={product.name} className="gap-5 inline-flex items-center">
-              <Image src={product.productPictureUrl} alt={product.name} width={96} height={96} className="rounded" />
+              <div className="w-24 h-24px relative">
+                <Image src={product.productPictureUrl} alt={product.name} width={96} height={96} className="rounded" />
+              </div>
               <div className="flex-col gap-3 inline-flex">
                 <div className="flex-col gap-2 flex">
                   <p className=" text-zinc-800 text-base font-bold leading-snug">{product.name}</p>
