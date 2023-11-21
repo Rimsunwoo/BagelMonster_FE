@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MonsterBagel-FrontEnd
 
-## Getting Started
+| Front-End | [유준호](https://github.com/youjunho613) | [임선우](https://github.com/Rimsunwoo)  | [노진철](https://github.com/jinoc-git) |
+| --------- | ---------------------------------------- | --------------------------------------- | -------------------------------------- |
+| Back-End  | [김희열](https://github.com/proLmpa)     | [조해나](https://github.com/HaenaCho01) |
 
-First, run the development server:
+[-Back-End Repository](https://github.com/proLmpa/BagleMonster_BE)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<br/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 프로젝트 소개
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+전국 베이글 전문점 픽업주문 커머스
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<br/>
 
-## Learn More
+## 구현기능
 
-To learn more about Next.js, take a look at the following resources:
+- 소비자, 사업자 회원가입, 로그인
+- 주문내역에서 지도로 가게 위치 확인
+- 가게목록에서 최신순/거리순 정렬
+- 장바구니 담기, 주문하기
+- 사업자 가게 및 메뉴 CRUD, 주문 수락/거절
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br/>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<div>
+<img src="https://user-images.githubusercontent.com/92662974/284555205-8a65e6ca-72b2-4a4b-962d-e8ca8cf4f441.png"/>
+<img src="https://user-images.githubusercontent.com/92662974/284555202-9373e5ee-aceb-4db6-91e8-b7649ca9b45b.png"/>
+<img src="https://user-images.githubusercontent.com/92662974/284555198-d96e4bce-60d2-48f7-81f3-e98fc4d41bc0.png"/>
+<img src="https://user-images.githubusercontent.com/92662974/284555193-40e4d2b0-d912-4321-b1ab-4357de616d44.png"/>
+<img src="https://user-images.githubusercontent.com/92662974/284555185-e1d0320a-2eb5-4c5a-94b2-7fa85b1920d5.png"/>
+</div>
 
-## Deploy on Vercel
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 기술스택 및 Service Architecture
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<div>
+<img src="https://img.shields.io/badge/Html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+  <img src="https://img.shields.io/badge/next-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
+	  <img src="https://img.shields.io/badge/tailwindCss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+</div>
+<br/>
+<img src="https://user-images.githubusercontent.com/92662974/284272870-f0004724-a0d7-4ec5-b769-c704d5e6cf34.png" />
+
+<br/>
+
+## ERD 설계도
+
+<img src="https://user-images.githubusercontent.com/92662974/284274668-39d8ac71-6638-48f5-b762-7b11586f97b4.png" />
+
+[Link→](https://www.erdcloud.com/d/Pdu6txpyBqHk7oN2b)
+
+<br/>
+
+## API 설계도
+
+<img src="https://user-images.githubusercontent.com/92662974/284273427-c9c54175-3487-488d-bb2d-c43e876292d5.png" />
+
+[Link→](https://docs.google.com/spreadsheets/d/16hrlJtJsRxIR2JGB27hq91LDS3BlU0y5kxHWjP2GgLA/edit#gid=0)
