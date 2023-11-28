@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
+import useAuth from "@/hooks/useAuth";
 import { changeFormat } from "@/utils/changeFormat";
 
 import StatusIcon from "../productDetail/StatusIcon";
@@ -18,6 +19,7 @@ interface StoreMenuProps {
 export default function StoreMenu({ products, storeId }: StoreMenuProps) {
   const router = useRouter();
   const currentPath = usePathname();
+  const { isStore } = useAuth();
 
   const onClickMenu = (productId: number) => {
     if (storeId) router.push(`${currentPath}/${storeId}/${productId}`);
@@ -27,7 +29,7 @@ export default function StoreMenu({ products, storeId }: StoreMenuProps) {
   return (
     <section>
       <ol>
-        {products.length === 0 ? (
+        {products.length === 0 && isStore() ? (
           <Link className="flex w-full py-3 px-5 mb-[25px] cursor-pointer" href={`mystore/${storeId}/addmenu`}>
             메뉴 등록하기
           </Link>
