@@ -6,7 +6,7 @@ import Link from "next/link";
 import { getMyOrderList } from "@/app/api/order";
 import useAuth from "@/hooks/useAuth";
 
-import OrderInfo from "./orderInfo";
+import OrderInfo from "./OrderInfo";
 
 export default function OrderList() {
   const { getCookie } = useAuth();

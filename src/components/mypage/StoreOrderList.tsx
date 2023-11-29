@@ -8,7 +8,7 @@ import { getAllOrderToStore } from "@/app/api/order";
 import useAuth from "@/hooks/useAuth";
 
 import OrderButton from "./OrderButton";
-import OrderInfo from "./orderInfo";
+import OrderInfo from "./OrderInfo";
 
 interface Props {
   type: "new" | "read" | "done";
