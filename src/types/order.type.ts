@@ -19,6 +19,6 @@ export interface GetOrderResponse {
 
 export interface PatchOrderRequest {
   orderId: number;
-  type: StoreOrderStatus;
+  type: "read" | "canceled" | "sold";
   token: string | undefined;
 }

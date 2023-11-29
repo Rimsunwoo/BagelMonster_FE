@@ -46,15 +46,9 @@ export async function getAllOrderToStore(token: Token) {
 export async function changeOrderStatus({ orderId, type, token }: PatchOrderRequest) {
   if (!token) throw new Error("로그인이 필요합니다.");
 
-  const status = () => {
-    if (type === "READ") return "read";
-    else if (type === "CANCELED") return "canceled";
-    else return "sold";
-  };
-
   await getMyStore(token).then(async (myStore) => {
     if (!myStore) return;
-    const response = await fetch(`${API_URL}/api/stores/${myStore.storeId}/orders/${orderId}/${status()}`, {
+    const response = await fetch(`${API_URL}/api/stores/${myStore.storeId}/orders/${orderId}/${type}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json", Authorization: token },
     });
